@@ -7,10 +7,14 @@
 //
 
 import XCTest
+import Spectre
 @testable import FengNiaoKit
 
 class ExtensionsTests: XCTestCase {
-    
+    func testRunSpectre() {
+        testExtensions()
+    }
+
     func testStringPlainName() {
         let paths = [
             "/usr/bin/hello/file1.swift",
@@ -37,6 +41,14 @@ class ExtensionsTests: XCTestCase {
         return [
             ("testStringStripingSuffix", testStringPlainName)
         ]
+    }   
+}
+
+
+public func testExtensions() {
+describe("FengNiao Extensions") {
+    $0.it("example") {
+        try expect("") == ""
     }
-    
+}
 }
