@@ -1,6 +1,6 @@
 import XCTest
-@testable import FengNiaoTests
+@testable import FengNiaoKitTests
 
 XCTMain([
-     testCase(FengNiao.allTests)
+     testCase(ExtensionsTests.allTests)
 ])

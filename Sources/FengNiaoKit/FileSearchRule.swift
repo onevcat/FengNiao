@@ -27,8 +27,8 @@ extension RegPatternSearchRule {
             
             let matches = reg.matches(in: content, options: [], range: content.fullRange)
             for checkingResult in matches {
-                let extracted = NSString(string: nsstring.substring(with: checkingResult.rangeAt(1)))
-                
+                let extracted = nsstring.substring(with: checkingResult.rangeAt(1))
+                result.insert(extracted.plainFileName)
             }
         }
         

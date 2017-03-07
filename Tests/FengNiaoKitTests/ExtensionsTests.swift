@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import FengNiao
+@testable import FengNiaoKit
 
 class ExtensionsTests: XCTestCase {
     
@@ -29,11 +29,8 @@ class ExtensionsTests: XCTestCase {
             "file@2x6"
         ]
         
-        let a = "hello".plainFileName
-        print(a)
-        
-//        let result = paths.map { NSString(string: $0).plainFileName }
-        
+        let result = paths.map { $0.plainFileName }
+        XCTAssertEqual(result, expected)
     }
     
     static var allTests : [(String, (ExtensionsTests) -> () throws -> Void)] {

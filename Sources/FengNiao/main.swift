@@ -1,6 +1,7 @@
 import Darwin
 import CommandLineKit
 import Rainbow
+import FengNiaoKit
 
 let cli = CommandLineKit.CommandLine()
 cli.formatOutput = { s, type in

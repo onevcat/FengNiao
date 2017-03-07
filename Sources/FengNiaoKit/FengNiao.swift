@@ -31,23 +31,30 @@ enum FileType {
 //    }
 }
 
-struct FileInfo {
+public struct FileInfo {
     
 }
 
-enum FengNiaoError: Error {
+public enum FengNiaoError: Error {
     case noResourceExtension
     case noFileExtension
 }
 
-struct FengNiao {
-    
+public struct FengNiao {
+
     let projectPath: String
     let excludedPaths: [String]
     let resourceExtensions: [String]
     let searchInFileExtensions: [String]
     
-    func unusedFiles() throws -> [FileInfo] {
+    public init(projectPath: String, excludedPaths: [String], resourceExtensions: [String], searchInFileExtensions: [String]) {
+        self.projectPath = projectPath
+        self.excludedPaths = excludedPaths
+        self.resourceExtensions = resourceExtensions
+        self.searchInFileExtensions = searchInFileExtensions
+    }
+    
+    public func unusedFiles() throws -> [FileInfo] {
         guard !resourceExtensions.isEmpty else {
             throw FengNiaoError.noResourceExtension
         }
