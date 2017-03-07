@@ -14,7 +14,7 @@ extension String {
         return NSMakeRange(0, nsstring.length)
     }
     
-    public var plainFileName: String {
+    var plainFileName: String {
         let nsstring = NSString(string: self)
         var result = NSString(string: nsstring.lastPathComponent).deletingPathExtension
         if result.hasSuffix("@2x") || result.hasSuffix("@3x") {
@@ -22,4 +22,10 @@ extension String {
         }
         return result
     }
+    
+    func appendingPathComponent(_ str: String) -> String {
+        let nsstring = NSString(string: self)
+        return nsstring.appendingPathComponent(str)
+    }
 }
+

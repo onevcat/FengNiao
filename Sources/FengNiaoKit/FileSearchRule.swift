@@ -48,3 +48,14 @@ struct PlainImageSearchRule: RegPatternSearchRule {
     }
 }
 
+struct ObjCImageSearchRule: RegPatternSearchRule {
+    let patterns = ["@\"(.+?)\""]
+}
+
+struct SwiftImageSearchRule: RegPatternSearchRule {
+    let patterns = ["\"(.+?)\""]
+}
+
+struct XibImageSearchRule: RegPatternSearchRule {
+    let patterns = ["image name=\"(.+?)\""]
+}
