@@ -4,7 +4,7 @@ let package = Package(
     name: "FengNiao",
     targets: [
         Target(name: "FengNiaoKit", dependencies: []),
-        Target(name: "FengNiao", dependencies: ["FengNiaoKit"])
+        Target(name: "FengNiao", dependencies: ["FengNiaoKit"]),
     ],
     dependencies: [
         .Package(url: "https://github.com/onevcat/Rainbow", majorVersion: 2),

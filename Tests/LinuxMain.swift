@@ -1,7 +1,4 @@
-import XCTest
-@testable import FengNiaoKitTests
+import FengNiaoKitTests
 
-XCTMain([
-     testCase(ExtensionsTests.allTests),
-     testCase(testRegularExpressRule.allTests)
-])
+testFengNiaoKit()
+

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PathKit
 
 extension String {
     var fullRange: NSRange {
@@ -15,8 +16,9 @@ extension String {
     }
     
     var plainFileName: String {
-        let nsstring = NSString(string: self)
-        var result = NSString(string: nsstring.lastPathComponent).deletingPathExtension
+        let path = Path(self)
+        var result = path.lastComponentWithoutExtension
+        
         if result.hasSuffix("@2x") || result.hasSuffix("@3x") {
             result = String(describing: result.utf16.dropLast(3))
         }

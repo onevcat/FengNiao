@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4BDFA3BC1E6EAEBD0097AEE0 /* FengNiaoKitSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDFA3BB1E6EAEBD0097AEE0 /* FengNiaoKitSpec.swift */; };
 		OBJ_100 /* StringGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* StringGenerator.swift */; };
 		OBJ_101 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* Style.swift */; };
 		OBJ_102 /* XcodeColorsSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* XcodeColorsSupport.swift */; };
@@ -67,8 +68,7 @@
 		OBJ_201 /* Swiftline.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_80 /* Swiftline.framework */; };
 		OBJ_202 /* Spectre.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_81 /* Spectre.framework */; };
 		OBJ_203 /* PathKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_82 /* PathKit.framework */; };
-		OBJ_214 /* ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_73 /* ExtensionsTests.swift */; };
-		OBJ_215 /* FileSearchRuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_74 /* FileSearchRuleTests.swift */; };
+		OBJ_214 /* FengNiaoKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_73 /* FengNiaoKitTests.swift */; };
 		OBJ_217 /* Rainbow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_78 /* Rainbow.framework */; };
 		OBJ_218 /* CommandLineKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_79 /* CommandLineKit.framework */; };
 		OBJ_219 /* Swiftline.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_80 /* Swiftline.framework */; };
@@ -271,6 +271,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4BDFA3BB1E6EAEBD0097AEE0 /* FengNiaoKitSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FengNiaoKitSpec.swift; sourceTree = "<group>"; };
 		OBJ_10 /* CodesParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodesParser.swift; sourceTree = "<group>"; };
 		OBJ_11 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		OBJ_12 /* ControlCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlCode.swift; sourceTree = "<group>"; };
@@ -327,8 +328,7 @@
 		OBJ_68 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		OBJ_69 /* FengNiao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FengNiao.swift; sourceTree = "<group>"; };
 		OBJ_70 /* FileSearchRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSearchRule.swift; sourceTree = "<group>"; };
-		OBJ_73 /* ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsTests.swift; sourceTree = "<group>"; };
-		OBJ_74 /* FileSearchRuleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSearchRuleTests.swift; sourceTree = "<group>"; };
+		OBJ_73 /* FengNiaoKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FengNiaoKitTests.swift; sourceTree = "<group>"; };
 		OBJ_76 /* FengNiaoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FengNiaoTests.swift; sourceTree = "<group>"; };
 		OBJ_78 /* Rainbow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Rainbow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_79 /* CommandLineKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CommandLineKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -563,8 +563,8 @@
 		OBJ_72 /* FengNiaoKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_73 /* ExtensionsTests.swift */,
-				OBJ_74 /* FileSearchRuleTests.swift */,
+				OBJ_73 /* FengNiaoKitTests.swift */,
+				4BDFA3BB1E6EAEBD0097AEE0 /* FengNiaoKitSpec.swift */,
 			);
 			name = FengNiaoKitTests;
 			path = Tests/FengNiaoKitTests;
@@ -911,8 +911,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_214 /* ExtensionsTests.swift in Sources */,
-				OBJ_215 /* FileSearchRuleTests.swift in Sources */,
+				OBJ_214 /* FengNiaoKitTests.swift in Sources */,
+				4BDFA3BC1E6EAEBD0097AEE0 /* FengNiaoKitSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
