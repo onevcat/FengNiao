@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_31"
+               BlueprintIdentifier = "OBJ_68"
                BuildableName = "Rainbow.framework"
                BlueprintName = "Rainbow"
                ReferencedContainer = "container:FengNiao.xcodeproj">
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_48"
+               BlueprintIdentifier = "OBJ_85"
                BuildableName = "CommandLineKit.framework"
                BlueprintName = "CommandLineKit"
                ReferencedContainer = "container:FengNiao.xcodeproj">
@@ -42,7 +42,21 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_57"
+               BlueprintIdentifier = "OBJ_94"
+               BuildableName = "Swiftline.framework"
+               BlueprintName = "Swiftline"
+               ReferencedContainer = "container:FengNiao.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "OBJ_128"
                BuildableName = "FengNiao"
                BlueprintName = "FengNiao"
                ReferencedContainer = "container:FengNiao.xcodeproj">
@@ -56,6 +70,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "OBJ_145"
+               BuildableName = "FengNiaoTests.xctest"
+               BlueprintName = "FengNiaoTests"
+               ReferencedContainer = "container:FengNiao.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <AdditionalOptions>
       </AdditionalOptions>
@@ -73,7 +97,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "OBJ_31"
+            BlueprintIdentifier = "OBJ_68"
             BuildableName = "Rainbow.framework"
             BlueprintName = "Rainbow"
             ReferencedContainer = "container:FengNiao.xcodeproj">
