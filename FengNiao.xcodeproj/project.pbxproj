@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4BDFA39E1E6E8FE60097AEE0 /* FileSearchRuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDFA39D1E6E8FE60097AEE0 /* FileSearchRuleTests.swift */; };
 		OBJ_104 /* Agree.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* Agree.swift */; };
 		OBJ_105 /* AgreeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* AgreeSettings.swift */; };
 		OBJ_106 /* ArgConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* ArgConvertible.swift */; };
@@ -189,6 +190,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4BDFA39D1E6E8FE60097AEE0 /* FileSearchRuleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileSearchRuleTests.swift; path = Tests/FengNiaoKitTests/FileSearchRuleTests.swift; sourceTree = SOURCE_ROOT; };
 		OBJ_10 /* CodesParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodesParser.swift; sourceTree = "<group>"; };
 		OBJ_11 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		OBJ_12 /* ControlCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlCode.swift; sourceTree = "<group>"; };
@@ -363,7 +365,7 @@
 			path = "Packages/Swiftline-0.5.0/Source";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -371,7 +373,6 @@
 				OBJ_60 /* Tests */,
 				OBJ_65 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_53 /* FengNiao */ = {
@@ -407,6 +408,7 @@
 		OBJ_61 /* FengNiaoKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				4BDFA39D1E6E8FE60097AEE0 /* FileSearchRuleTests.swift */,
 				OBJ_62 /* ExtensionsTests.swift */,
 			);
 			name = FengNiaoKitTests;
@@ -613,7 +615,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_65 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -689,6 +691,7 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_169 /* ExtensionsTests.swift in Sources */,
+				4BDFA39E1E6E8FE60097AEE0 /* FileSearchRuleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
