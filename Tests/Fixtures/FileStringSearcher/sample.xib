@@ -1,0 +1,15 @@
+<document>
+<scene sceneID="WQZ-Ci-hsr">
+    <objects>
+        <viewControllerPlaceholder storyboardName="Gift" id="mZq-Yh-kYp" sceneMemberID="viewController"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="p3p-xp-89b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+    </objects>
+    <point key="canvasLocation" x="487" y="990"/>
+</scene>
+
+<resources>
+    <image name="profile_image" width="94" height="94"/>
+    <image name="bottom" width="2" height="142"/>
+    <image name="top" width="2" height="132"/>
+</resources>
+</document>

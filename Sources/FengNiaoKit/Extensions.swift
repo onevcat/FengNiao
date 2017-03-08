@@ -15,9 +15,19 @@ extension String {
         return NSMakeRange(0, nsstring.length)
     }
     
-    var plainFileName: String {
-        let path = Path(self)
-        var result = path.lastComponentWithoutExtension
+    func plainFileName(extensions: [String]) -> String {
+        let p = Path(self)
+        var result: String!
+        for ext in extensions {
+            if hasSuffix(".\(ext)") {
+                result = p.lastComponentWithoutExtension
+                break
+            }
+        }
+        
+        if result == nil {
+            result = p.lastComponent
+        }
         
         if result.hasSuffix("@2x") || result.hasSuffix("@3x") {
             result = String(describing: result.utf16.dropLast(3))

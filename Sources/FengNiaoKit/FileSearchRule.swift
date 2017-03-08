@@ -13,6 +13,7 @@ protocol FileSearchRule {
 }
 
 protocol RegPatternSearchRule: FileSearchRule {
+    var extensions: [String] { get }
     var patterns: [String] { get }
 }
 
@@ -28,7 +29,7 @@ extension RegPatternSearchRule {
             let matches = reg.matches(in: content, options: [], range: content.fullRange)
             for checkingResult in matches {
                 let extracted = nsstring.substring(with: checkingResult.rangeAt(1))
-                result.insert(extracted.plainFileName)
+                result.insert(extracted.plainFileName(extensions: extensions) )
             }
         }
         
@@ -49,13 +50,16 @@ struct PlainImageSearchRule: RegPatternSearchRule {
 }
 
 struct ObjCImageSearchRule: RegPatternSearchRule {
-    let patterns = ["@\"(.+?)\""]
+    let extensions: [String]
+    let patterns = ["@\"(.+?)\"", "\"(.+?)\""]
 }
 
 struct SwiftImageSearchRule: RegPatternSearchRule {
+    let extensions: [String]
     let patterns = ["\"(.+?)\""]
 }
 
 struct XibImageSearchRule: RegPatternSearchRule {
+    let extensions = [String]()
     let patterns = ["image name=\"(.+?)\""]
 }

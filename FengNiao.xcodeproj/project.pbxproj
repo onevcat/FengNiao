@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B2DBC5E1E6FBDDB00923381 /* ExtensionFindProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2DBC5D1E6FBDDB00923381 /* ExtensionFindProcess.swift */; };
 		4BDFA3BC1E6EAEBD0097AEE0 /* FengNiaoKitSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDFA3BB1E6EAEBD0097AEE0 /* FengNiaoKitSpec.swift */; };
 		OBJ_100 /* StringGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* StringGenerator.swift */; };
 		OBJ_101 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* Style.swift */; };
@@ -271,6 +272,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4B2DBC5D1E6FBDDB00923381 /* ExtensionFindProcess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionFindProcess.swift; sourceTree = "<group>"; };
 		4BDFA3BB1E6EAEBD0097AEE0 /* FengNiaoKitSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FengNiaoKitSpec.swift; sourceTree = "<group>"; };
 		OBJ_10 /* CodesParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodesParser.swift; sourceTree = "<group>"; };
 		OBJ_11 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -480,7 +482,7 @@
 			path = "Packages/Swiftline-0.5.0/Source";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -488,7 +490,6 @@
 				OBJ_71 /* Tests */,
 				OBJ_77 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_53 /* Spectre */ = {
@@ -531,6 +532,7 @@
 				OBJ_67 /* CommandPrompt.swift */,
 				OBJ_68 /* Extensions.swift */,
 				OBJ_69 /* FengNiao.swift */,
+				4B2DBC5D1E6FBDDB00923381 /* ExtensionFindProcess.swift */,
 				OBJ_70 /* FileSearchRule.swift */,
 			);
 			name = FengNiaoKit;
@@ -801,7 +803,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_77 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -903,6 +905,7 @@
 				OBJ_194 /* CommandPrompt.swift in Sources */,
 				OBJ_195 /* Extensions.swift in Sources */,
 				OBJ_196 /* FengNiao.swift in Sources */,
+				4B2DBC5E1E6FBDDB00923381 /* ExtensionFindProcess.swift in Sources */,
 				OBJ_197 /* FileSearchRule.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

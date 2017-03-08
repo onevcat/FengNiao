@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PathKit
 
 enum FileType {
     case swift
@@ -22,10 +23,10 @@ enum FileType {
         }
     }
     
-    var searchRules: [FileSearchRule] {
+    func searchRules(extensions: [String]) -> [FileSearchRule] {
         switch self {
-        case .swift: return [SwiftImageSearchRule()]
-        case .objc: return [ObjCImageSearchRule()]
+        case .swift: return [SwiftImageSearchRule(extensions: extensions)]
+        case .objc: return [ObjCImageSearchRule(extensions: extensions)]
         case .xib: return [XibImageSearchRule()]
         }
     }
@@ -42,15 +43,15 @@ public enum FengNiaoError: Error {
 
 public struct FengNiao {
 
-    let projectPath: String
-    let excludedPaths: [String]
+    let projectPath: Path
+    let excludedPaths: [Path]
     let resourceExtensions: [String]
     let searchInFileExtensions: [String]
     
     public init(projectPath: String, excludedPaths: [String], resourceExtensions: [String], searchInFileExtensions: [String]) {
-        let currentPath = FileManager.default.currentDirectoryPath
-        self.projectPath = currentPath.appendingPathComponent(projectPath)
-        self.excludedPaths = excludedPaths
+        let path = Path(projectPath).absolute()
+        self.projectPath = path
+        self.excludedPaths = excludedPaths.map { path + Path($0) }
         self.resourceExtensions = resourceExtensions
         self.searchInFileExtensions = searchInFileExtensions
     }
@@ -62,44 +63,55 @@ public struct FengNiao {
         guard !searchInFileExtensions.isEmpty else {
             throw FengNiaoError.noFileExtension
         }
-        
 
         return [FileInfo()]
     }
     
     func allResourceFiles() -> [String: FileInfo] {
+        
+        
         return [:]
     }
     
-    func allUsedFileNames() -> Set<String> {
-        
-        let allFiles = usedFileNames(atPath: projectPath)
-        
-        return []
+    func allUsedStringNames() -> Set<String> {
+        return usedStringNames(at: projectPath)
     }
     
-    func usedFileNames(atPath path: String, base: String = "") -> Set<String> {
-        var result = Set<String>()
-        let baseNSString = NSString(string: base)
-        guard let allFiles = try? FileManager.default.contentsOfDirectory(atPath: path) else {
-            print("Encountered a problem when reading content in \(path)")
-            return result
+    func usedStringNames(at path: Path) -> Set<String> {
+        guard let subPaths = try? path.children() else {
+            print("Failed to get contents in path: \(path)")
+            return []
         }
         
-        for file in allFiles {
-            if file.hasPrefix(".") {
+        var result = [String]()
+        for subPath in subPaths {
+            if subPath.lastComponent.hasPrefix(".") {
                 continue
             }
             
-            if excludedPaths.contains(baseNSString.appendingPathComponent(path)) {
+            if excludedPaths.contains(subPath) {
                 continue
             }
             
-            
-            
+            if subPath.isDirectory {
+                result.append(contentsOf: usedStringNames(at: subPath))
+            } else {
+                let fileExt = subPath.extension ?? ""
+                guard searchInFileExtensions.contains(fileExt) else {
+                    continue
+                }
+                
+                let fileType = FileType(ext: fileExt)
+                
+                let searchRules = fileType?.searchRules(extensions: resourceExtensions) ??
+                                  [PlainImageSearchRule(extensions: resourceExtensions)]
+                
+                let content = (try? subPath.read()) ?? ""
+                result.append(contentsOf: searchRules.flatMap { $0.search(in: content) })
+            }
         }
         
-        return result
+        return Set(result)
     }
 }
 

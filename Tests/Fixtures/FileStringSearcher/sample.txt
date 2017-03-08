@@ -1,0 +1,1 @@
+Hello it is a sample project with "image.png" a png and "another-image.jpg"
