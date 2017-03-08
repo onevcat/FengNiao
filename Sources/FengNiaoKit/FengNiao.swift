@@ -49,6 +49,11 @@ public struct FengNiao {
     let resourceExtensions: [String]
     let searchInFileExtensions: [String]
     
+    let regularDirExtensions = ["imageset", "launchimage", "appiconset", "bundle"]
+    var nonDirExtensions: [String] {
+        return resourceExtensions.filter { !regularDirExtensions.contains($0) }
+    }
+    
     public init(projectPath: String, excludedPaths: [String], resourceExtensions: [String], searchInFileExtensions: [String]) {
         let path = Path(projectPath).absolute()
         self.projectPath = path
@@ -65,6 +70,9 @@ public struct FengNiao {
             throw FengNiaoError.noFileExtension
         }
 
+        let allResources = allResourceFiles()
+        let usedNames = allUsedStringNames()
+        
         
         
         return [FileInfo()]
@@ -78,14 +86,17 @@ public struct FengNiao {
         }
         
         var files = [String: String]()
-        for file in result {
+        fileLoop: for file in result {
             
             // Skip resources in a bundle
-            if file.contains(".imageset/") ||
-               file.contains(".launchimage/") ||
-               file.contains(".appiconset/") ||
-               file.contains(".bundle/")
-            {
+            let dirPaths = regularDirExtensions.map { ".\($0)/" }
+            for dir in dirPaths where file.contains(dir) {
+                continue fileLoop
+            }
+            
+            // Skip the extensions should not be folder
+            let filePath = Path(file)
+            if let ext = filePath.extension, filePath.isDirectory && nonDirExtensions.contains(ext)  {
                 continue
             }
             
