@@ -13,7 +13,7 @@ class ExtensionFindProcess: NSObject {
     
     let p: Process
     
-    init?(path: String, extensions: [String], excluded: [String]) {
+    init?(path: Path, extensions: [String], excluded: [Path]) {
         p = Process()
         p.launchPath = "/usr/bin/find"
         
@@ -22,9 +22,7 @@ class ExtensionFindProcess: NSObject {
         }
         
         var args = [String]()
-        args.append(path)
-        args.append("-type")
-        args.append("f")
+        args.append(path.string)
         
         for (i, ext) in extensions.enumerated() {
             if i == 0 {
@@ -40,22 +38,26 @@ class ExtensionFindProcess: NSObject {
             }
         }
         
-        let rootPath = Path(path)
         for excludedPath in excluded {
             args.append("-not")
             args.append("-path")
-            let path = rootPath + Path(excludedPath)
-            guard path.exists else { continue }
             
-            if path.isDirectory {
-                args.append("\(path.string)/*")
+            let filePath = path + excludedPath
+            guard filePath.exists else { continue }
+            
+            if filePath.isDirectory {
+                args.append("\(filePath.string)/*")
             } else {
-                args.append(path.string)
+                args.append(filePath.string)
             }
             
         }
         
         p.arguments = args
+    }
+    
+    convenience init?(path: String, extensions: [String], excluded: [String]) {
+        self.init(path: Path(path), extensions: extensions, excluded: excluded.map { Path($0) })
     }
     
     func execute() -> Set<String> {

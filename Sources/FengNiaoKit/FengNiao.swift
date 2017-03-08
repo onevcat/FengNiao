@@ -8,6 +8,7 @@
 
 import Foundation
 import PathKit
+import Rainbow
 
 enum FileType {
     case swift
@@ -64,13 +65,39 @@ public struct FengNiao {
             throw FengNiaoError.noFileExtension
         }
 
+        
+        
         return [FileInfo()]
     }
     
-    func allResourceFiles() -> [String: FileInfo] {
+    func allResourceFiles() -> [String: String] {
+        let find = ExtensionFindProcess(path: projectPath, extensions: resourceExtensions, excluded: excludedPaths)
+        guard let result = find?.execute() else {
+            print("Resource finding failed.".red)
+            return [:]
+        }
         
-        
-        return [:]
+        var files = [String: String]()
+        for file in result {
+            
+            // Skip resources in a bundle
+            if file.contains(".imageset/") ||
+               file.contains(".launchimage/") ||
+               file.contains(".appiconset/") ||
+               file.contains(".bundle/")
+            {
+                continue
+            }
+            
+            let key = file.plainFileName(extensions: resourceExtensions)
+            if let existing = files[key] {
+                print("Found a dulplicated file key: \(key). Conflicting name: '\(existing)' | '\(file)'. Consider to rename one of them or exclude one.".yellow)
+                continue
+            }
+
+            files[key] = file
+        }
+        return files
     }
     
     func allUsedStringNames() -> Set<String> {
@@ -79,7 +106,7 @@ public struct FengNiao {
     
     func usedStringNames(at path: Path) -> Set<String> {
         guard let subPaths = try? path.children() else {
-            print("Failed to get contents in path: \(path)")
+            print("Failed to get contents in path: \(path)".red)
             return []
         }
         

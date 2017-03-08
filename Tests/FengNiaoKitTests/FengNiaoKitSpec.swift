@@ -191,6 +191,37 @@ describe("FengNiaoKit") {
             try expect(result) == expected
         }
     }
+    
+    $0.describe("FengNiao Resource Searcher") {
+        $0.it("should search resources in a simeple project") {
+            let project = fixtures + "SimpleResource"
+            let fengniao = FengNiao(projectPath: project.string,
+                                    excludedPaths: [],
+                                    resourceExtensions: ["png", "jpg", "imageset"],
+                                    searchInFileExtensions: [])
+            let result = fengniao.allResourceFiles()
+            let expected = [
+                "file1": (project + "file1.png").string,
+                "file2": (project + "file2.jpg").string,
+                "images": (project + "images.imageset").string
+            ]
+            try expect(result) == expected
+        }
+        
+        $0.it("should properly skip resource in bundle") {
+            let project = fixtures + "ResourcesInBundle"
+            let fengniao = FengNiao(projectPath: project.string,
+                                    excludedPaths: ["Ignore"],
+                                    resourceExtensions: ["png", "jpg", "imageset"],
+                                    searchInFileExtensions: [])
+            let result = fengniao.allResourceFiles()
+            let expected = [
+                "normal": (project + "normal.png").string,
+                "image": (project + "Assets.xcassets/image.imageset").string
+            ]
+            try expect(result) == expected
+        }
+    }
 
 }
 }
