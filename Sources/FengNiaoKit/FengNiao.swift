@@ -34,7 +34,10 @@ enum FileType {
 }
 
 public struct FileInfo {
-    
+    let path: Path
+    init(path: String) {
+        self.path = Path(path)
+    }
 }
 
 public enum FengNiaoError: Error {
@@ -73,9 +76,7 @@ public struct FengNiao {
         let allResources = allResourceFiles()
         let usedNames = allUsedStringNames()
         
-        
-        
-        return [FileInfo()]
+        return FengNiao.filterUnused(from: allResources, used: usedNames).map( FileInfo.init )
     }
     
     func allResourceFiles() -> [String: String] {
@@ -151,8 +152,55 @@ public struct FengNiao {
         
         return Set(result)
     }
+    
+    static func filterUnused(from all: [String: String], used: Set<String>) -> Set<String> {
+        let unusedPairs = all.filter { key, _ in
+            return !used.contains(key) &&
+                   !used.contains { $0.similarPatternWithNumberIndex(other: key) }
+        }
+        return Set( unusedPairs.map { $0.value } )
+    }
 }
 
+let digitalRex = try! NSRegularExpression(pattern: "(\\d+)", options: .caseInsensitive)
+extension String {
+    
+    func similarPatternWithNumberIndex(other: String) -> Bool {
+        // self -> pattern "image%02d"
+        // other -> name "image01"
+        let matches = digitalRex.matches(in: other, options: [], range: other.fullRange)
+        // No digital found in resource key.
+        guard matches.count >= 1 else { return false }
+        let lastMatch = matches.last!
+        let digitalRange = lastMatch.rangeAt(1)
+        
+        var prefix: String?
+        var suffix: String?
+
+        let digitalLocation = digitalRange.location
+        if digitalLocation != 0 {
+            let index = other.index(other.startIndex, offsetBy: digitalLocation)
+            prefix = other.substring(to: index)
+        }
+        
+        let digitalMaxRange = NSMaxRange(digitalRange)
+        if digitalMaxRange < other.utf16.count {
+            let index = other.index(other.startIndex, offsetBy: digitalMaxRange)
+            suffix = other.substring(from: index)
+        }
+        
+        switch (prefix, suffix) {
+        case (nil, nil):
+            return false // only digital
+        case (let p?, let s?):
+            return hasPrefix(p) && hasSuffix(s)
+        case (let p?, nil):
+            return hasPrefix(p)
+        case (nil, let s?):
+            return hasSuffix(s)
+        }
+    }
+}
 
 
 
