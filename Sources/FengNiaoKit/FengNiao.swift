@@ -33,10 +33,43 @@ enum FileType {
     }
 }
 
+let fileSizeSuffix = ["Bytes", "KB", "MB", "GB"]
+
 public struct FileInfo {
-    let path: Path
+    public let path: Path
+    public let size: Int
+    
     init(path: String) {
         self.path = Path(path)
+        self.size = self.path.size
+    }
+    
+    public var readableSize: String {
+        
+        var level = 0
+        var num = Float(size)
+        while num > 1000 && level <= 3 {
+            num = num / 1000.0
+            level += 1
+        }
+        
+        if level == 0 {
+            return "\(num) \(fileSizeSuffix[level])"
+        } else {
+            return String(format: "%.2f %@", num, fileSizeSuffix[level])
+        }
+    }
+}
+
+extension Path {
+    var size: Int {
+        if isDirectory {
+            let childrenPaths = try? children()
+            return (childrenPaths ?? []).reduce(0) { $0 + $1.size }
+        } else {
+            let attr = try? FileManager.default.attributesOfItem(atPath: absolute().string)
+            return attr?[.size] as? Int ?? 0
+        }
     }
 }
 
@@ -77,6 +110,19 @@ public struct FengNiao {
         let usedNames = allUsedStringNames()
         
         return FengNiao.filterUnused(from: allResources, used: usedNames).map( FileInfo.init )
+    }
+    
+    // Return a failed list of deleting
+    public func delete(_ unusedFiles: [FileInfo]) -> [(FileInfo, Error)] {
+        var failed = [(FileInfo, Error)]()
+        for file in unusedFiles {
+            do {
+                try file.path.delete()
+            } catch {
+                failed.append((file, error))
+            }
+        }
+        return failed
     }
     
     func allResourceFiles() -> [String: String] {

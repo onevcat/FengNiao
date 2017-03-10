@@ -64,39 +64,56 @@ do {
     unusedFiles = try fengNiao.unusedFiles()
 } catch {
     guard let e = error as? FengNiaoError else {
-        print("Unknown Error: \(error)".red)
+        print("Unknown Error: \(error)".red.bold)
         exit(EX_USAGE)
     }
     switch e {
     case .noResourceExtension:
-        print("You need to specify some resource extensions as search target. Use --resource-extensions to specify.".red)
+        print("You need to specify some resource extensions as search target. Use --resource-extensions to specify.".red.bold)
     case .noFileExtension:
-        print("You need to specify some file extensions to search in. Use --file-extensions to specify.".red)
+        print("You need to specify some file extensions to search in. Use --file-extensions to specify.".red.bold)
     }
     exit(EX_USAGE)
 }
 
 if unusedFiles.isEmpty {
-    print("Hu, you have no unused resources in path: \(projectPath)! Good job! 😎".green)
+    print("Hu, you have no unused resources in path: \(projectPath)! Good job! 😎".green.bold)
     exit(EX_OK)
 }
 
-
-var result = promptResult(files: unusedFiles)
-while result == .list {
-    result = promptResult(files: unusedFiles)
+if isForce {
+    
+} else {
+    var result = promptResult(files: unusedFiles)
+    while result == .list {
+        for file in unusedFiles {
+            print("\(file.readableSize) \(file.path.string)")
+        }
+        result = promptResult(files: unusedFiles)
+    }
+    
+    switch result {
+    case .list:
+        fatalError()
+    case .delete:
+        break
+    case .ignore:
+        print("Ignored. Nothing to do, bye!".green.bold)
+        exit(EX_OK)
+    }
 }
 
-switch result {
-case .list:
-    fatalError()
-case .delete:
-    print("Deleting unused files...⚙")
-    print("\(unusedFiles.count) unused files are deleted.".green)
-case .ignore:
-    print("Ignored. Nothing to do, bye!".green)
-}
+print("Deleting unused files...⚙".bold)
 
+let failed = fengNiao.delete(unusedFiles)
+if failed.isEmpty {
+    print("\(unusedFiles.count) unused files are deleted.".green.bold)
+} else {
+    print("\(unusedFiles.count - failed.count) unused files are deleted. But we encountered some error while deleting these \(failed.count) files:".yellow.bold)
+    for (fileInfo, err) in failed {
+        print("\(fileInfo.path.string) - \(err.localizedDescription)")
+    }
+}
 
 
 
