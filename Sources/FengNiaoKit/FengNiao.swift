@@ -12,7 +12,7 @@ import Rainbow
 
 #if os(Linux)
 typealias FNRegularExpression = RegularExpression
-typealias FNProcess = NSProcess
+typealias FNProcess = NSTask
 #else
 typealias FNRegularExpression = NSRegularExpression
 typealias FNProcess = Process
