@@ -314,16 +314,24 @@ describe("FengNiaoKit") {
         let folderDes = fixtures + fixtures + "DeleteFiles/Folder_Copy"
         
         $0.before {
+            #if os(macOS)
             try! file.copy(fileDes)
             try! folder.copy(folderDes)
+            #endif
         }
         
         $0.after {
+            #if os(macOS)
             try? fileDes.delete()
             try? folderDes.delete()
+            #endif
         }
         
         $0.it("should delete specified file") {
+            #if os(Linux)
+            throw skip("Linux copyItem not implemented yet in FileManager.")
+            #endif
+            
             try expect(fileDes.exists).to.beTrue()
             try expect(folderDes.exists).to.beTrue()
             
