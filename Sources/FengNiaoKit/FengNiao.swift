@@ -33,7 +33,7 @@ enum FileType {
     }
 }
 
-let fileSizeSuffix = ["Bytes", "KB", "MB", "GB"]
+let fileSizeSuffix = ["B", "KB", "MB", "GB"]
 
 public struct FileInfo {
     public let path: Path
@@ -54,7 +54,7 @@ public struct FileInfo {
         }
         
         if level == 0 {
-            return "\(num) \(fileSizeSuffix[level])"
+            return "\(Int(num)) \(fileSizeSuffix[level])"
         } else {
             return String(format: "%.2f %@", num, fileSizeSuffix[level])
         }
@@ -67,6 +67,8 @@ extension Path {
             let childrenPaths = try? children()
             return (childrenPaths ?? []).reduce(0) { $0 + $1.size }
         } else {
+            // Skip hidden files
+            if lastComponent.hasPrefix(".") { return 0 }
             let attr = try? FileManager.default.attributesOfItem(atPath: absolute().string)
             return attr?[.size] as? Int ?? 0
         }

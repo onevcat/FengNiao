@@ -79,6 +79,26 @@ describe("FengNiaoKit") {
         }
     }
     
+    $0.describe("File Info Structure") {
+        $0.it("could create a file info struct") {
+            let path = fixtures + "FileInfo/file_1_byte"
+            let fileInfo = FileInfo(path: path.string)
+            
+            try expect(fileInfo.path) == path
+            try expect(fileInfo.size) == 1
+        }
+        
+        $0.it("could generate readable size text") {
+            let rootPath = fixtures + "FileInfo"
+            let root = FileInfo(path: rootPath.string)
+            try expect(root.readableSize) == "1.23 KB"
+            
+            let file1BytePath = fixtures + "FileInfo/file_1_byte"
+            let file1Byte = FileInfo(path: file1BytePath.string)
+            try expect(file1Byte.readableSize) == "1 B"
+        }
+    }
+    
     $0.describe("Find Process") {
         $0.it("should get proper files") {
             let project = fixtures + "FindProcess"
@@ -261,6 +281,12 @@ describe("FengNiaoKit") {
             let result = FengNiao.filterUnused(from: all, used: used)
             let expected: Set<String> = ["face.png", "unused_1.png", "unused_2.png", "unused_3.png"]
             try expect(result) == expected
+        }
+    }
+    
+    $0.describe("FengNiao Deleting File") {
+        $0.it("should delete specified file") {
+            
         }
     }
     
