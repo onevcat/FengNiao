@@ -92,9 +92,7 @@ if unusedFiles.isEmpty {
     exit(EX_OK)
 }
 
-if isForce {
-    
-} else {
+if !isForce {
     var result = promptResult(files: unusedFiles)
     while result == .list {
         for file in unusedFiles {
