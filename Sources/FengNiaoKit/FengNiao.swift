@@ -64,7 +64,11 @@ extension Path {
             // Skip hidden files
             if lastComponent.hasPrefix(".") { return 0 }
             let attr = try? FileManager.default.attributesOfItem(atPath: absolute().string)
-            return attr?[.size] as? Int ?? 0
+            if let num = attr?[.size] as? NSNumber {
+                return num.intValue
+            } else {
+                return 0
+            }
         }
     }
 }
