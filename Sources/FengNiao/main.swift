@@ -18,28 +18,27 @@ cli.formatOutput = { s, type in
 let projectPathOption = StringOption(
     shortFlag: "p", longFlag: "project",
     helpMessage: "Root path of your Xcode project. Default is current folder.")
+cli.addOption(projectPathOption)
 
 let isForceOption = BoolOption(
-    shortFlag: "f", longFlag: "force",
+    longFlag: "force",
     helpMessage: "Delete the found unused files without asking.")
+cli.addOption(isForceOption)
 
 let excludePathOption = MultiStringOption(
     shortFlag: "e", longFlag: "exclude",
     helpMessage: "Exclude paths from search.")
+cli.addOption(excludePathOption)
 
 let resourceExtOption = MultiStringOption(
     shortFlag: "r", longFlag: "resource-extensions",
     helpMessage: "Resource file extensions need to be searched. Default is 'imageset jpg png gif'")
+cli.addOption(resourceExtOption)
 
 let fileExtOption = MultiStringOption(
     shortFlag: "f", longFlag: "file-extensions",
     helpMessage: "In which types of files we should search for resource usage. Default is 'm mm swift xib storyboard'")
-
-let isIgnoreSimilar = BoolOption(
-    longFlag: "ignore-similar",
-    helpMessage: "Ignore similar pattern name. 'image_%d.png' for example.")
-
-cli.addOptions([projectPathOption, isForceOption, excludePathOption, resourceExtOption])
+cli.addOption(fileExtOption)
 
 do {
     try cli.parse()
@@ -49,6 +48,7 @@ do {
 }
 
 let projectPath = projectPathOption.value ?? "."
+let isForce = isForceOption.value
 let excludePaths = excludePathOption.value ?? []
 let resourceExtentions = resourceExtOption.value ?? ["imageset", "jpg", "png", "gif"]
 let fileExtensions = fileExtOption.value ?? ["m", "mm", "swift", "xib", "storyboard"]
@@ -81,15 +81,15 @@ if unusedFiles.isEmpty {
     exit(EX_OK)
 }
 
+
 var result = promptResult(files: unusedFiles)
 while result == .list {
-    
     result = promptResult(files: unusedFiles)
 }
 
-
 switch result {
-case .list: fatalError()
+case .list:
+    fatalError()
 case .delete:
     print("Deleting unused files...⚙")
     print("\(unusedFiles.count) unused files are deleted.".green)

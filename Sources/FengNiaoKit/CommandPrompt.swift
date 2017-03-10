@@ -16,12 +16,10 @@ public enum Action {
 }
 
 public func promptResult(files: [FileInfo]) -> Action {
-    print("\(files.count) unused files are found.".yellow)
-    let op = ask("Waht do you want to do with them? (l)ist/(d)elete/(i)gnore (Default is 'l')".yellow)
-    switch op {
-    case "l", "L": return .list
-    case "d", "D": return .delete
-    case "i", "I": return .ignore
-    default: return .list
+    print("\(files.count) unused files are found.".yellow.bold)
+    return choose("What do you want to do with them? ".bold, type: Action.self) { settings in
+        settings.addChoice("list") { .list }
+        settings.addChoice("delete") { .delete}
+        settings.addChoice("ignore") { .ignore}
     }
 }
