@@ -12,7 +12,7 @@ import Rainbow
 
 #if os(Linux)
 typealias FNRegularExpression = RegularExpression
-typealias FNProcess = NSTask
+typealias FNProcess = Task
 #else
 typealias FNRegularExpression = NSRegularExpression
 typealias FNProcess = Process
@@ -214,7 +214,11 @@ extension String {
         // No digital found in resource key.
         guard matches.count >= 1 else { return false }
         let lastMatch = matches.last!
+        #if os(Linux)
+        let digitalRange = lastMatch.range(at: 1)
+        #else
         let digitalRange = lastMatch.rangeAt(1)
+        #endif
         
         var prefix: String?
         var suffix: String?
