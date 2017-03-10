@@ -40,12 +40,22 @@ let fileExtOption = MultiStringOption(
     helpMessage: "In which types of files we should search for resource usage. Default is 'm mm swift xib storyboard'")
 cli.addOption(fileExtOption)
 
+let helpOption = BoolOption(shortFlag: "h", longFlag: "help",
+                      helpMessage: "Prints this help message.")
+cli.addOption(helpOption)
+
 do {
     try cli.parse()
 } catch {
     cli.printUsage(error)
     exit(EX_USAGE)
 }
+
+if helpOption.value {
+    cli.printUsage()
+    exit(EX_OK)
+}
+
 
 let projectPath = projectPathOption.value ?? "."
 let isForce = isForceOption.value

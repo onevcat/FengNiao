@@ -33,8 +33,6 @@ enum FileType {
     }
 }
 
-let fileSizeSuffix = ["B", "KB", "MB", "GB"]
-
 public struct FileInfo {
     public let path: Path
     public let size: Int
@@ -45,19 +43,7 @@ public struct FileInfo {
     }
     
     public var readableSize: String {
-        
-        var level = 0
-        var num = Float(size)
-        while num > 1000 && level <= 3 {
-            num = num / 1000.0
-            level += 1
-        }
-        
-        if level == 0 {
-            return "\(Int(num)) \(fileSizeSuffix[level])"
-        } else {
-            return String(format: "%.2f %@", num, fileSizeSuffix[level])
-        }
+        return size.fn_readableSize
     }
 }
 

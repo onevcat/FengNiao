@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4B2DBC5E1E6FBDDB00923381 /* ExtensionFindProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2DBC5D1E6FBDDB00923381 /* ExtensionFindProcess.swift */; };
-		4B674EFF1E723F9D00290706 /* CommandPrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_67 /* CommandPrompt.swift */; };
+		4B674F011E7252FE00290706 /* CommandPrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B674F001E7252FE00290706 /* CommandPrompt.swift */; };
 		4BDFA3BC1E6EAEBD0097AEE0 /* FengNiaoKitSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDFA3BB1E6EAEBD0097AEE0 /* FengNiaoKitSpec.swift */; };
 		OBJ_100 /* StringGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* StringGenerator.swift */; };
 		OBJ_101 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* Style.swift */; };
@@ -273,6 +273,7 @@
 
 /* Begin PBXFileReference section */
 		4B2DBC5D1E6FBDDB00923381 /* ExtensionFindProcess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionFindProcess.swift; sourceTree = "<group>"; };
+		4B674F001E7252FE00290706 /* CommandPrompt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandPrompt.swift; sourceTree = "<group>"; };
 		4BDFA3BB1E6EAEBD0097AEE0 /* FengNiaoKitSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FengNiaoKitSpec.swift; sourceTree = "<group>"; };
 		OBJ_10 /* CodesParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodesParser.swift; sourceTree = "<group>"; };
 		OBJ_11 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -326,7 +327,6 @@
 		OBJ_61 /* Reporters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reporters.swift; sourceTree = "<group>"; };
 		OBJ_63 /* PathKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathKit.swift; sourceTree = "<group>"; };
 		OBJ_65 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		OBJ_67 /* CommandPrompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CommandPrompt.swift; path = Sources/FengNiaoKit/CommandPrompt.swift; sourceTree = SOURCE_ROOT; };
 		OBJ_68 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		OBJ_69 /* FengNiao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FengNiao.swift; sourceTree = "<group>"; };
 		OBJ_70 /* FileSearchRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSearchRule.swift; sourceTree = "<group>"; };
@@ -521,7 +521,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_65 /* main.swift */,
-				OBJ_67 /* CommandPrompt.swift */,
+				4B674F001E7252FE00290706 /* CommandPrompt.swift */,
 			);
 			name = FengNiao;
 			path = Sources/FengNiao;
@@ -895,7 +895,7 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_175 /* main.swift in Sources */,
-				4B674EFF1E723F9D00290706 /* CommandPrompt.swift in Sources */,
+				4B674F011E7252FE00290706 /* CommandPrompt.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

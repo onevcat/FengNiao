@@ -15,7 +15,7 @@ public func testFengNiaoKit() {
 describe("FengNiaoKit") {
     let fixtures = Path(#file).parent().parent() + "Fixtures"
 
-    $0.describe("Extensions") {
+    $0.describe("String Extensions") {
         $0.it("should parse to plain name") {
             let paths = [
                 "/usr/bin/hello/file1.swift",
@@ -35,6 +35,27 @@ describe("FengNiaoKit") {
             ]
             let result = paths.map { $0.plainFileName(extensions: ["png", "jpg"]) }
             try expect(result) == expected
+        }
+    }
+    
+    $0.describe("Int Extesnions") {
+        $0.it("should parse for 0 byte") {
+            try expect(0.fn_readableSize) == "0 B"
+        }
+        $0.it("should parse several bytes") {
+            try expect(123.fn_readableSize) == "123 B"
+        }
+        $0.it("should parse serveral kb") {
+            try expect(123_456.fn_readableSize) == "123.46 KB"
+        }
+        $0.it("should parse serveral mb") {
+            try expect(123_456_789.fn_readableSize) == "123.46 MB"
+        }
+        $0.it("should parse serveral gb") {
+            try expect(1_123_456_789.fn_readableSize) == "1.12 GB"
+        }
+        $0.it("should parse more than tb") {
+            try expect(1_321_123_456_789.fn_readableSize) == "1321.12 GB"
         }
     }
 
