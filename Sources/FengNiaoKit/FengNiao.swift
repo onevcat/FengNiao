@@ -10,6 +10,14 @@ import Foundation
 import PathKit
 import Rainbow
 
+#if os(Linux)
+typealias FNRegularExpression = RegularExpression
+typealias FNProcess = NSProcess
+#else
+typealias FNRegularExpression = NSRegularExpression
+typealias FNProcess = Process
+#endif
+
 enum FileType {
     case swift
     case objc
@@ -196,7 +204,7 @@ public struct FengNiao {
     }
 }
 
-let digitalRex = try! NSRegularExpression(pattern: "(\\d+)", options: .caseInsensitive)
+let digitalRex = try! FNRegularExpression(pattern: "(\\d+)", options: .caseInsensitive)
 extension String {
     
     func similarPatternWithNumberIndex(other: String) -> Bool {

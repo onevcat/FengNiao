@@ -11,10 +11,10 @@ import PathKit
 
 class ExtensionFindProcess: NSObject {
     
-    let p: Process
+    let p: FNProcess
     
     init?(path: Path, extensions: [String], excluded: [Path]) {
-        p = Process()
+        p = FNProcess()
         p.launchPath = "/usr/bin/find"
         
         guard !extensions.isEmpty else {
