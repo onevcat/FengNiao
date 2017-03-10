@@ -4,6 +4,11 @@ import Rainbow
 import FengNiaoKit
 import PathKit
 
+#if os(Linux)
+let EX_OK = 0
+let EX_USAGE = 64
+#endif
+
 let cli = CommandLineKit.CommandLine()
 cli.formatOutput = { s, type in
     var str: String
