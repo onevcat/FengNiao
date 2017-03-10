@@ -285,13 +285,34 @@ describe("FengNiaoKit") {
     }
     
     $0.describe("FengNiao Deleting File") {
+        
+        let file = fixtures + "DeleteFiles/file_in_root"
+        let folder = fixtures + "DeleteFiles/Folder"
+        
+        let fileDes = fixtures + "DeleteFiles/file_in_root_copy"
+        let folderDes = fixtures + fixtures + "DeleteFiles/Folder_Copy"
+        
+        $0.before {
+            try! file.copy(fileDes)
+            try! folder.copy(folderDes)
+        }
+        
+        $0.after {
+            try? fileDes.delete()
+            try? folderDes.delete()
+        }
+        
         $0.it("should delete specified file") {
+            try expect(fileDes.exists).to.beTrue()
+            try expect(folderDes.exists).to.beTrue()
             
+            let failed = FengNiao.delete([fileDes, folderDes].map{ FileInfo(path: $0.string) })
+            
+            try expect(failed.count) == 0
+            try expect(fileDes.exists).to.beFalse()
+            try expect(folderDes.exists).to.beFalse()
         }
     }
-    
-    
-
 }
 }
     

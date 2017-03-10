@@ -115,7 +115,7 @@ public struct FengNiao {
     }
     
     // Return a failed list of deleting
-    public func delete(_ unusedFiles: [FileInfo]) -> [(FileInfo, Error)] {
+    static public func delete(_ unusedFiles: [FileInfo]) -> [(FileInfo, Error)] {
         var failed = [(FileInfo, Error)]()
         for file in unusedFiles {
             do {

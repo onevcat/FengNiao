@@ -8,6 +8,7 @@
 
 import Swiftline
 import Rainbow
+import FengNiaoKit
 
 public enum Action {
     case list

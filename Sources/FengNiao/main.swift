@@ -1,4 +1,4 @@
-import Darwin
+import Foundation
 import CommandLineKit
 import Rainbow
 import FengNiaoKit
@@ -105,7 +105,7 @@ if isForce {
 
 print("Deleting unused files...⚙".bold)
 
-let failed = fengNiao.delete(unusedFiles)
+let failed = FengNiao.delete(unusedFiles)
 if failed.isEmpty {
     print("\(unusedFiles.count) unused files are deleted.".green.bold)
 } else {
