@@ -2,6 +2,7 @@ import Foundation
 import CommandLineKit
 import Rainbow
 import FengNiaoKit
+import PathKit
 
 let cli = CommandLineKit.CommandLine()
 cli.formatOutput = { s, type in
@@ -87,7 +88,7 @@ do {
 }
 
 if unusedFiles.isEmpty {
-    print("Hu, you have no unused resources in path: \(projectPath)! Good job! 😎".green.bold)
+    print("😎 Hu, you have no unused resources in path: \(Path(projectPath).absolute()).".green.bold)
     exit(EX_OK)
 }
 
