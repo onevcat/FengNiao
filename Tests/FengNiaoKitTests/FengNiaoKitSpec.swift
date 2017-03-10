@@ -10,8 +10,8 @@ import Foundation
 import Spectre
 @testable import FengNiaoKit
 import  PathKit
-public func testFengNiaoKit() {
-    
+
+public func testFengNiaoKit() {    
 describe("FengNiaoKit") {
     let fixtures = Path(#file).parent().parent() + "Fixtures"
 
