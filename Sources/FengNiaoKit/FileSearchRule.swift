@@ -49,7 +49,7 @@ struct PlainImageSearchRule: RegPatternSearchRule {
         }
         
         let joinedExt = extensions.joined(separator: "|")
-        return ["([a-zA-Z0-9_-]+)\\.(\(joinedExt))"]
+        return ["\"(.+?)\\.(\(joinedExt))\""]
     }
 }
 

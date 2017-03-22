@@ -141,7 +141,8 @@ public struct FengNiao {
                 continue fileLoop
             }
             
-            // Skip the extensions should not be folder
+            // Skip the folders which suffix with a non-folder extension.
+            // eg: We need to skip a folder with such name: /myfolder.png/ (although we should blame the one who named it)
             let filePath = Path(file)
             if let ext = filePath.extension, filePath.isDirectory && nonDirExtensions.contains(ext)  {
                 continue
