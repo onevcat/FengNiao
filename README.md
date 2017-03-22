@@ -13,8 +13,8 @@ You need Swift Package Manager (as well as swift compiler) installed in your mac
 #### Compile from source
 
 ```bash
-> git clone https://git.linecorp.com/wei-wang/fengniao
-> cd fengniao
+> git clone https://github.com/onevcat/FengNiao.git
+> cd FengNiao
 > ./install.sh
 ```
 
