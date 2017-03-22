@@ -1,0 +1,10 @@
+os:
+  - linux
+  - osx
+language: generic
+sudo: required
+dist: trusty
+osx_image: xcode8.2
+script:
+  - eval "$(curl -sL https://raw.githubusercontent.com/onevcat/Swift-CI/master/ci)"
+  - eval "$(curl -sL https://raw.githubusercontent.com/onevcat/Swift-CI/master/codecov)"
