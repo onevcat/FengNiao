@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_87"
+               BlueprintIdentifier = "OBJ_58"
                BuildableName = "Rainbow.framework"
                BlueprintName = "Rainbow"
                ReferencedContainer = "container:FengNiao.xcodeproj">
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_104"
+               BlueprintIdentifier = "OBJ_75"
                BuildableName = "CommandLineKit.framework"
                BlueprintName = "CommandLineKit"
                ReferencedContainer = "container:FengNiao.xcodeproj">
@@ -42,21 +42,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_113"
-               BuildableName = "Swiftline.framework"
-               BlueprintName = "Swiftline"
-               ReferencedContainer = "container:FengNiao.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_147"
+               BlueprintIdentifier = "OBJ_84"
                BuildableName = "Spectre.framework"
                BlueprintName = "Spectre"
                ReferencedContainer = "container:FengNiao.xcodeproj">
@@ -70,7 +56,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_161"
+               BlueprintIdentifier = "OBJ_98"
                BuildableName = "PathKit.framework"
                BlueprintName = "PathKit"
                ReferencedContainer = "container:FengNiao.xcodeproj">
@@ -84,7 +70,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_170"
+               BlueprintIdentifier = "OBJ_107"
                BuildableName = "FengNiao"
                BlueprintName = "FengNiao"
                ReferencedContainer = "container:FengNiao.xcodeproj">
@@ -98,7 +84,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_189"
+               BlueprintIdentifier = "OBJ_125"
                BuildableName = "FengNiaoKit.framework"
                BlueprintName = "FengNiaoKit"
                ReferencedContainer = "container:FengNiao.xcodeproj">
@@ -116,7 +102,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_209"
+               BlueprintIdentifier = "OBJ_143"
                BuildableName = "FengNiaoKitTests.xctest"
                BlueprintName = "FengNiaoKitTests"
                ReferencedContainer = "container:FengNiao.xcodeproj">
@@ -126,7 +112,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_229"
+               BlueprintIdentifier = "OBJ_161"
                BuildableName = "FengNiaoTests.xctest"
                BlueprintName = "FengNiaoTests"
                ReferencedContainer = "container:FengNiao.xcodeproj">
@@ -149,7 +135,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "OBJ_87"
+            BlueprintIdentifier = "OBJ_58"
             BuildableName = "Rainbow.framework"
             BlueprintName = "Rainbow"
             ReferencedContainer = "container:FengNiao.xcodeproj">

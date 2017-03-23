@@ -125,14 +125,14 @@ public struct FengNiao {
         return failed
     }
     
-    func allResourceFiles() -> [String: String] {
+    func allResourceFiles() -> [String: Set<String>] {
         let find = ExtensionFindProcess(path: projectPath, extensions: resourceExtensions, excluded: excludedPaths)
         guard let result = find?.execute() else {
             print("Resource finding failed.".red)
             return [:]
         }
         
-        var files = [String: String]()
+        var files = [String: Set<String>]()
         fileLoop: for file in result {
             
             // Skip resources in a bundle
@@ -150,11 +150,10 @@ public struct FengNiao {
             
             let key = file.plainFileName(extensions: resourceExtensions)
             if let existing = files[key] {
-                print("Found a dulplicated file key: \(key). Conflicting name: '\(existing)' | '\(file)'. Consider to rename one of them or exclude one.".yellow)
-                continue
+                files[key] = existing.union([file])
+            } else {
+                files[key] = [file]
             }
-
-            files[key] = file
         }
         return files
     }
@@ -200,12 +199,12 @@ public struct FengNiao {
         return Set(result)
     }
     
-    static func filterUnused(from all: [String: String], used: Set<String>) -> Set<String> {
+    static func filterUnused(from all: [String: Set<String>], used: Set<String>) -> Set<String> {
         let unusedPairs = all.filter { key, _ in
             return !used.contains(key) &&
                    !used.contains { $0.similarPatternWithNumberIndex(other: key) }
         }
-        return Set( unusedPairs.map { $0.value } )
+        return Set( unusedPairs.flatMap { $0.value } )
     }
 }
 
