@@ -241,10 +241,10 @@ describe("FengNiaoKit") {
                                     resourceExtensions: ["png", "jpg", "imageset"],
                                     searchInFileExtensions: [])
             let result = fengniao.allResourceFiles()
-            let expected = [
-                "file1": (project + "file1.png").string,
-                "file2": (project + "file2.jpg").string,
-                "images": (project + "images.imageset").string
+            let expected: [String: Set<String>] = [
+                "file1": [(project + "file1.png").string],
+                "file2": [(project + "file2.jpg").string],
+                "images": [(project + "images.imageset").string]
             ]
             try expect(result) == expected
         }
@@ -256,9 +256,23 @@ describe("FengNiaoKit") {
                                     resourceExtensions: ["png", "jpg", "imageset"],
                                     searchInFileExtensions: [])
             let result = fengniao.allResourceFiles()
-            let expected = [
-                "normal": (project + "normal.png").string,
-                "image": (project + "Assets.xcassets/image.imageset").string
+            let expected: [String: Set<String>] = [
+                "normal": [(project + "normal.png").string],
+                "image": [(project + "Assets.xcassets/image.imageset").string]
+            ]
+            try expect(result) == expected
+        }
+        
+        $0.it("should not skip same files with difference scale suffix") {
+            let project = fixtures + "ResourcesSuffix"
+            let fengniao = FengNiao(projectPath: project.string,
+                                    excludedPaths: [],
+                                    resourceExtensions: ["png"],
+                                    searchInFileExtensions: [])
+            let result = fengniao.allResourceFiles()
+            let expected: [String: Set<String>] = [
+                "image": [(project + "image@2x.png").string, (project + "image@3x.png").string],
+                "cloud": [(project + "cloud.png").string]
             ]
             try expect(result) == expected
         }
@@ -266,10 +280,10 @@ describe("FengNiaoKit") {
     
     $0.describe("FengNiao File Filter") {
         $0.it("should filter simple unused files") {
-            let all = [
-                "face": "face.png",
-                "book": "book.png",
-                "moon": "moon.png"
+            let all: [String: Set<String>] = [
+                "face": ["face.png"],
+                "book": ["book.png"],
+                "moon": ["moon.png"]
             ]
             let used: Set<String> = ["book"]
             
@@ -279,24 +293,37 @@ describe("FengNiaoKit") {
             
         }
         
+        $0.it("should filter same name files correctly") {
+            let all: [String: Set<String>] = [
+                "face": ["face1.png", "face2.png"],
+                "book": ["book.png"],
+                "moon": ["moon.png"]
+            ]
+            let used: Set<String> = ["book"]
+            
+            let result = FengNiao.filterUnused(from: all, used: used)
+            let expected: Set<String> = ["face1.png", "face2.png", "moon.png"]
+            try expect(result) == expected
+        }
+        
         $0.it("should not filter similar pattern") {
-            let all = [
-                "face": "face.png",
-                "image01": "image01.png",
-                "image02": "image02.png",
-                "image03": "image03.png",
-                "1_set": "001_set.jpg",
-                "2_set": "002_set.jpg",
-                "3_set": "003_set.jpg",
-                "middle_01_bird": "middle_01_bird@2x.png",
-                "middle_02_bird": "middle_02_bird@2x.png",
-                "middle_03_bird": "middle_03_bird@2x.png",
-                "suffix_1": "suffix_1.jpg",
-                "suffix_2": "suffix_2.jpg",
-                "suffix_3": "suffix_3.jpg",
-                "unused_1": "unused_1.png",
-                "unused_2": "unused_2.png",
-                "unused_3": "unused_3.png",
+            let all: [String: Set<String>] = [
+                "face": ["face.png"],
+                "image01": ["image01.png"],
+                "image02": ["image02.png"],
+                "image03": ["image03.png"],
+                "1_set": ["001_set.jpg"],
+                "2_set": ["002_set.jpg"],
+                "3_set": ["003_set.jpg"],
+                "middle_01_bird": ["middle_01_bird@2x.png"],
+                "middle_02_bird": ["middle_02_bird@2x.png"],
+                "middle_03_bird": ["middle_03_bird@2x.png"],
+                "suffix_1": ["suffix_1.jpg"],
+                "suffix_2": ["suffix_2.jpg"],
+                "suffix_3": ["suffix_3.jpg"],
+                "unused_1": ["unused_1.png"],
+                "unused_2": ["unused_2.png"],
+                "unused_3": ["unused_3.png"],
             ]
             let used: Set<String> = ["image%02d", "%d_set", "middle_%d_bird","suffix_"]
             let result = FengNiao.filterUnused(from: all, used: used)
@@ -345,7 +372,18 @@ describe("FengNiaoKit") {
 }
 }
     
-
+public func == (lhs: Expectation<[String: Set<String>]>, rhs: [String: Set<String>]) throws {
+    if let leftDic = try lhs.expression() {
+        for (key, value) in leftDic {
+            if let rValue = rhs[key], value != rValue {
+                throw lhs.failure("\(String(describing: leftDic)) is not equal to \(rhs)")
+            }
+        }
+        
+    } else {
+        throw lhs.failure("given value is nil")
+    }
+}
 
 
 
