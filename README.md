@@ -70,7 +70,7 @@ A more daily-work usage under a project could be:
 > fengniao --project . --exclude Carthage Pods
 ```
 
-This will search in current folder, as well as skip the `Carthage` and `Pods` folder.
+This will search in current folder, but skip the `Carthage` and `Pods` folder, in which there might be some third party resources you do not want to touch.
 
 ### Use with Xcode build phase
 
