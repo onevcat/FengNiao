@@ -1,4 +1,15 @@
-# FengNiao
+![](https://raw.githubusercontent.com/onevcat/FengNiao/assets/logo.png)
+
+</p>
+
+<p align="center">
+<a href="https://travis-ci.org/onevcat/FengNiao"><img src="https://img.shields.io/travis/onevcat/FengNiao/master.svg"></a>
+<a href="https://swift.org/package-manager/"><img src="https://img.shields.io/badge/swift-3.0-brightgreen.svg"/></a>
+<a href="https://swift.org/package-manager/"><img src="https://img.shields.io/badge/SPM-ready-orange.svg"></a>
+<a href="https://raw.githubusercontent.com/onevcat/Kingfisher/master/LICENSE"><img src="https://img.shields.io/cocoapods/l/Kingfisher.svg?style=flat"></a>
+<a href="https://swift.org/package-manager/"><img src="https://img.shields.io/badge/platform-macos%20|%20Linux-blue.svg"/></a>
+<a href="https://codecov.io/gh/onevcat/Hedwig"><img src="https://codecov.io/gh/onevcat/Hedwig/branch/master/graph/badge.svg"/></a>
+</p>
 
 ## What
 
@@ -28,7 +39,7 @@ You may want to install in from Homebrew. But for now it is not supported.
 
 Just navigate to your project folder, then:
 
-```bash
+```shell
 > fengniao
 ```
 
@@ -36,7 +47,7 @@ It will scan current folder and all its subfolders to find unused images, then a
 
 FengNiao supports some arguments, you could find it by:
 
-```bash
+```shell
 > fengniao --help
 
   -p, --project:
@@ -53,6 +64,14 @@ FengNiao supports some arguments, you could find it by:
       Prints this help message.
 ```
 
+A more daily-work usage under a project could be:
+
+```shell
+> fengniao --project . --exclude Carthage Pods
+```
+
+This will search in current folder, as well as skip the `Carthage` and `Pods` folder.
+
 ### Use with Xcode build phase
 
 It is easy to integrate FengNiao into your Xcode build process. By doing so, you could ensure your project being cleaned every time you build your project. 
@@ -63,12 +82,30 @@ Add a "Run Script" phase in the Build Phases tab:
 
 Then drap it above of "Copy Bundle Resources", editing its content to something like this:
 
-```
-fengniao --exclude Carthage vendor --force
+```bash
+fengniao --exclude Carthage --force
 ```
 
 It is recommended to exclude vender's folders like Pods or Carthage. Since you do not have a chance to confirm the result, you also need to add `--force` option.
 
+## License and Information
 
+FengNiao is open-sourced as MIT license. The name of this project comes from the Chinese word 蜂鸟 (hummingbird), which is the smallest bird in the world.
+
+Submit [an issue](https://github.com/onevcat/Hedwig/issues/new) if you find something wrong. Pull requests are warmly welcome, but I suggest to discuss first.
+
+You can also follow and contact me on [Twitter](http://twitter.com/onevcat) or [Sina Weibo](http://weibo.com/onevcat).
+
+## Learning to Create
+
+I streamed the way I created this tool as a live-coding session in a live platform in China. You can learn how to create a project with Swift Package Manager, how to apply Protocol-Oriented Programming (POP) in the project, and how to develop in a BDD way as well as write good tests there. 
+
+It is a paid series lesson in Chinese. If you are interested in it, please check and watch the links below:
+
+#### 现场编程 - 用 Swift 创建命令行工具 fengniao-cli
+
+- [Part 1](http://m.quzhiboapp.com/?liveId=391&fromUserId=12049)
+- [Part 2](http://m.quzhiboapp.com/?liveId=401&fromUserId=12049)
+- [Part 3](http://m.quzhiboapp.com/?liveId=409&fromUserId=12049)
 
 
