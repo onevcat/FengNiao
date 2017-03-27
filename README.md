@@ -92,7 +92,7 @@ It is recommended to exclude vender's folders like Pods or Carthage. Since you d
 
 FengNiao is open-sourced as MIT license. The name of this project comes from the Chinese word 蜂鸟 (hummingbird), which is the smallest bird in the world.
 
-Submit [an issue](https://github.com/onevcat/Hedwig/issues/new) if you find something wrong. Pull requests are warmly welcome, but I suggest to discuss first.
+Submit [an issue](https://github.com/onevcat/FengNiao/issues/new) if you find something wrong. Pull requests are warmly welcome, but I suggest to discuss first.
 
 You can also follow and contact me on [Twitter](http://twitter.com/onevcat) or [Sina Weibo](http://weibo.com/onevcat).
 
