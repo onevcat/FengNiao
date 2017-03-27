@@ -1,5 +1,5 @@
-![](https://raw.githubusercontent.com/onevcat/FengNiao/assets/logo.png)
-
+<p align="center">
+<img src="https://raw.githubusercontent.com/onevcat/FengNiao/assets/logo.png" alt="FengNiao" title="FengNiao" width="468"/>
 </p>
 
 <p align="center">
