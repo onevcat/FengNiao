@@ -29,6 +29,8 @@ import Rainbow
 import FengNiaoKit
 import PathKit
 
+let appVersion = "0.1.2"
+
 #if os(Linux)
 let EX_OK: Int32 = 0
 let EX_USAGE: Int32 = 64
@@ -71,8 +73,11 @@ let fileExtOption = MultiStringOption(
     helpMessage: "In which types of files we should search for resource usage. Default is 'm mm swift xib storyboard'")
 cli.addOption(fileExtOption)
 
+let versionOption = BoolOption(longFlag: "version", helpMessage: "Print version.")
+cli.addOption(versionOption)
+
 let helpOption = BoolOption(shortFlag: "h", longFlag: "help",
-                      helpMessage: "Prints this help message.")
+                      helpMessage: "Print this help message.")
 cli.addOption(helpOption)
 
 do {
@@ -85,6 +90,11 @@ do {
 if helpOption.value {
     cli.printUsage()
     exit(EX_OK)
+}
+
+if versionOption.value {
+    print(appVersion)
+    exit(EX_OK);
 }
 
 
