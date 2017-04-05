@@ -87,6 +87,12 @@ do {
     exit(EX_USAGE)
 }
 
+if !cli.unparsedArguments.isEmpty {
+    print("Unknow arguments: \(cli.unparsedArguments)".red)
+    cli.printUsage()
+    exit(EX_USAGE)
+}
+
 if helpOption.value {
     cli.printUsage()
     exit(EX_OK)
