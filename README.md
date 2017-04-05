@@ -86,7 +86,7 @@ Then drap it above of "Copy Bundle Resources", editing its content to something 
 fengniao --exclude Carthage --force
 ```
 
-It is recommended to exclude vender's folders like Pods or Carthage. Since you do not have a chance to confirm the result, you also need to add `--force` option.
+It is recommended to exclude vendor's folders like Pods or Carthage. Since you do not have a chance to confirm the result, you also need to add `--force` option.
 
 ## License and Information
 
