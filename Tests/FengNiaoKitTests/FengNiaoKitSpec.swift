@@ -402,6 +402,9 @@ describe("FengNiaoKit") {
             #endif
         }
         $0.it("Remove the Reference"){
+            #if os(Linux)
+                throw skip("Linux copyItem not implemented yet in FileManager.")
+            #endif
             let projectPath = fileDes + "FengNiao.xcodeproj"+"project.pbxproj"
             let fileProjectPath = file + "FengNiao.xcodeproj"+"project.pbxproj"
             let file:String = try! fileProjectPath.read()
