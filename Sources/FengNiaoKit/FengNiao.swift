@@ -60,10 +60,12 @@ enum FileType {
 public struct FileInfo {
     public let path: Path
     public let size: Int
+    public let fileName: String
     
     init(path: String) {
         self.path = Path(path)
         self.size = self.path.size
+        self.fileName = self.path.lastComponent
     }
     
     public var readableSize: String {
@@ -133,12 +135,47 @@ public struct FengNiao {
         var failed = [(FileInfo, Error)]()
         for file in unusedFiles {
             do {
+                deletedFiles.append(file)
                 try file.path.delete()
             } catch {
                 failed.append((file, error))
             }
         }
         return failed
+    }
+    
+    static var deletedFiles:[FileInfo] = []
+    // delete the project.pbxproj image reference
+    static public func deleteReference(projectPath:Path) {
+        if let content:String = try? projectPath.read() {
+            let mutableContent = content
+            let lines = mutableContent.components(separatedBy: .newlines)
+            var results:[String] = []
+            for line in lines {
+                var containImage = true
+                outerLoop:  for file in deletedFiles {
+                    if line.contains(file.fileName) {
+                        containImage = false
+                        continue outerLoop
+                    }
+                }
+                if containImage {
+                    results.append(line)
+                }
+            }
+            
+            let resultString = results.reduce("", { (res, line) -> String in
+                return res + "\n" + line
+            })
+            
+            do {
+                try  projectPath.write(resultString)
+            } catch {
+                print(error)
+            }
+            
+        }
+        
     }
     
     func allResourceFiles() -> [String: Set<String>] {
