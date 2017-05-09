@@ -160,9 +160,19 @@ if !isForce {
 
 print("Deleting unused files...⚙".bold)
 
-let failed = FengNiao.delete(unusedFiles)
+let (deleted, failed) = FengNiao.delete(unusedFiles)
 if failed.isEmpty {
     print("\(unusedFiles.count) unused files are deleted.".green.bold)
+    if let children = try? Path(projectPath).absolute().children(){
+        print("Now Deleting unused Reference in project.pbxproj...⚙".bold)
+        for path in children {
+            if path.lastComponent.hasSuffix("xcodeproj"){
+                let pbxproj = path + "project.pbxproj"
+                FengNiao.deleteReference(projectFilePath: pbxproj, deletedFiles: deleted)
+            }
+        }
+        print("Deleting unused Reference success .".green.bold)
+    }
 } else {
     print("\(unusedFiles.count - failed.count) unused files are deleted. But we encountered some error while deleting these \(failed.count) files:".yellow.bold)
     for (fileInfo, err) in failed {

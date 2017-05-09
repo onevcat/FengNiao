@@ -60,10 +60,12 @@ enum FileType {
 public struct FileInfo {
     public let path: Path
     public let size: Int
+    public let fileName: String
     
     init(path: String) {
         self.path = Path(path)
         self.size = self.path.size
+        self.fileName = self.path.lastComponent
     }
     
     public var readableSize: String {
@@ -129,16 +131,50 @@ public struct FengNiao {
     }
     
     // Return a failed list of deleting
-    static public func delete(_ unusedFiles: [FileInfo]) -> [(FileInfo, Error)] {
+    static public func delete(_ unusedFiles: [FileInfo]) -> (deleted: [FileInfo], failed :[(FileInfo, Error)]) {
+        var deleted = [FileInfo]()
         var failed = [(FileInfo, Error)]()
         for file in unusedFiles {
             do {
                 try file.path.delete()
+                deleted.append(file)
             } catch {
                 failed.append((file, error))
             }
         }
-        return failed
+        return (deleted, failed)
+    }
+    
+    // delete the project.pbxproj image reference
+    static public func deleteReference(projectFilePath: Path, deletedFiles: [FileInfo]) {
+        if let content: String = try? projectFilePath.read() {
+            let lines = content.components(separatedBy: .newlines)
+            var results:[String] = []
+            for line in lines {
+                var containImage = true
+                outerLoop: for file in deletedFiles {
+                    if line.contains(file.fileName) {
+                        containImage = false
+                        continue outerLoop
+                    }
+                }
+                if containImage {
+                    results.append(line)
+                }
+            }
+            
+            let resultString = results.reduce("") { result, line in
+                return result + "\n" + line
+            }
+            
+            do {
+                try projectFilePath.write(resultString)
+            } catch {
+                print(error)
+            }
+            
+        }
+        
     }
     
     func allResourceFiles() -> [String: Set<String>] {
