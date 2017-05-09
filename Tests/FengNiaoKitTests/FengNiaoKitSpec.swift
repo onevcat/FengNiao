@@ -385,6 +385,40 @@ describe("FengNiaoKit") {
             try expect(folderDes.exists).to.beFalse()
         }
     }
+    
+    $0.describe("FengNiao Delete the xcodeproj image reference"){
+        let file = fixtures+"DeleteReference"
+        
+        let fileDes = fixtures + "DeleteReferenceCopy"
+        $0.before {
+            #if os(macOS)
+                try! file.copy(fileDes)
+            #endif
+        }
+        
+        $0.after {
+            #if os(macOS)
+                try? fileDes.delete()
+            #endif
+        }
+        $0.it("Remove the Reference"){
+            #if os(Linux)
+                throw skip("Linux copyItem not implemented yet in FileManager.")
+            #endif
+            let projectPath = fileDes + "FengNiao.xcodeproj"+"project.pbxproj"
+            let fileProjectPath = file + "FengNiao.xcodeproj"+"project.pbxproj"
+            let file:String = try! fileProjectPath.read()
+            var project:String = try! projectPath.read()
+            try expect(file) == project
+            let path  = FileInfo(path: "/text/file1.png")
+            FengNiao.deletedFiles = [path]
+            FengNiao.deleteReference(projectPath: projectPath)
+            project = try! projectPath.read()
+            try expect(file) != project
+            try expect(project.contains("file1.png")) == false
+        }
+    }
+
 }
 }
     
