@@ -60,8 +60,10 @@ FengNiao supports some arguments, you could find it by:
       Resource file extensions need to be searched. Default is 'imageset jpg png gif'
   -f, --file-extensions:
       In which types of files we should search for resource usage. Default is 'm mm swift xib storyboard'
+  --version:
+      Print version.
   -h, --help:
-      Prints this help message.
+      Print this help message.
 ```
 
 A more daily-work usage under a project could be:

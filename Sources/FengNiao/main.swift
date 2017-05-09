@@ -29,7 +29,7 @@ import Rainbow
 import FengNiaoKit
 import PathKit
 
-let appVersion = "0.1.2"
+let appVersion = "0.2.0"
 
 #if os(Linux)
 let EX_OK: Int32 = 0
