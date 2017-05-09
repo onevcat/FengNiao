@@ -160,7 +160,7 @@ if !isForce {
 
 print("Deleting unused files...⚙".bold)
 
-let failed = FengNiao.delete(unusedFiles)
+let (deleted, failed) = FengNiao.delete(unusedFiles)
 if failed.isEmpty {
     print("\(unusedFiles.count) unused files are deleted.".green.bold)
     if let children = try? Path(projectPath).absolute().children(){
@@ -168,7 +168,7 @@ if failed.isEmpty {
         for path in children {
             if path.lastComponent.hasSuffix("xcodeproj"){
                 let pbxproj = path + "project.pbxproj"
-                FengNiao.deleteReference(projectPath: pbxproj)
+                FengNiao.deleteReference(projectFilePath: pbxproj, deletedFiles: deleted)
             }
         }
         print("Deleting unused Reference success .".green.bold)

@@ -131,29 +131,28 @@ public struct FengNiao {
     }
     
     // Return a failed list of deleting
-    static public func delete(_ unusedFiles: [FileInfo]) -> [(FileInfo, Error)] {
+    static public func delete(_ unusedFiles: [FileInfo]) -> (deleted: [FileInfo], failed :[(FileInfo, Error)]) {
+        var deleted = [FileInfo]()
         var failed = [(FileInfo, Error)]()
         for file in unusedFiles {
             do {
-                deletedFiles.append(file)
                 try file.path.delete()
+                deleted.append(file)
             } catch {
                 failed.append((file, error))
             }
         }
-        return failed
+        return (deleted, failed)
     }
     
-    static var deletedFiles:[FileInfo] = []
     // delete the project.pbxproj image reference
-    static public func deleteReference(projectPath:Path) {
-        if let content:String = try? projectPath.read() {
-            let mutableContent = content
-            let lines = mutableContent.components(separatedBy: .newlines)
+    static public func deleteReference(projectFilePath: Path, deletedFiles: [FileInfo]) {
+        if let content: String = try? projectFilePath.read() {
+            let lines = content.components(separatedBy: .newlines)
             var results:[String] = []
             for line in lines {
                 var containImage = true
-                outerLoop:  for file in deletedFiles {
+                outerLoop: for file in deletedFiles {
                     if line.contains(file.fileName) {
                         containImage = false
                         continue outerLoop
@@ -164,12 +163,12 @@ public struct FengNiao {
                 }
             }
             
-            let resultString = results.reduce("", { (res, line) -> String in
-                return res + "\n" + line
-            })
+            let resultString = results.reduce("") { result, line in
+                return result + "\n" + line
+            }
             
             do {
-                try  projectPath.write(resultString)
+                try projectFilePath.write(resultString)
             } catch {
                 print(error)
             }
