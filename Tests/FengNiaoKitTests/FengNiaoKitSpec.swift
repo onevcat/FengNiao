@@ -106,7 +106,15 @@ describe("FengNiaoKit") {
             let expected: Set<String> = ["button_image", "foo"]
             try expect(result) == expected
         }
-        
+
+        $0.it("Swift search rule with empty string applies") {
+            let searcher = SwiftImageSearchRule(extensions: ["jpg"])
+            let content = "let item = TableItem(name: \"\", image: UIImage(named: \"foo\")!)"
+            let result = searcher.search(in: content)
+            let expected: Set<String> = ["", "foo"]
+            try expect(result) == expected
+        }
+
         $0.it("xib search rule applies") {
             let searcher = XibImageSearchRule()
             let content = "<resources>\n<image name=\"btn_error\" width=\"39\" height=\"39\"/>\n<image name=\"disconnect_wifi\" width=\"61\" height=\"49\"/>\n</resources>"
