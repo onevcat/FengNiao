@@ -117,9 +117,9 @@ describe("FengNiaoKit") {
 
         $0.it("xib search rule applies") {
             let searcher = XibImageSearchRule()
-            let content = "<resources>\n<image name=\"btn_error\" width=\"39\" height=\"39\"/>\n<image name=\"disconnect_wifi\" width=\"61\" height=\"49\"/>\n</resources>"
+            let content = "<resources>\n<image name=\"btn_error\" width=\"39\" height=\"39\"/>\n<image name=\"disconnect_wifi\" width=\"61\" height=\"49\"/>\n</resources>\n<userDefinedRuntimeAttribute type=\"image\" keyPath=\"defaultBackgroundImage\" value=\"live_btn_add_follow\"/>"
             let result = searcher.search(in: content)
-            let expected: Set<String> = ["btn_error", "disconnect_wifi"]
+            let expected: Set<String> = ["btn_error", "disconnect_wifi", "live_btn_add_follow"]
             try expect(result) == expected
         }
     }

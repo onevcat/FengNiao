@@ -81,5 +81,5 @@ struct SwiftImageSearchRule: RegPatternSearchRule {
 
 struct XibImageSearchRule: RegPatternSearchRule {
     let extensions = [String]()
-    let patterns = ["image name=\"(.*?)\"", "image=\"(.*?)\""]
+    let patterns = ["image name=\"(.*?)\"", "image=\"(.*?)\"", "value=\"(.*?)\""]
 }
