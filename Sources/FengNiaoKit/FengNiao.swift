@@ -163,9 +163,7 @@ public struct FengNiao {
                 }
             }
             
-            let resultString = results.reduce("") { result, line in
-                return result + "\n" + line
-            }
+            let resultString = results.joined(separator: "\n")
             
             do {
                 try projectFilePath.write(resultString)

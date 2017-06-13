@@ -29,7 +29,7 @@ import Rainbow
 import FengNiaoKit
 import PathKit
 
-let appVersion = "0.2.0"
+let appVersion = "0.3.0"
 
 #if os(Linux)
 let EX_OK: Int32 = 0
@@ -72,6 +72,12 @@ let fileExtOption = MultiStringOption(
     shortFlag: "f", longFlag: "file-extensions",
     helpMessage: "In which types of files we should search for resource usage. Default is 'm mm swift xib storyboard'")
 cli.addOption(fileExtOption)
+
+let skipProjRefereceCleanOption = BoolOption(
+    longFlag: "skip-proj-reference",
+    helpMessage: "Skip the Project file (.pbxproj) reference cleaning. By skipping it, the project file will be left untouched. You may want to skip ths step if you are trying to build multiple projects with dependency and keep .pbxproj unchanged while compiling."
+)
+cli.addOption(skipProjRefereceCleanOption)
 
 let versionOption = BoolOption(longFlag: "version", helpMessage: "Print version.")
 cli.addOption(versionOption)
@@ -161,8 +167,18 @@ if !isForce {
 print("Deleting unused files...⚙".bold)
 
 let (deleted, failed) = FengNiao.delete(unusedFiles)
-if failed.isEmpty {
-    print("\(unusedFiles.count) unused files are deleted.".green.bold)
+guard failed.isEmpty else {
+    print("\(unusedFiles.count - failed.count) unused files are deleted. But we encountered some error while deleting these \(failed.count) files:".yellow.bold)
+    for (fileInfo, err) in failed {
+        print("\(fileInfo.path.string) - \(err.localizedDescription)")
+    }
+    exit(EX_USAGE)
+}
+
+
+print("\(unusedFiles.count) unused files are deleted.".green.bold)
+
+if !skipProjRefereceCleanOption.value {
     if let children = try? Path(projectPath).absolute().children(){
         print("Now Deleting unused Reference in project.pbxproj...⚙".bold)
         for path in children {
@@ -171,17 +187,6 @@ if failed.isEmpty {
                 FengNiao.deleteReference(projectFilePath: pbxproj, deletedFiles: deleted)
             }
         }
-        print("Deleting unused Reference success .".green.bold)
-    }
-} else {
-    print("\(unusedFiles.count - failed.count) unused files are deleted. But we encountered some error while deleting these \(failed.count) files:".yellow.bold)
-    for (fileInfo, err) in failed {
-        print("\(fileInfo.path.string) - \(err.localizedDescription)")
+        print("Unused Reference deleted successfully.".green.bold)
     }
 }
-
-
-
-
-
-

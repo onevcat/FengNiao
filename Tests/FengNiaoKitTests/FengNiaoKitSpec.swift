@@ -426,6 +426,7 @@ describe("FengNiaoKit") {
             project = try! projectPath.read()
             try expect(file) != project
             try expect(project.contains("file1.png")) == false
+            try expect(project.hasPrefix("\n")) == false
         }
     }
 
