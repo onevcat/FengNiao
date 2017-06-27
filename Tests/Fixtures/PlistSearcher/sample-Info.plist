@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>UIApplicationShortcutItems</key>
+    <array>
+        <dict>
+            <key>UIApplicationShortcutItemIconFile</key>
+            <string>some_image</string>
+            <key>UIApplicationShortcutItemTitle</key>
+            <string>Some Image</string>
+            <key>UIApplicationShortcutItemType</key>
+            <string>some_type</string>
+        </dict>
+    </array>
+</dict>
+</plist>

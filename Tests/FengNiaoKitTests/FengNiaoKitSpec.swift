@@ -225,6 +225,18 @@ describe("FengNiaoKit") {
             try expect(result) == expected
         }
         
+        $0.it("should work for plist file") {
+            let project = fixtures + "PlistSearcher"
+            let fengniao = FengNiao(projectPath: project.string,
+                                    excludedPaths: [],
+                                    resourceExtensions: [],
+                                    searchInFileExtensions: ["plist"])
+            let result = fengniao.allUsedStringNames()
+            let expected: Set<String> = ["some_image"]
+            
+            try expect(result) == expected
+        }
+        
         $0.it("could search in subfolder") {
             let project = fixtures + "SubFolderSearcher"
             let fengniao = FengNiao(projectPath: project.string,

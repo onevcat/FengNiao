@@ -83,3 +83,8 @@ struct XibImageSearchRule: RegPatternSearchRule {
     let extensions = [String]()
     let patterns = ["image name=\"(.*?)\"", "image=\"(.*?)\"", "value=\"(.*?)\""]
 }
+
+struct PlistImageSearchRule: RegPatternSearchRule {
+    let extensions: [String]
+    let patterns = ["<key>UIApplicationShortcutItemIconFile</key>[^<]*<string>(.*?)</string>"]
+}
