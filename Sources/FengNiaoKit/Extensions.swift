@@ -46,7 +46,8 @@ extension String {
         }
         
         if result.hasSuffix("@2x") || result.hasSuffix("@3x") {
-            result = String(describing: result.utf16.dropLast(3))
+            let endIndex = result.index(result.endIndex, offsetBy: -3)
+            result = result.substring(to: endIndex)
         }
         return result
     }
