@@ -90,6 +90,12 @@ fengniao --exclude Carthage --force
 
 It is recommended to exclude vendor's folders like Pods or Carthage. Since you do not have a chance to confirm the result, you also need to add `--force` option.
 
+## How it works
+
+1. Extract resource file names (default file type: `["imageset", "jpg", "png", "gif"]`) in these folders `["imageset", "launchimage", "appiconset", "bundle”]`. 
+2. Use regular expression to search all string names in files (default files type: `["m", "mm", "swift", "xib", "storyboard", "plist"]`).
+3. Exclude all used string names from resources files, we get all unused resources files.
+
 ## License and Information
 
 FengNiao is open-sourced as MIT license. The name of this project comes from the Chinese word 蜂鸟 (hummingbird), which is the smallest bird in the world.
