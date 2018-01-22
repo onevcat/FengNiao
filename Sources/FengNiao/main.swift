@@ -70,7 +70,7 @@ cli.addOption(resourceExtOption)
 
 let fileExtOption = MultiStringOption(
     shortFlag: "f", longFlag: "file-extensions",
-    helpMessage: "In which types of files we should search for resource usage. Default is 'm mm swift xib storyboard'")
+    helpMessage: "In which types of files we should search for resource usage. Default is 'm mm swift xib storyboard plist'")
 cli.addOption(fileExtOption)
 
 let skipProjRefereceCleanOption = BoolOption(
