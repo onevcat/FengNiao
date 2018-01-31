@@ -237,7 +237,13 @@ public struct FengNiao {
                                   [PlainImageSearchRule(extensions: resourceExtensions)]
                 
                 let content = (try? subPath.read()) ?? ""
-                result.append(contentsOf: searchRules.flatMap { $0.search(in: content) })
+                result.append(contentsOf: searchRules.flatMap {
+                    $0.search(in: content).map { name in
+                        let p = Path(name)
+                        guard let ext = p.extension else { return name }
+                        return resourceExtensions.contains(ext) ? p.lastComponentWithoutExtension : name
+                    }
+                })
             }
         }
         
