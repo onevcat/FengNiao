@@ -11,5 +11,6 @@
     <image name="profile_image" width="94" height="94"/>
     <image name="left" width="2" height="142"/>
     <image name="right" width="2" height="132"/>
+    <image name="normal.png" width="16" height="16"/>
 </resources>
 </document>
