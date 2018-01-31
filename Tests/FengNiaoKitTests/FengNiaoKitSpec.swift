@@ -213,14 +213,15 @@ describe("FengNiaoKit") {
             let project = fixtures + "FileStringSearcher"
             let fengniao = FengNiao(projectPath: project.string,
                                     excludedPaths: [],
-                                    resourceExtensions: [],
+                                    resourceExtensions: ["png"],
                                     searchInFileExtensions: ["xib", "storyboard"])
             let result = fengniao.allUsedStringNames()
             let expected: Set<String> = ["profile_image",
                                          "bottom",
                                          "top",
                                          "left",
-                                         "right"]
+                                         "right",
+                                         "normal"]
             
             try expect(result) == expected
         }
