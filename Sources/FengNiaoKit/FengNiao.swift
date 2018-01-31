@@ -26,14 +26,6 @@ import Foundation
 import PathKit
 import Rainbow
 
-#if os(Linux)
-typealias FNRegularExpression = RegularExpression
-typealias FNProcess = Task
-#else
-typealias FNRegularExpression = NSRegularExpression
-typealias FNProcess = Process
-#endif
-
 enum FileType {
     case swift
     case objc
@@ -261,7 +253,7 @@ public struct FengNiao {
     }
 }
 
-let digitalRex = try! FNRegularExpression(pattern: "(\\d+)", options: .caseInsensitive)
+let digitalRex = try! NSRegularExpression(pattern: "(\\d+)", options: .caseInsensitive)
 extension String {
     
     func similarPatternWithNumberIndex(other: String) -> Bool {
@@ -271,11 +263,7 @@ extension String {
         // No digital found in resource key.
         guard matches.count >= 1 else { return false }
         let lastMatch = matches.last!
-        #if os(Linux)
         let digitalRange = lastMatch.range(at: 1)
-        #else
-        let digitalRange = lastMatch.rangeAt(1)
-        #endif
         
         var prefix: String?
         var suffix: String?
@@ -283,13 +271,13 @@ extension String {
         let digitalLocation = digitalRange.location
         if digitalLocation != 0 {
             let index = other.index(other.startIndex, offsetBy: digitalLocation)
-            prefix = other.substring(to: index)
+            prefix = String(other[..<index])
         }
         
         let digitalMaxRange = NSMaxRange(digitalRange)
         if digitalMaxRange < other.utf16.count {
             let index = other.index(other.startIndex, offsetBy: digitalMaxRange)
-            suffix = other.substring(from: index)
+            suffix = String(other[index...])
         }
         
         switch (prefix, suffix) {
