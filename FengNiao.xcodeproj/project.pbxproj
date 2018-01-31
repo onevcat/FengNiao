@@ -81,84 +81,84 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4BFBE87F2021673F00AA74E6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "PathKit::PathKit";
-			remoteInfo = PathKit;
-		};
-		4BFBE8802021673F00AA74E6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Rainbow::Rainbow";
-			remoteInfo = Rainbow;
-		};
-		4BFBE8812021673F00AA74E6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Spectre::Spectre";
-			remoteInfo = Spectre;
-		};
-		4BFBE8822021673F00AA74E6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "FengNiao::FengNiaoKit";
-			remoteInfo = FengNiaoKit;
-		};
-		4BFBE8832021673F00AA74E6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "PathKit::PathKit";
-			remoteInfo = PathKit;
-		};
-		4BFBE8842021673F00AA74E6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Rainbow::Rainbow";
-			remoteInfo = Rainbow;
-		};
-		4BFBE8852021674000AA74E6 /* PBXContainerItemProxy */ = {
+		4BFDA92020216DD30054DBC3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "CommandLine::CommandLineKit";
 			remoteInfo = CommandLineKit;
 		};
-		4BFBE8862021674000AA74E6 /* PBXContainerItemProxy */ = {
+		4BFDA92120216DD30054DBC3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "FengNiao::FengNiaoKit";
 			remoteInfo = FengNiaoKit;
 		};
-		4BFBE8872021674000AA74E6 /* PBXContainerItemProxy */ = {
+		4BFDA92220216DD30054DBC3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "PathKit::PathKit";
 			remoteInfo = PathKit;
 		};
-		4BFBE8882021674000AA74E6 /* PBXContainerItemProxy */ = {
+		4BFDA92320216DD30054DBC3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Rainbow::Rainbow";
 			remoteInfo = Rainbow;
 		};
-		4BFBE8892021674000AA74E6 /* PBXContainerItemProxy */ = {
+		4BFDA92420216DD30054DBC3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "PathKit::PathKit";
+			remoteInfo = PathKit;
+		};
+		4BFDA92520216DD30054DBC3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Rainbow::Rainbow";
+			remoteInfo = Rainbow;
+		};
+		4BFDA92620216DD30054DBC3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Spectre::Spectre";
+			remoteInfo = Spectre;
+		};
+		4BFDA92720216DD30054DBC3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "FengNiao::FengNiaoKit";
+			remoteInfo = FengNiaoKit;
+		};
+		4BFDA92820216DD30054DBC3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "PathKit::PathKit";
+			remoteInfo = PathKit;
+		};
+		4BFDA92920216DD30054DBC3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Rainbow::Rainbow";
+			remoteInfo = Rainbow;
+		};
+		4BFDA92A20216DD40054DBC3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "FengNiao::FengNiaoKitTests";
 			remoteInfo = FengNiaoKitTests;
 		};
-		4BFBE88A2021674000AA74E6 /* PBXContainerItemProxy */ = {
+		4BFDA92B20216DD40054DBC3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
@@ -390,7 +390,7 @@
 			path = ".build/checkouts/Rainbow.git-2499542794955463186/Sources";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -399,7 +399,6 @@
 				OBJ_20 /* Dependencies */,
 				OBJ_54 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_54 /* Products */ = {
@@ -647,7 +646,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_54 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -797,62 +796,62 @@
 		OBJ_104 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "CommandLine::CommandLineKit" /* CommandLineKit */;
-			targetProxy = 4BFBE8852021674000AA74E6 /* PBXContainerItemProxy */;
+			targetProxy = 4BFDA92020216DD30054DBC3 /* PBXContainerItemProxy */;
 		};
 		OBJ_106 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "FengNiao::FengNiaoKit" /* FengNiaoKit */;
-			targetProxy = 4BFBE8862021674000AA74E6 /* PBXContainerItemProxy */;
+			targetProxy = 4BFDA92120216DD30054DBC3 /* PBXContainerItemProxy */;
 		};
 		OBJ_108 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "PathKit::PathKit" /* PathKit */;
-			targetProxy = 4BFBE8872021674000AA74E6 /* PBXContainerItemProxy */;
+			targetProxy = 4BFDA92420216DD30054DBC3 /* PBXContainerItemProxy */;
 		};
 		OBJ_110 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Rainbow::Rainbow" /* Rainbow */;
-			targetProxy = 4BFBE8882021674000AA74E6 /* PBXContainerItemProxy */;
+			targetProxy = 4BFDA92520216DD30054DBC3 /* PBXContainerItemProxy */;
 		};
 		OBJ_132 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Spectre::Spectre" /* Spectre */;
-			targetProxy = 4BFBE8812021673F00AA74E6 /* PBXContainerItemProxy */;
+			targetProxy = 4BFDA92620216DD30054DBC3 /* PBXContainerItemProxy */;
 		};
 		OBJ_134 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "FengNiao::FengNiaoKit" /* FengNiaoKit */;
-			targetProxy = 4BFBE8822021673F00AA74E6 /* PBXContainerItemProxy */;
+			targetProxy = 4BFDA92720216DD30054DBC3 /* PBXContainerItemProxy */;
 		};
 		OBJ_135 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "PathKit::PathKit" /* PathKit */;
-			targetProxy = 4BFBE8832021673F00AA74E6 /* PBXContainerItemProxy */;
+			targetProxy = 4BFDA92820216DD30054DBC3 /* PBXContainerItemProxy */;
 		};
 		OBJ_136 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Rainbow::Rainbow" /* Rainbow */;
-			targetProxy = 4BFBE8842021673F00AA74E6 /* PBXContainerItemProxy */;
+			targetProxy = 4BFDA92920216DD30054DBC3 /* PBXContainerItemProxy */;
 		};
 		OBJ_161 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "PathKit::PathKit" /* PathKit */;
-			targetProxy = 4BFBE87F2021673F00AA74E6 /* PBXContainerItemProxy */;
+			targetProxy = 4BFDA92220216DD30054DBC3 /* PBXContainerItemProxy */;
 		};
 		OBJ_162 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Rainbow::Rainbow" /* Rainbow */;
-			targetProxy = 4BFBE8802021673F00AA74E6 /* PBXContainerItemProxy */;
+			targetProxy = 4BFDA92320216DD30054DBC3 /* PBXContainerItemProxy */;
 		};
 		OBJ_189 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "FengNiao::FengNiaoKitTests" /* FengNiaoKitTests */;
-			targetProxy = 4BFBE8892021674000AA74E6 /* PBXContainerItemProxy */;
+			targetProxy = 4BFDA92A20216DD40054DBC3 /* PBXContainerItemProxy */;
 		};
 		OBJ_194 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "CommandLine::CommandLineKit" /* CommandLineKit */;
-			targetProxy = 4BFBE88A2021674000AA74E6 /* PBXContainerItemProxy */;
+			targetProxy = 4BFDA92B20216DD40054DBC3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
