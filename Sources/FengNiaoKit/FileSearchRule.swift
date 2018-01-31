@@ -40,7 +40,7 @@ extension RegPatternSearchRule {
         var result = Set<String>()
         
         for pattern in patterns {
-            let reg = try! FNRegularExpression(pattern: pattern, options: .caseInsensitive)
+            let reg = try! NSRegularExpression(pattern: pattern, options: .caseInsensitive)
             
             let matches = reg.matches(in: content, options: [], range: content.fullRange)
             for checkingResult in matches {
