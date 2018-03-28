@@ -124,7 +124,7 @@ describe("FengNiaoKit") {
         }
         
         $0.it("plist alternate icon search rule applies") {
-            let searcher = PlistAppIconSearchRule(extensions: ["plist"])
+            let searcher = PlistAppIconSearchRule(extensions: ["png"])
             let content = "<key>CFBundleIcons</key>\n<dict>\n<key>CFBundleAlternateIcons</key>\n<dict>\n<key>ChristmasIcon</key>\n<dict>\n<key>CFBundleIconFiles</key>\n<array>\n<string>ChristmasIcon_20pt</string>\n<string>ChristmasIcon_29pt</string>\n<string>ChristmasIcon_40pt</string>\n<string>ChristmasIcon_60pt</string>\n<string>ChristmasIcon_76pt</string>\n<string>ChristmasIcon_83.5pt</string>\n<string>ChristmasIcon_1024pt</string>\n</array>\n<key>UIPrerenderedIcon</key>\n<false/>\n</dict>\n<key>NewYearIcon</key>\n<dict>\n<key>CFBundleIconFiles</key>\n<array>\n<string>NewYearIcon_20pt</string>\n<string>NewYearIcon_29pt</string>\n<string>NewYearIcon_40pt</string>\n<string>NewYearIcon_60pt</string>\n<string>NewYearIcon_76pt</string>\n<string>NewYearIcon_83.5pt</string>\n<string>NewYearIcon_1024pt</string>\n</array>\n<key>UIPrerenderedIcon</key>\n<false/>\n</dict>\n</dict>\n</dict>"
             
             let result = searcher.search(in: content)

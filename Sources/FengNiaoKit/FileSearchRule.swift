@@ -115,7 +115,7 @@ struct PlistAppIconSearchRule: FileSearchRule {
             for checkingResult in itemMatches {
                 if let range = Range(checkingResult.range(at: 1), in: itemContent) {
                     let extracted = String(itemContent[range])
-                    result.insert(extracted)
+                    result.insert(extracted.plainFileName(extensions: extensions))
                 }
             }
         }
