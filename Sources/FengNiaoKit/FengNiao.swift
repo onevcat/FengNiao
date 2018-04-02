@@ -35,7 +35,7 @@ enum FileType {
     init?(ext: String) {
         switch ext {
         case "swift": self = .swift
-        case "m", "mm": self = .objc
+        case "h", "m", "mm": self = .objc
         case "xib", "storyboard": self = .xib
         case "plist": self = .plist
         default: return nil
