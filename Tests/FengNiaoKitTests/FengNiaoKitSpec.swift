@@ -237,6 +237,18 @@ describe("FengNiaoKit") {
             try expect(result) == expected
         }
         
+        $0.it("should work for pbxproj file") {
+            let project = fixtures + "PbxprojSearcher"
+            let fengniao = FengNiao(projectPath: project.string,
+                                    excludedPaths: [],
+                                    resourceExtensions: [],
+                                    searchInFileExtensions: ["pbxproj"])
+            let result = fengniao.allUsedStringNames()
+            let expected: Set<String> = ["AppIcon", "MessagesIcon", "iMessage App Icon"]
+            
+            try expect(result) == expected
+        }
+        
         $0.it("could search in subfolder") {
             let project = fixtures + "SubFolderSearcher"
             let fengniao = FengNiao(projectPath: project.string,

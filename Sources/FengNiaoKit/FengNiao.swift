@@ -39,6 +39,7 @@ enum FileType {
     case objc
     case xib
     case plist
+    case pbxproj
     
     init?(ext: String) {
         switch ext {
@@ -46,6 +47,7 @@ enum FileType {
         case "m", "mm": self = .objc
         case "xib", "storyboard": self = .xib
         case "plist": self = .plist
+        case "pbxproj": self = .pbxproj
         default: return nil
         }
     }
@@ -56,6 +58,7 @@ enum FileType {
         case .objc: return [ObjCImageSearchRule(extensions: extensions)]
         case .xib: return [XibImageSearchRule()]
         case .plist: return [PlistImageSearchRule(extensions: extensions)]
+        case .pbxproj: return [PbxprojImageSearchRule(extensions: extensions)]
         }
     }
 }
@@ -106,7 +109,7 @@ public struct FengNiao {
     let resourceExtensions: [String]
     let searchInFileExtensions: [String]
     
-    let regularDirExtensions = ["imageset", "launchimage", "appiconset", "bundle"]
+    let regularDirExtensions = ["imageset", "launchimage", "appiconset", "stickersiconset", "bundle"]
     var nonDirExtensions: [String] {
         return resourceExtensions.filter { !regularDirExtensions.contains($0) }
     }

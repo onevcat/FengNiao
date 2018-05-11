@@ -88,3 +88,8 @@ struct PlistImageSearchRule: RegPatternSearchRule {
     let extensions: [String]
     let patterns = ["<key>UIApplicationShortcutItemIconFile</key>[^<]*<string>(.*?)</string>"]
 }
+
+struct PbxprojImageSearchRule: RegPatternSearchRule {
+    let extensions: [String]
+    let patterns = ["ASSETCATALOG_COMPILER_APPICON_NAME = \"?(.*?)\"?;"]
+}
