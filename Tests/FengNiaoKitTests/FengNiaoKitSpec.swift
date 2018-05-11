@@ -244,7 +244,7 @@ describe("FengNiaoKit") {
                                     resourceExtensions: [],
                                     searchInFileExtensions: ["pbxproj"])
             let result = fengniao.allUsedStringNames()
-            let expected: Set<String> = ["AppIcon", "MessagesIcon", "iMessage App Icon"]
+            let expected: Set<String> = ["AppIcon", "MessagesIcon", "iMessage App Icon", "Complication"]
             
             try expect(result) == expected
         }

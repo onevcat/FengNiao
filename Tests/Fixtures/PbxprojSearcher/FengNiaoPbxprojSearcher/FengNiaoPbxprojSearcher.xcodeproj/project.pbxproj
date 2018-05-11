@@ -18,6 +18,15 @@
 		D910829B20A5DB340026A235 /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D910829A20A5DB340026A235 /* MessagesViewController.m */; };
 		D91082A020A5DB350026A235 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D910829F20A5DB350026A235 /* Assets.xcassets */; };
 		D91082A420A5DB350026A235 /* iMessage2FengNiao.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D910829620A5DB340026A235 /* iMessage2FengNiao.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D91082B320A5E3280026A235 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D91082B120A5E3280026A235 /* Interface.storyboard */; };
+		D91082B520A5E3290026A235 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D91082B420A5E3290026A235 /* Assets.xcassets */; };
+		D91082BC20A5E3290026A235 /* WatchAppFengNiao Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D91082BB20A5E3290026A235 /* WatchAppFengNiao Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D91082C220A5E3290026A235 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = D91082C120A5E3290026A235 /* InterfaceController.m */; };
+		D91082C520A5E3290026A235 /* ExtensionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D91082C420A5E3290026A235 /* ExtensionDelegate.m */; };
+		D91082C820A5E3290026A235 /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D91082C720A5E3290026A235 /* NotificationController.m */; };
+		D91082CB20A5E3290026A235 /* ComplicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D91082CA20A5E3290026A235 /* ComplicationController.m */; };
+		D91082CD20A5E32A0026A235 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D91082CC20A5E32A0026A235 /* Assets.xcassets */; };
+		D91082D220A5E32A0026A235 /* WatchAppFengNiao.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = D91082AF20A5E3280026A235 /* WatchAppFengNiao.app */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +44,20 @@
 			remoteGlobalIDString = D910829520A5DB340026A235;
 			remoteInfo = iMessage2FengNiao;
 		};
+		D91082BD20A5E3290026A235 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D910825820A5D93C0026A235 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D91082BA20A5E3290026A235;
+			remoteInfo = "WatchAppFengNiao Extension";
+		};
+		D91082D020A5E32A0026A235 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D910825820A5D93C0026A235 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D91082AE20A5E3280026A235;
+			remoteInfo = WatchAppFengNiao;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,6 +71,28 @@
 				D910828D20A5D9740026A235 /* iMessageFengNiao.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D91082D820A5E32A0026A235 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				D91082BC20A5E3290026A235 /* WatchAppFengNiao Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D91082DA20A5E32A0026A235 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				D91082D220A5E32A0026A235 /* WatchAppFengNiao.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -70,6 +115,21 @@
 		D910829A20A5DB340026A235 /* MessagesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessagesViewController.m; sourceTree = "<group>"; };
 		D910829F20A5DB350026A235 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D91082A120A5DB350026A235 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D91082AF20A5E3280026A235 /* WatchAppFengNiao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchAppFengNiao.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D91082B220A5E3280026A235 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		D91082B420A5E3290026A235 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D91082B620A5E3290026A235 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D91082BB20A5E3290026A235 /* WatchAppFengNiao Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "WatchAppFengNiao Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D91082C020A5E3290026A235 /* InterfaceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterfaceController.h; sourceTree = "<group>"; };
+		D91082C120A5E3290026A235 /* InterfaceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InterfaceController.m; sourceTree = "<group>"; };
+		D91082C320A5E3290026A235 /* ExtensionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExtensionDelegate.h; sourceTree = "<group>"; };
+		D91082C420A5E3290026A235 /* ExtensionDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExtensionDelegate.m; sourceTree = "<group>"; };
+		D91082C620A5E3290026A235 /* NotificationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationController.h; sourceTree = "<group>"; };
+		D91082C720A5E3290026A235 /* NotificationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationController.m; sourceTree = "<group>"; };
+		D91082C920A5E3290026A235 /* ComplicationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComplicationController.h; sourceTree = "<group>"; };
+		D91082CA20A5E3290026A235 /* ComplicationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComplicationController.m; sourceTree = "<group>"; };
+		D91082CC20A5E32A0026A235 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D91082CE20A5E32A0026A235 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +156,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D91082B820A5E3290026A235 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -105,6 +172,8 @@
 				D910826220A5D93C0026A235 /* FengNiaoPbxprojSearcher */,
 				D910828120A5D9730026A235 /* iMessageFengNiao */,
 				D910829820A5DB340026A235 /* iMessage2FengNiao */,
+				D91082B020A5E3280026A235 /* WatchAppFengNiao */,
+				D91082BF20A5E3290026A235 /* WatchAppFengNiao Extension */,
 				D910827E20A5D9730026A235 /* Frameworks */,
 				D910826120A5D93C0026A235 /* Products */,
 			);
@@ -116,6 +185,8 @@
 				D910826020A5D93C0026A235 /* FengNiaoPbxprojSearcher.app */,
 				D910827D20A5D9730026A235 /* iMessageFengNiao.appex */,
 				D910829620A5DB340026A235 /* iMessage2FengNiao.appex */,
+				D91082AF20A5E3280026A235 /* WatchAppFengNiao.app */,
+				D91082BB20A5E3290026A235 /* WatchAppFengNiao Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -162,6 +233,33 @@
 			path = iMessage2FengNiao;
 			sourceTree = "<group>";
 		};
+		D91082B020A5E3280026A235 /* WatchAppFengNiao */ = {
+			isa = PBXGroup;
+			children = (
+				D91082B120A5E3280026A235 /* Interface.storyboard */,
+				D91082B420A5E3290026A235 /* Assets.xcassets */,
+				D91082B620A5E3290026A235 /* Info.plist */,
+			);
+			path = WatchAppFengNiao;
+			sourceTree = "<group>";
+		};
+		D91082BF20A5E3290026A235 /* WatchAppFengNiao Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D91082C020A5E3290026A235 /* InterfaceController.h */,
+				D91082C120A5E3290026A235 /* InterfaceController.m */,
+				D91082C320A5E3290026A235 /* ExtensionDelegate.h */,
+				D91082C420A5E3290026A235 /* ExtensionDelegate.m */,
+				D91082C620A5E3290026A235 /* NotificationController.h */,
+				D91082C720A5E3290026A235 /* NotificationController.m */,
+				D91082C920A5E3290026A235 /* ComplicationController.h */,
+				D91082CA20A5E3290026A235 /* ComplicationController.m */,
+				D91082CC20A5E32A0026A235 /* Assets.xcassets */,
+				D91082CE20A5E32A0026A235 /* Info.plist */,
+			);
+			path = "WatchAppFengNiao Extension";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -173,12 +271,14 @@
 				D910825D20A5D93C0026A235 /* Frameworks */,
 				D910825E20A5D93C0026A235 /* Resources */,
 				D910829120A5D9740026A235 /* Embed App Extensions */,
+				D91082DA20A5E32A0026A235 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				D910828C20A5D9740026A235 /* PBXTargetDependency */,
 				D91082A320A5DB350026A235 /* PBXTargetDependency */,
+				D91082D120A5E32A0026A235 /* PBXTargetDependency */,
 			);
 			name = FengNiaoPbxprojSearcher;
 			productName = FengNiaoPbxprojSearcher;
@@ -219,6 +319,40 @@
 			productReference = D910829620A5DB340026A235 /* iMessage2FengNiao.appex */;
 			productType = "com.apple.product-type.app-extension.messages";
 		};
+		D91082AE20A5E3280026A235 /* WatchAppFengNiao */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D91082D920A5E32A0026A235 /* Build configuration list for PBXNativeTarget "WatchAppFengNiao" */;
+			buildPhases = (
+				D91082AD20A5E3280026A235 /* Resources */,
+				D91082D820A5E32A0026A235 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D91082BE20A5E3290026A235 /* PBXTargetDependency */,
+			);
+			name = WatchAppFengNiao;
+			productName = WatchAppFengNiao;
+			productReference = D91082AF20A5E3280026A235 /* WatchAppFengNiao.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		D91082BA20A5E3290026A235 /* WatchAppFengNiao Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D91082D720A5E32A0026A235 /* Build configuration list for PBXNativeTarget "WatchAppFengNiao Extension" */;
+			buildPhases = (
+				D91082B720A5E3290026A235 /* Sources */,
+				D91082B820A5E3290026A235 /* Frameworks */,
+				D91082B920A5E3290026A235 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WatchAppFengNiao Extension";
+			productName = "WatchAppFengNiao Extension";
+			productReference = D91082BB20A5E3290026A235 /* WatchAppFengNiao Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -235,6 +369,12 @@
 						CreatedOnToolsVersion = 9.3;
 					};
 					D910829520A5DB340026A235 = {
+						CreatedOnToolsVersion = 9.3;
+					};
+					D91082AE20A5E3280026A235 = {
+						CreatedOnToolsVersion = 9.3;
+					};
+					D91082BA20A5E3290026A235 = {
 						CreatedOnToolsVersion = 9.3;
 					};
 				};
@@ -255,6 +395,8 @@
 				D910825F20A5D93C0026A235 /* FengNiaoPbxprojSearcher */,
 				D910827C20A5D9730026A235 /* iMessageFengNiao */,
 				D910829520A5DB340026A235 /* iMessage2FengNiao */,
+				D91082AE20A5E3280026A235 /* WatchAppFengNiao */,
+				D91082BA20A5E3290026A235 /* WatchAppFengNiao Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -281,6 +423,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				D91082A020A5DB350026A235 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D91082AD20A5E3280026A235 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D91082B520A5E3290026A235 /* Assets.xcassets in Resources */,
+				D91082B320A5E3280026A235 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D91082B920A5E3290026A235 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D91082CD20A5E32A0026A235 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +471,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D91082B720A5E3290026A235 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D91082C520A5E3290026A235 /* ExtensionDelegate.m in Sources */,
+				D91082CB20A5E3290026A235 /* ComplicationController.m in Sources */,
+				D91082C220A5E3290026A235 /* InterfaceController.m in Sources */,
+				D91082C820A5E3290026A235 /* NotificationController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -325,7 +495,28 @@
 			target = D910829520A5DB340026A235 /* iMessage2FengNiao */;
 			targetProxy = D91082A220A5DB350026A235 /* PBXContainerItemProxy */;
 		};
+		D91082BE20A5E3290026A235 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D91082BA20A5E3290026A235 /* WatchAppFengNiao Extension */;
+			targetProxy = D91082BD20A5E3290026A235 /* PBXContainerItemProxy */;
+		};
+		D91082D120A5E32A0026A235 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D91082AE20A5E3280026A235 /* WatchAppFengNiao */;
+			targetProxy = D91082D020A5E32A0026A235 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D91082B120A5E3280026A235 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D91082B220A5E3280026A235 /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		D910827420A5D93E0026A235 /* Debug */ = {
@@ -542,6 +733,78 @@
 			};
 			name = Release;
 		};
+		D91082D320A5E32A0026A235 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				IBSC_MODULE = WatchAppFengNiao_Extension;
+				INFOPLIST_FILE = WatchAppFengNiao/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = FengNiao.FengNiaoPbxprojSearcher.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.3;
+			};
+			name = Debug;
+		};
+		D91082D420A5E32A0026A235 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				IBSC_MODULE = WatchAppFengNiao_Extension;
+				INFOPLIST_FILE = WatchAppFengNiao/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = FengNiao.FengNiaoPbxprojSearcher.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.3;
+			};
+			name = Release;
+		};
+		D91082D520A5E32A0026A235 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "WatchAppFengNiao Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = FengNiao.FengNiaoPbxprojSearcher.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.3;
+			};
+			name = Debug;
+		};
+		D91082D620A5E32A0026A235 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "WatchAppFengNiao Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = FengNiao.FengNiaoPbxprojSearcher.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.3;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -577,6 +840,24 @@
 			buildConfigurations = (
 				D91082A620A5DB350026A235 /* Debug */,
 				D91082A720A5DB350026A235 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D91082D720A5E32A0026A235 /* Build configuration list for PBXNativeTarget "WatchAppFengNiao Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D91082D520A5E32A0026A235 /* Debug */,
+				D91082D620A5E32A0026A235 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D91082D920A5E32A0026A235 /* Build configuration list for PBXNativeTarget "WatchAppFengNiao" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D91082D320A5E32A0026A235 /* Debug */,
+				D91082D420A5E32A0026A235 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -109,7 +109,7 @@ public struct FengNiao {
     let resourceExtensions: [String]
     let searchInFileExtensions: [String]
     
-    let regularDirExtensions = ["imageset", "launchimage", "appiconset", "stickersiconset", "bundle"]
+    let regularDirExtensions = ["imageset", "launchimage", "appiconset", "stickersiconset", "complicationset", "bundle"]
     var nonDirExtensions: [String] {
         return resourceExtensions.filter { !regularDirExtensions.contains($0) }
     }
