@@ -1,16 +1,21 @@
+// swift-tools-version:4.0
+
 import PackageDescription
 
 let package = Package(
     name: "FengNiao",
-    targets: [
-        Target(name: "FengNiaoKit", dependencies: []),
-        Target(name: "FengNiao", dependencies: ["FengNiaoKit"])
+    products: [
+        .executable(name: "FengNiao", targets: ["FengNiao"]),
     ],
     dependencies: [
-        .Package(url: "https://github.com/onevcat/Rainbow", majorVersion: 2),
-        .Package(url: "https://github.com/jatoben/CommandLine", "3.0.0-pre1"),
-        .Package(url: "https://github.com/kylef/Spectre.git", majorVersion: 0, minor: 7),
-        .Package(url: "https://github.com/kylef/PathKit.git", majorVersion: 0, minor: 8)   
+        .package(url: "https://github.com/onevcat/Rainbow.git", from: "3.1.1"),
+        .package(url: "https://github.com/jatoben/CommandLine.git", from: "3.0.0-pre1"),
+        .package(url: "https://github.com/kylef/Spectre.git", from: "0.8.0"),
+        .package(url: "https://github.com/kylef/PathKit.git", from: "0.9.0")
     ],
-    exclude: [ "Tests/Fixtures" ]
+    targets: [
+        .target(name: "FengNiaoKit", dependencies: ["Rainbow", "PathKit"]),
+        .target(name: "FengNiao", dependencies: ["FengNiaoKit", "CommandLine"]),
+        .testTarget(name: "FengNiaoKitTests", dependencies: ["FengNiaoKit", "Spectre"], exclude: ["Tests/Fixtures"]),
+    ]
 )

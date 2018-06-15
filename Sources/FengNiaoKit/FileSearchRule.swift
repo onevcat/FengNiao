@@ -40,15 +40,11 @@ extension RegPatternSearchRule {
         var result = Set<String>()
         
         for pattern in patterns {
-            let reg = try! FNRegularExpression(pattern: pattern, options: .caseInsensitive)
+            let reg = try! NSRegularExpression(pattern: pattern, options: .caseInsensitive)
             
             let matches = reg.matches(in: content, options: [], range: content.fullRange)
             for checkingResult in matches {
-                #if os(Linux)
                 let extracted = nsstring.substring(with: checkingResult.range(at: 1))
-                #else
-                let extracted = nsstring.substring(with: checkingResult.rangeAt(1))
-                #endif
                 result.insert(extracted.plainFileName(extensions: extensions) )
             }
         }
@@ -89,7 +85,47 @@ struct PlistImageSearchRule: RegPatternSearchRule {
     let patterns = ["<key>UIApplicationShortcutItemIconFile</key>[^<]*<string>(.*?)</string>"]
 }
 
+struct PlistAppIconSearchRule: FileSearchRule {
+    let extensions: [String]
+    
+    func search(in content: String) -> Set<String> {
+        var result = Set<String>()
+        
+        let groupRegexStr = "<key>CFBundleIconFiles</key>[^<]*<array>([\\w\\W]*?)</array>"
+        let groupRegex = try! NSRegularExpression(pattern: groupRegexStr, options: .caseInsensitive)
+        
+        let groupMatches = groupRegex.matches(in: content, options: [], range: content.fullRange)
+        var groupContents = [String]()
+        for checkingResult in groupMatches {
+            if let range = Range(checkingResult.range(at: 1), in: content) {
+                let extracted = String(content[range])
+                groupContents.append(extracted)
+            }
+        }
+        
+        guard groupContents.count > 0 else {
+            return []
+        }
+        
+        let itemRegexStr = "<string>(.*?)</string>"
+        let itemRegex = try! NSRegularExpression(pattern: itemRegexStr, options: .caseInsensitive)
+        for itemContent in groupContents {
+            let itemMatches = itemRegex.matches(in: itemContent, options: [], range: itemContent.fullRange)
+            
+            for checkingResult in itemMatches {
+                if let range = Range(checkingResult.range(at: 1), in: itemContent) {
+                    let extracted = String(itemContent[range])
+                    result.insert(extracted.plainFileName(extensions: extensions))
+                }
+            }
+        }
+        
+        return result
+    }
+}
+
 struct PbxprojImageSearchRule: RegPatternSearchRule {
     let extensions: [String]
     let patterns = ["ASSETCATALOG_COMPILER_APPICON_NAME = \"?(.*?)\"?;", "ASSETCATALOG_COMPILER_COMPLICATION_NAME = \"?(.*?)\"?;"]
 }
+

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0920"
+   LastUpgradeVersion = "9999"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Rainbow::Rainbow"
-               BuildableName = "Rainbow.framework"
-               BlueprintName = "Rainbow"
+               BlueprintIdentifier = "FengNiao::FengNiao"
+               BuildableName = "FengNiao"
+               BlueprintName = "FengNiao"
                ReferencedContainer = "container:FengNiao.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -56,20 +56,6 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "PathKit::PathKit"
-               BuildableName = "PathKit.framework"
-               BlueprintName = "PathKit"
-               ReferencedContainer = "container:FengNiao.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "FengNiao::FengNiaoKit"
                BuildableName = "FengNiaoKit.framework"
                BlueprintName = "FengNiaoKit"
@@ -84,9 +70,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FengNiao::FengNiao"
-               BuildableName = "FengNiao"
-               BlueprintName = "FengNiao"
+               BlueprintIdentifier = "PathKit::PathKit"
+               BuildableName = "PathKit.framework"
+               BlueprintName = "PathKit"
+               ReferencedContainer = "container:FengNiao.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "Rainbow::Rainbow"
+               BuildableName = "Rainbow.framework"
+               BlueprintName = "Rainbow"
                ReferencedContainer = "container:FengNiao.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -109,16 +109,6 @@
                ReferencedContainer = "container:FengNiao.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_163"
-               BuildableName = "FengNiaoTests.xctest"
-               BlueprintName = "FengNiaoTests"
-               ReferencedContainer = "container:FengNiao.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <AdditionalOptions>
       </AdditionalOptions>
@@ -137,9 +127,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "Rainbow::Rainbow"
-            BuildableName = "Rainbow.framework"
-            BlueprintName = "Rainbow"
+            BlueprintIdentifier = "FengNiao::FengNiao"
+            BuildableName = "FengNiao"
+            BlueprintName = "FengNiao"
             ReferencedContainer = "container:FengNiao.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

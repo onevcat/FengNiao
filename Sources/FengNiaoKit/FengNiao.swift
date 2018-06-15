@@ -26,14 +26,6 @@ import Foundation
 import PathKit
 import Rainbow
 
-#if os(Linux)
-typealias FNRegularExpression = RegularExpression
-typealias FNProcess = Task
-#else
-typealias FNRegularExpression = NSRegularExpression
-typealias FNProcess = Process
-#endif
-
 enum FileType {
     case swift
     case objc
@@ -44,7 +36,7 @@ enum FileType {
     init?(ext: String) {
         switch ext {
         case "swift": self = .swift
-        case "m", "mm": self = .objc
+        case "h", "m", "mm": self = .objc
         case "xib", "storyboard": self = .xib
         case "plist": self = .plist
         case "pbxproj": self = .pbxproj
@@ -57,7 +49,7 @@ enum FileType {
         case .swift: return [SwiftImageSearchRule(extensions: extensions)]
         case .objc: return [ObjCImageSearchRule(extensions: extensions)]
         case .xib: return [XibImageSearchRule()]
-        case .plist: return [PlistImageSearchRule(extensions: extensions)]
+        case .plist: return [PlistImageSearchRule(extensions: extensions), PlistAppIconSearchRule(extensions: extensions)]
         case .pbxproj: return [PbxprojImageSearchRule(extensions: extensions)]
         }
     }
@@ -248,7 +240,13 @@ public struct FengNiao {
                                   [PlainImageSearchRule(extensions: resourceExtensions)]
                 
                 let content = (try? subPath.read()) ?? ""
-                result.append(contentsOf: searchRules.flatMap { $0.search(in: content) })
+                result.append(contentsOf: searchRules.flatMap {
+                    $0.search(in: content).map { name in
+                        let p = Path(name)
+                        guard let ext = p.extension else { return name }
+                        return resourceExtensions.contains(ext) ? p.lastComponentWithoutExtension : name
+                    }
+                })
             }
         }
         
@@ -264,7 +262,7 @@ public struct FengNiao {
     }
 }
 
-let digitalRex = try! FNRegularExpression(pattern: "(\\d+)", options: .caseInsensitive)
+let digitalRex = try! NSRegularExpression(pattern: "(\\d+)", options: .caseInsensitive)
 extension String {
     
     func similarPatternWithNumberIndex(other: String) -> Bool {
@@ -274,11 +272,7 @@ extension String {
         // No digital found in resource key.
         guard matches.count >= 1 else { return false }
         let lastMatch = matches.last!
-        #if os(Linux)
         let digitalRange = lastMatch.range(at: 1)
-        #else
-        let digitalRange = lastMatch.rangeAt(1)
-        #endif
         
         var prefix: String?
         var suffix: String?
@@ -286,13 +280,13 @@ extension String {
         let digitalLocation = digitalRange.location
         if digitalLocation != 0 {
             let index = other.index(other.startIndex, offsetBy: digitalLocation)
-            prefix = other.substring(to: index)
+            prefix = String(other[..<index])
         }
         
         let digitalMaxRange = NSMaxRange(digitalRange)
         if digitalMaxRange < other.utf16.count {
             let index = other.index(other.startIndex, offsetBy: digitalMaxRange)
-            suffix = other.substring(from: index)
+            suffix = String(other[index...])
         }
         
         switch (prefix, suffix) {

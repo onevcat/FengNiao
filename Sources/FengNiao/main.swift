@@ -29,7 +29,7 @@ import Rainbow
 import FengNiaoKit
 import PathKit
 
-let appVersion = "0.4.0"
+let appVersion = "0.5.0"
 
 #if os(Linux)
 let EX_OK: Int32 = 0
@@ -70,7 +70,7 @@ cli.addOption(resourceExtOption)
 
 let fileExtOption = MultiStringOption(
     shortFlag: "f", longFlag: "file-extensions",
-    helpMessage: "In which types of files we should search for resource usage. Default is 'm mm swift xib storyboard'")
+    helpMessage: "In which types of files we should search for resource usage. Default is 'm mm swift xib storyboard plist'")
 cli.addOption(fileExtOption)
 
 let skipProjRefereceCleanOption = BoolOption(
@@ -114,7 +114,7 @@ let projectPath = projectPathOption.value ?? "."
 let isForce = isForceOption.value
 let excludePaths = excludePathOption.value ?? []
 let resourceExtentions = resourceExtOption.value ?? ["imageset", "jpg", "png", "gif"]
-let fileExtensions = fileExtOption.value ?? ["m", "mm", "swift", "xib", "storyboard", "plist"]
+let fileExtensions = fileExtOption.value ?? ["h", "m", "mm", "swift", "xib", "storyboard", "plist"]
 
 let fengNiao = FengNiao(projectPath: projectPath,
                         excludedPaths: excludePaths,

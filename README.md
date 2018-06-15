@@ -4,7 +4,7 @@
 
 <p align="center">
 <a href="https://travis-ci.org/onevcat/FengNiao"><img src="https://img.shields.io/travis/onevcat/FengNiao/master.svg"></a>
-<a href="https://swift.org/package-manager/"><img src="https://img.shields.io/badge/swift-3.0-brightgreen.svg"/></a>
+<a href="https://swift.org/package-manager/"><img src="https://img.shields.io/badge/swift-4.0-brightgreen.svg"/></a>
 <a href="https://swift.org/package-manager/"><img src="https://img.shields.io/badge/SPM-ready-orange.svg"></a>
 <a href="https://raw.githubusercontent.com/onevcat/Kingfisher/master/LICENSE"><img src="https://img.shields.io/cocoapods/l/Kingfisher.svg?style=flat"></a>
 <a href="https://swift.org/package-manager/"><img src="https://img.shields.io/badge/platform-macos%20|%20Linux-blue.svg"/></a>
@@ -89,6 +89,12 @@ fengniao --exclude Carthage --force
 ```
 
 It is recommended to exclude vendor's folders like Pods or Carthage. Since you do not have a chance to confirm the result, you also need to add `--force` option.
+
+## How it works
+
+1. Extract resource file names (default file type: `["imageset", "jpg", "png", "gif"]`) in these folders `["imageset", "launchimage", "appiconset", "bundle”]`. 
+2. Use regular expression to search all string names in files (default files type: `["m", "mm", "swift", "xib", "storyboard", "plist"]`).
+3. Exclude all used string names from resources files, we get all unused resources files.
 
 ## License and Information
 
