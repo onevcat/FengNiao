@@ -123,3 +123,9 @@ struct PlistAppIconSearchRule: FileSearchRule {
         return result
     }
 }
+
+struct PbxprojImageSearchRule: RegPatternSearchRule {
+    let extensions: [String]
+    let patterns = ["ASSETCATALOG_COMPILER_APPICON_NAME = \"?(.*?)\"?;", "ASSETCATALOG_COMPILER_COMPLICATION_NAME = \"?(.*?)\"?;"]
+}
+
