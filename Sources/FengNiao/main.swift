@@ -114,7 +114,7 @@ let projectPath = projectPathOption.value ?? "."
 let isForce = isForceOption.value
 let excludePaths = excludePathOption.value ?? []
 let resourceExtentions = resourceExtOption.value ?? ["imageset", "jpg", "png", "gif"]
-let fileExtensions = fileExtOption.value ?? ["m", "mm", "swift", "xib", "storyboard", "plist"]
+let fileExtensions = fileExtOption.value ?? ["h", "m", "mm", "swift", "xib", "storyboard", "plist"]
 
 let fengNiao = FengNiao(projectPath: projectPath,
                         excludedPaths: excludePaths,

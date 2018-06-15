@@ -35,7 +35,7 @@ enum FileType {
     init?(ext: String) {
         switch ext {
         case "swift": self = .swift
-        case "m", "mm": self = .objc
+        case "h", "m", "mm": self = .objc
         case "xib", "storyboard": self = .xib
         case "plist": self = .plist
         default: return nil
@@ -47,7 +47,7 @@ enum FileType {
         case .swift: return [SwiftImageSearchRule(extensions: extensions)]
         case .objc: return [ObjCImageSearchRule(extensions: extensions)]
         case .xib: return [XibImageSearchRule()]
-        case .plist: return [PlistImageSearchRule(extensions: extensions)]
+        case .plist: return [PlistImageSearchRule(extensions: extensions), PlistAppIconSearchRule(extensions: extensions)]
         }
     }
 }
