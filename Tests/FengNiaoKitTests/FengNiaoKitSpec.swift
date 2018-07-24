@@ -101,9 +101,9 @@ describe("FengNiaoKit") {
         
         $0.it("Swift search rule applies") {
             let searcher = SwiftImageSearchRule(extensions: ["jpg"])
-            let content = "UIImage(named: \"button_image\")\nlet s = \"foo.jpg\"\n"
+            let content = "UIImage(named: \"button_image\")\nlet s = \"foo.jpg\"\nR.image.aaa()\n"
             let result = searcher.search(in: content)
-            let expected: Set<String> = ["button_image", "foo"]
+            let expected: Set<String> = ["button_image", "foo", "aaa"]
             try expect(result) == expected
         }
 
