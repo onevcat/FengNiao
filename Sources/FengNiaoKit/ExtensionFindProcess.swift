@@ -55,18 +55,17 @@ class ExtensionFindProcess: NSObject {
         }
         
         for excludedPath in excluded {
-            args.append("-not")
-            args.append("-path")
-            
             let filePath = path + excludedPath
             guard filePath.exists else { continue }
+            
+            args.append("-not")
+            args.append("-path")
             
             if filePath.isDirectory {
                 args.append("\(filePath.string)/*")
             } else {
                 args.append(filePath.string)
             }
-            
         }
         
         p.arguments = args
