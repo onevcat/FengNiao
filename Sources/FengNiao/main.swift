@@ -147,7 +147,7 @@ if unusedFiles.isEmpty {
 if !isForce {
     var result = promptResult(files: unusedFiles)
     while result == .list {
-        for file in unusedFiles {
+        for file in unusedFiles.sorted(by: { $0.size > $1.size }) {
             print("\(file.readableSize) \(file.path.string)")
         }
         result = promptResult(files: unusedFiles)
