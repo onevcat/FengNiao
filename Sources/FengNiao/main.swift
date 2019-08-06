@@ -65,7 +65,7 @@ cli.addOption(excludePathOption)
 
 let resourceExtOption = MultiStringOption(
     shortFlag: "r", longFlag: "resource-extensions",
-    helpMessage: "Resource file extensions need to be searched. Default is 'imageset jpg png gif'")
+    helpMessage: "Resource file extensions need to be searched. Default is 'imageset jpg png gif pdf'")
 cli.addOption(resourceExtOption)
 
 let fileExtOption = MultiStringOption(
@@ -113,7 +113,7 @@ if versionOption.value {
 let projectPath = projectPathOption.value ?? "."
 let isForce = isForceOption.value
 let excludePaths = excludePathOption.value ?? []
-let resourceExtentions = resourceExtOption.value ?? ["imageset", "jpg", "png", "gif"]
+let resourceExtentions = resourceExtOption.value ?? ["imageset", "jpg", "png", "gif", "pdf"]
 let fileExtensions = fileExtOption.value ?? ["h", "m", "mm", "swift", "xib", "storyboard", "plist"]
 
 let fengNiao = FengNiao(projectPath: projectPath,
