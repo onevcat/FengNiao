@@ -57,7 +57,7 @@ FengNiao supports some arguments. You can find it by:
   -e, --exclude:
       Exclude paths from search.
   -r, --resource-extensions:
-      Resource file extensions need to be searched. Default is 'imageset jpg png gif'
+      Resource file extensions need to be searched. Default is 'imageset jpg png gif pdf'
   -f, --file-extensions:
       In which types of files we should search for resource usage. Default is 'm mm swift xib storyboard'
   --version:
@@ -92,7 +92,7 @@ It is recommended to exclude vendor's folders like Pods or Carthage. Since you d
 
 ## How it works
 
-1. Extract resource file names (default file type: `["imageset", "jpg", "png", "gif"]`) in these folders `["imageset", "launchimage", "appiconset", "bundle”]`. 
+1. Extract resource file names (default file type: `["imageset", "jpg", "png", "gif", "pdf"]`) in these folders `["imageset", "launchimage", "appiconset", "bundle”]`.
 2. Use regular expression to search all string names in files (default files type: `["m", "mm", "swift", "xib", "storyboard", "plist"]`).
 3. Exclude all used string names from resources files, we get all unused resources files.
 
