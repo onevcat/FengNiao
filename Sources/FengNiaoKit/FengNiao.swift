@@ -49,7 +49,7 @@ enum FileType {
         case .swift: return [SwiftImageSearchRule(extensions: extensions)]
         case .objc: return [ObjCImageSearchRule(extensions: extensions)]
         case .xib: return [XibImageSearchRule()]
-        case .plist: return [PlistImageSearchRule(extensions: extensions), PlistAppIconSearchRule(extensions: extensions)]
+        case .plist: return [PlistImageSearchRule(extensions: extensions)]
         case .pbxproj: return [PbxprojImageSearchRule(extensions: extensions)]
         }
     }
