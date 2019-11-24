@@ -1,4 +1,4 @@
-// swift-tools-version:4.0
+// swift-tools-version:4.2
 
 import PackageDescription
 
@@ -18,5 +18,5 @@ let package = Package(
         .target(name: "FengNiao", dependencies: ["FengNiaoKit", "CommandLineKit"]),
         .testTarget(name: "FengNiaoKitTests", dependencies: ["FengNiaoKit", "Spectre"], exclude: ["Tests/Fixtures"]),
     ],
-    swiftLanguageVersions: [4]
+    swiftLanguageVersions: [.v4, .v4_2]
 )

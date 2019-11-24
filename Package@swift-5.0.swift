@@ -1,11 +1,12 @@
-// swift-tools-version:4.0
+// swift-tools-version:5.0
 
 import PackageDescription
 
 let package = Package(
     name: "FengNiao",
+    platforms: [.macOS(.v10_10)],
     products: [
-        .executable(name: "FengNiao", targets: ["FengNiao"]),
+        .executable(name: "FengNiao", targets: ["FengNiao"])
     ],
     dependencies: [
         .package(url: "https://github.com/onevcat/Rainbow.git", from: "3.1.1"),
@@ -18,5 +19,5 @@ let package = Package(
         .target(name: "FengNiao", dependencies: ["FengNiaoKit", "CommandLineKit"]),
         .testTarget(name: "FengNiaoKitTests", dependencies: ["FengNiaoKit", "Spectre"], exclude: ["Tests/Fixtures"]),
     ],
-    swiftLanguageVersions: [4]
+    swiftLanguageVersions: [.v4, .v4_2, .v5]
 )
