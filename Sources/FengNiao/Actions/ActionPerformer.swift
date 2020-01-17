@@ -44,7 +44,6 @@ class ActionPerformer {
                 print("\(fileInfo.path.string) - \(err.localizedDescription)")
             }
             return
-            //exit(EX_USAGE)
         }
 
 
