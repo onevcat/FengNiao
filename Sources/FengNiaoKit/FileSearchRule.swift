@@ -90,3 +90,7 @@ struct PbxprojImageSearchRule: RegPatternSearchRule {
     let patterns = ["ASSETCATALOG_COMPILER_APPICON_NAME = \"?(.*?)\"?;", "ASSETCATALOG_COMPILER_COMPLICATION_NAME = \"?(.*?)\"?;"]
 }
 
+struct JsSearchRule: RegPatternSearchRule {
+    let extensions: [String]
+    let patterns = [":\"(.*?)\"", ":'(.*?)'"]
+}

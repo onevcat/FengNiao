@@ -58,6 +58,11 @@ let isForceOption = BoolOption(
     helpMessage: "Delete the found unused files without asking.")
 cli.addOption(isForceOption)
 
+let actionOption = StringOption(
+    shortFlag: "action",
+    helpMessage: "Perform an immediate action on the unused resources.")
+cli.addOption(actionOption)
+
 let excludePathOption = MultiStringOption(
     shortFlag: "e", longFlag: "exclude",
     helpMessage: "Exclude paths from search.")
@@ -142,51 +147,39 @@ do {
 if unusedFiles.isEmpty {
     print("😎 Hu, you have no unused resources in path: \(Path(projectPath).absolute()).".green.bold)
     exit(EX_OK)
+} else {
+    let size = unusedFiles.filesSize.fn_readableSize
+    print("\(unusedFiles.count) unused files are found. Total Size: \(size)".yellow.bold)
 }
 
-if !isForce {
-    var result = promptResult(files: unusedFiles)
-    while result == .list {
-        for file in unusedFiles.sorted(by: { $0.size > $1.size }) {
-            print("\(file.readableSize) \(file.path.string)")
-        }
-        result = promptResult(files: unusedFiles)
+let actionPerformer = ActionPerformer(unusedFiles: unusedFiles, projectPath: projectPath, skipProjRefereceCleanOption: skipProjRefereceCleanOption.value)
+
+if isForce { // Force remove all the unused resources
+    actionPerformer.perform(action: .delete)
+    exit(EX_OK)
+} else if let immediateAction = actionOption.value {
+    // Perform an immediate action without going to the interactive mode
+    // To use for CI jobs when interactive mode is not needed.
+    if let action = Action(rawValue: immediateAction) {
+        actionPerformer.perform(action: action)
+        exit(EX_OK)
+    } else {
+        // Unknown/Unsupported immediate action recived.
+        print("Unknown action".red.bold)
+        exit(EX_USAGE)
     }
-    
+} else {
+    // Interactive mode
+    var result = promptResult(files: unusedFiles)
     switch result {
     case .list:
-        fatalError()
+        actionPerformer.perform(action: .list)
+        result = promptResult(files: unusedFiles)
     case .delete:
-        break
+        actionPerformer.perform(action: .delete)
+        exit(EX_OK)
     case .ignore:
         print("Ignored. Nothing to do, bye!".green.bold)
         exit(EX_OK)
-    }
-}
-
-print("Deleting unused files...⚙".bold)
-
-let (deleted, failed) = FengNiao.delete(unusedFiles)
-guard failed.isEmpty else {
-    print("\(unusedFiles.count - failed.count) unused files are deleted. But we encountered some error while deleting these \(failed.count) files:".yellow.bold)
-    for (fileInfo, err) in failed {
-        print("\(fileInfo.path.string) - \(err.localizedDescription)")
-    }
-    exit(EX_USAGE)
-}
-
-
-print("\(unusedFiles.count) unused files are deleted.".green.bold)
-
-if !skipProjRefereceCleanOption.value {
-    if let children = try? Path(projectPath).absolute().children(){
-        print("Now Deleting unused Reference in project.pbxproj...⚙".bold)
-        for path in children {
-            if path.lastComponent.hasSuffix("xcodeproj"){
-                let pbxproj = path + "project.pbxproj"
-                FengNiao.deleteReference(projectFilePath: pbxproj, deletedFiles: deleted)
-            }
-        }
-        print("Unused Reference deleted successfully.".green.bold)
     }
 }
