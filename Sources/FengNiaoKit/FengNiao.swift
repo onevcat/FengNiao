@@ -32,6 +32,7 @@ enum FileType {
     case xib
     case plist
     case pbxproj
+    case js
     
     init?(ext: String) {
         switch ext {
@@ -40,6 +41,7 @@ enum FileType {
         case "xib", "storyboard": self = .xib
         case "plist": self = .plist
         case "pbxproj": self = .pbxproj
+        case "js": self = .js
         default: return nil
         }
     }
@@ -51,6 +53,7 @@ enum FileType {
         case .xib: return [XibImageSearchRule()]
         case .plist: return [PlistImageSearchRule(extensions: extensions)]
         case .pbxproj: return [PbxprojImageSearchRule(extensions: extensions)]
+        case .js: return [JsSearchRule(extensions: extensions)]
         }
     }
 }
