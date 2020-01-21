@@ -9,6 +9,6 @@ import FengNiaoKit
 
 extension Array where Element == FileInfo {
     var filesSize: Int {
-        return self.reduce(Int.zero) { $0 + $1.size }
+        return reduce(0) { $0 + $1.size }
     }
 }
