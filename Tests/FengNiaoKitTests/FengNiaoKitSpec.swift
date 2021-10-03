@@ -27,8 +27,7 @@ import Spectre
 @testable import FengNiaoKit
 import  PathKit
 
-public func testFengNiaoKit() {    
-describe("FengNiaoKit") {
+public let testFengNiaoKit: ((ContextType) -> Void) = {
     let fixtures = Path(#file).parent().parent() + "Fixtures"
 
     $0.describe("String Extensions") {
@@ -463,8 +462,6 @@ describe("FengNiaoKit") {
             try expect(project.hasPrefix("\n")) == false
         }
     }
-
-}
 }
     
 public func == (lhs: Expectation<[String: Set<String>]>, rhs: [String: Set<String>]) throws {

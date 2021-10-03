@@ -26,7 +26,7 @@ import XCTest
 
 class FengNiaoKitTests: XCTestCase {
     func testRunSpectre() {
-        testFengNiaoKit()
+        describe("FengNiaoKit", testFengNiaoKit)
     }
 }
 
