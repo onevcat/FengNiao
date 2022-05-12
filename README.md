@@ -19,21 +19,28 @@ FengNiao is a simple command-line util to deleting unused image resource files f
 
 ### Install
 
-You need Swift Package Manager (as well as swift compiler) installed in your macOS; generally you are prepared if you have the latest Xcode installed.
+#### Mint
+
+[Mint](https://github.com/yonaskolb/Mint) is a tool that installs and runs Swift command line tool packages. Make sure
+you have Xcode installed, then:
+
+```sh
+> brew install mint
+> mint install onevcat/fengniao
+```
 
 #### Compile from source
 
 ```bash
 > git clone https://github.com/onevcat/FengNiao.git
 > cd FengNiao
-> ./install.sh
+> swift build -c release
+
+# Then copy the executable to your PATH, such as `/usr/local/bin`
+> sudo cp .build/release/FengNiao /usr/local/bin/fengniao
 ```
 
 FengNiao should be compiled, tested and installed into the `/usr/local/bin`.
-
-#### Homebrew
-
-You may want to install in from Homebrew. But for now it is not supported.
 
 ### Usage
 
