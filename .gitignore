@@ -102,3 +102,4 @@ fastlane/test_output
 /fengniao.sketch
 
 .swiftpm
+.vscode
