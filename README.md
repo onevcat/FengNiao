@@ -13,7 +13,7 @@
 
 ## What
 
-FengNiao is a simple command-line util to deleting unused image resource files from your Xcode project.
+FengNiao is a simple command-line util to delete unused image resource files from your Xcode project.
 
 ## How
 
