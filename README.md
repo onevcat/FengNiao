@@ -67,6 +67,10 @@ FengNiao supports some arguments. You can find it by:
       Resource file extensions need to be searched. Default is 'imageset jpg png gif pdf'
   -f, --file-extensions:
       In which types of files we should search for resource usage. Default is 'm mm swift xib storyboard'
+  --skip-proj-reference:
+      Skip the Project file (.pbxproj) reference cleaning.
+      By skipping it, the project file will be left untouched. 
+      You may want to skip ths step if you are trying to build multiple projects with dependency and keep .pbxproj unchanged while compiling.
   --version:
       Print version.
   -h, --help:
