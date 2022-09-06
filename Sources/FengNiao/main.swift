@@ -36,6 +36,8 @@ let EX_OK: Int32 = 0
 let EX_USAGE: Int32 = 64
 #endif
 
+let EXIT_UNUSED_RESOURCES: Int32 = 1
+
 let cli = CommandLineKit.CommandLine()
 cli.formatOutput = { s, type in
     var str: String
@@ -78,6 +80,9 @@ let skipProjRefereceCleanOption = BoolOption(
     helpMessage: "Skip the Project file (.pbxproj) reference cleaning. By skipping it, the project file will be left untouched. You may want to skip ths step if you are trying to build multiple projects with dependency and keep .pbxproj unchanged while compiling."
 )
 cli.addOption(skipProjRefereceCleanOption)
+
+let xcodeWarningsOption = BoolOption(longFlag: "xcode-warnings", helpMessage: "Print results as xcode warnings and return non zero code if any.")
+cli.addOption(xcodeWarningsOption)
 
 let versionOption = BoolOption(longFlag: "version", helpMessage: "Print version.")
 cli.addOption(versionOption)
@@ -142,6 +147,14 @@ do {
 if unusedFiles.isEmpty {
     print("😎 Hu, you have no unused resources in path: \(Path(projectPath).absolute()).".green.bold)
     exit(EX_OK)
+}
+
+if xcodeWarningsOption.value {
+    for file in unusedFiles.sorted(by: { $0.size > $1.size }) {
+        print("\(file.path.string): warning: Unused resource of size \(file.readableSize)")
+    }
+
+    exit(EXIT_UNUSED_RESOURCES);
 }
 
 if !isForce {
