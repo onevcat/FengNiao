@@ -55,12 +55,16 @@ enum FileType {
     }
 }
 
-public struct FileInfo {
+public struct FileInfo: Identifiable, Hashable {
+    public var id: String {
+        path.string
+    }
+
     public let path: Path
     public let size: Int
     public let fileName: String
     
-    init(path: String) {
+    public init(path: String) {
         self.path = Path(path)
         self.size = self.path.size
         self.fileName = self.path.lastComponent
