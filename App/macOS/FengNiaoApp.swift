@@ -4,7 +4,8 @@ import SwiftUI
 struct FengNiaoApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppView()
+                .frame(minWidth: 300, idealWidth: 650, minHeight: 500)
         }
     }
 }

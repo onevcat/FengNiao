@@ -8,20 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		6AAF22A82AA1D0F400DB0B5F /* FengNiaoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAF22A72AA1D0F400DB0B5F /* FengNiaoApp.swift */; };
-		6AAF22AA2AA1D0F400DB0B5F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAF22A92AA1D0F400DB0B5F /* ContentView.swift */; };
+		6AAF22AA2AA1D0F400DB0B5F /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAF22A92AA1D0F400DB0B5F /* AppView.swift */; };
 		6AAF22AC2AA1D0F500DB0B5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AAF22AB2AA1D0F500DB0B5F /* Assets.xcassets */; };
 		6AAF22AF2AA1D0F500DB0B5F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AAF22AE2AA1D0F500DB0B5F /* Preview Assets.xcassets */; };
 		6AE869FC2AA1D41600DCF78B /* FengNiaoKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6AE869FB2AA1D41600DCF78B /* FengNiaoKit */; };
+		6AE869FE2AA1D58E00DCF78B /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE869FD2AA1D58E00DCF78B /* AppViewModel.swift */; };
+		6AE86A002AA1D5D800DCF78B /* DeleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE869FF2AA1D5D800DCF78B /* DeleteView.swift */; };
+		6AE86A022AA1D5F700DCF78B /* DeleteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE86A012AA1D5F700DCF78B /* DeleteViewModel.swift */; };
+		6AE86A042AA1D61600DCF78B /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE86A032AA1D61600DCF78B /* ExportView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6AAF22A42AA1D0F400DB0B5F /* FengNiao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FengNiao.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AAF22A72AA1D0F400DB0B5F /* FengNiaoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FengNiaoApp.swift; sourceTree = "<group>"; };
-		6AAF22A92AA1D0F400DB0B5F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		6AAF22A92AA1D0F400DB0B5F /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		6AAF22AB2AA1D0F500DB0B5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6AAF22AE2AA1D0F500DB0B5F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6AAF22B02AA1D0F500DB0B5F /* FengNiao.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FengNiao.entitlements; sourceTree = "<group>"; };
 		6AE869F92AA1D35500DCF78B /* FengNiao */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = FengNiao; path = ..; sourceTree = "<group>"; };
+		6AE869FD2AA1D58E00DCF78B /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		6AE869FF2AA1D5D800DCF78B /* DeleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteView.swift; sourceTree = "<group>"; };
+		6AE86A012AA1D5F700DCF78B /* DeleteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteViewModel.swift; sourceTree = "<group>"; };
+		6AE86A032AA1D61600DCF78B /* ExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,8 +66,12 @@
 		6AAF22A62AA1D0F400DB0B5F /* macOS */ = {
 			isa = PBXGroup;
 			children = (
+				6AAF22A92AA1D0F400DB0B5F /* AppView.swift */,
+				6AE869FD2AA1D58E00DCF78B /* AppViewModel.swift */,
+				6AE869FF2AA1D5D800DCF78B /* DeleteView.swift */,
+				6AE86A012AA1D5F700DCF78B /* DeleteViewModel.swift */,
+				6AE86A032AA1D61600DCF78B /* ExportView.swift */,
 				6AAF22A72AA1D0F400DB0B5F /* FengNiaoApp.swift */,
-				6AAF22A92AA1D0F400DB0B5F /* ContentView.swift */,
 				6AAF22AD2AA1D0F500DB0B5F /* Preview Content */,
 			);
 			path = macOS;
@@ -162,8 +174,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6AAF22AA2AA1D0F400DB0B5F /* ContentView.swift in Sources */,
+				6AE86A022AA1D5F700DCF78B /* DeleteViewModel.swift in Sources */,
+				6AAF22AA2AA1D0F400DB0B5F /* AppView.swift in Sources */,
+				6AE86A042AA1D61600DCF78B /* ExportView.swift in Sources */,
+				6AE86A002AA1D5D800DCF78B /* DeleteView.swift in Sources */,
 				6AAF22A82AA1D0F400DB0B5F /* FengNiaoApp.swift in Sources */,
+				6AE869FE2AA1D58E00DCF78B /* AppViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
