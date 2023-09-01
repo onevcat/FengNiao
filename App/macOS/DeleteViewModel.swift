@@ -11,7 +11,7 @@ final class DeleteStatusViewModel: ObservableObject {
     @Published var errorAlertMessage: String = ""
 
     private let projectPath: String
-    private let queue = DispatchQueue(label: "com.ldakhoa.resourcePurgeX", attributes: .concurrent)
+    private let queue = DispatchQueue(label: "com.onevcat.fengniao", attributes: .concurrent)
     private let timer = Timer.publish(every: 0.1, on: .current, in: .default).autoconnect()
     private var cancellable: AnyCancellable?
 
