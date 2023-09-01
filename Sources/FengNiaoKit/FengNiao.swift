@@ -55,11 +55,7 @@ enum FileType {
     }
 }
 
-public struct FileInfo: Identifiable, Hashable {
-    public var id: String {
-        path.string
-    }
-
+public struct FileInfo {
     public let path: Path
     public let size: Int
     public let fileName: String
@@ -177,7 +173,7 @@ public struct FengNiao {
         
     }
     
-    public func allResourceFiles() -> [String: Set<String>] {
+    func allResourceFiles() -> [String: Set<String>] {
         let find = ExtensionFindProcess(path: projectPath, extensions: resourceExtensions, excluded: excludedPaths)
         guard let result = find?.execute() else {
             print("Resource finding failed.".red)

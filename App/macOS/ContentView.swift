@@ -1,11 +1,5 @@
-//
-//  ContentView.swift
-//  fengniao
-//
-//  Created by Khoa Le on 01/09/2023.
-//
-
 import SwiftUI
+import FengNiaoKit
 
 struct ContentView: View {
     var body: some View {
@@ -16,6 +10,20 @@ struct ContentView: View {
             Text("Hello, world!")
         }
         .padding()
+    }
+}
+
+extension FengNiaoKit.FileInfo: Identifiable, Hashable {
+    public var id: String {
+        path.string
+    }
+
+    public static func == (lhs: FileInfo, rhs: FileInfo) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }
 

@@ -11,6 +11,7 @@
 		6AAF22AA2AA1D0F400DB0B5F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAF22A92AA1D0F400DB0B5F /* ContentView.swift */; };
 		6AAF22AC2AA1D0F500DB0B5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AAF22AB2AA1D0F500DB0B5F /* Assets.xcassets */; };
 		6AAF22AF2AA1D0F500DB0B5F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AAF22AE2AA1D0F500DB0B5F /* Preview Assets.xcassets */; };
+		6AE869FC2AA1D41600DCF78B /* FengNiaoKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6AE869FB2AA1D41600DCF78B /* FengNiaoKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		6AAF22AB2AA1D0F500DB0B5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6AAF22AE2AA1D0F500DB0B5F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6AAF22B02AA1D0F500DB0B5F /* FengNiao.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FengNiao.entitlements; sourceTree = "<group>"; };
+		6AE869F92AA1D35500DCF78B /* FengNiao */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = FengNiao; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AE869FC2AA1D41600DCF78B /* FengNiaoKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -36,9 +39,11 @@
 		6AAF229B2AA1D0F400DB0B5F = {
 			isa = PBXGroup;
 			children = (
+				6AE869F92AA1D35500DCF78B /* FengNiao */,
 				6AAF22A62AA1D0F400DB0B5F /* macOS */,
 				6AAF22A52AA1D0F400DB0B5F /* Products */,
 				6AAF22B62AA1D1C900DB0B5F /* Resources */,
+				6AE869FA2AA1D41600DCF78B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,6 +82,13 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		6AE869FA2AA1D41600DCF78B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -93,6 +105,9 @@
 			dependencies = (
 			);
 			name = fengniao;
+			packageProductDependencies = (
+				6AE869FB2AA1D41600DCF78B /* FengNiaoKit */,
+			);
 			productName = fengniao;
 			productReference = 6AAF22A42AA1D0F400DB0B5F /* FengNiao.app */;
 			productType = "com.apple.product-type.application";
@@ -205,7 +220,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -259,7 +274,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -344,6 +359,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6AE869FB2AA1D41600DCF78B /* FengNiaoKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FengNiaoKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6AAF229C2AA1D0F400DB0B5F /* Project object */;
 }
