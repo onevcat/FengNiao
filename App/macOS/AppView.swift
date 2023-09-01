@@ -44,7 +44,8 @@ struct AppView: View {
         ToggleState(fileExtension: "swift", isOn: true),
         ToggleState(fileExtension: "xib", isOn: true),
         ToggleState(fileExtension: "storyboard", isOn: true),
-        ToggleState(fileExtension: "plist", isOn: true)
+        ToggleState(fileExtension: "plist", isOn: true),
+        ToggleState(fileExtension: "pbxproj", isOn: true)
     ]
 
     // MARK: - View

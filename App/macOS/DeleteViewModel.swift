@@ -29,6 +29,8 @@ final class DeleteStatusViewModel: ObservableObject {
         queue.async {
             let (deleted, failed) = FengNiao.delete(self.unusedFilesToDelete)
 
+            // FengNiaoKit doesn't public functions to calculate the exact download percentage,
+            // so using this hack to make progress continually running
             self.cancellable = self.timer.sink { [weak self] _ in
                 DispatchQueue.main.async {
                     guard let self else { return }
@@ -56,8 +58,7 @@ final class DeleteStatusViewModel: ObservableObject {
                 self.consoleStatus += content
             }
 
-            let projectPath = Path(self.projectPath)
-            if let children = try? projectPath.absolute().children() {
+            if let children = try? Path(self.projectPath).absolute().children() {
                 DispatchQueue.main.async {
                     self.consoleStatus += "\nNow deleting unused reference in project.pbxproj..."
                 }
