@@ -60,7 +60,7 @@ public struct FileInfo {
     public let size: Int
     public let fileName: String
     
-    init(path: String) {
+    public init(path: String) {
         self.path = Path(path)
         self.size = self.path.size
         self.fileName = self.path.lastComponent
@@ -129,7 +129,7 @@ public struct FengNiao {
     }
     
     // Return a failed list of deleting
-    static public func delete(_ unusedFiles: [FileInfo]) -> (deleted: [FileInfo], failed :[(FileInfo, Error)]) {
+    static public func delete(_ unusedFiles: [FileInfo]) -> (deleted: [FileInfo], failed: [(FileInfo, Error)]) {
         var deleted = [FileInfo]()
         var failed = [(FileInfo, Error)]()
         for file in unusedFiles {
@@ -192,7 +192,7 @@ public struct FengNiao {
             // Skip the folders which suffix with a non-folder extension.
             // eg: We need to skip a folder with such name: /myfolder.png/ (although we should blame the one who named it)
             let filePath = Path(file)
-            if let ext = filePath.extension, filePath.isDirectory && nonDirExtensions.contains(ext)  {
+            if let ext = filePath.extension, filePath.isDirectory && nonDirExtensions.contains(ext) {
                 continue
             }
             
@@ -301,6 +301,3 @@ extension String {
         }
     }
 }
-
-
-

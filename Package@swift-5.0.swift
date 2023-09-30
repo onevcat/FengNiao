@@ -6,7 +6,8 @@ let package = Package(
     name: "FengNiao",
     platforms: [.macOS(.v10_10)],
     products: [
-        .executable(name: "FengNiao", targets: ["FengNiao"])
+        .executable(name: "FengNiao", targets: ["FengNiao"]),
+        .library(name: "FengNiaoKit", targets: ["FengNiaoKit"])
     ],
     dependencies: [
         .package(url: "https://github.com/onevcat/Rainbow.git", from: "3.1.1"),

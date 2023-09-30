@@ -6,6 +6,7 @@ let package = Package(
     name: "FengNiao",
     products: [
         .executable(name: "FengNiao", targets: ["FengNiao"]),
+        .library(name: "FengNiaoKit", targets: ["FengNiaoKit"])
     ],
     dependencies: [
         .package(url: "https://github.com/onevcat/Rainbow.git", from: "3.1.1"),
