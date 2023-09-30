@@ -17,7 +17,7 @@ let package = Package(
     targets: [
         .target(name: "FengNiaoKit", dependencies: ["Rainbow", "PathKit"]),
         .target(name: "FengNiao", dependencies: ["FengNiaoKit", "CommandLineKit"]),
-        .testTarget(name: "FengNiaoKitTests", dependencies: ["FengNiaoKit", "Spectre"], exclude: ["Tests/Fixtures"]),
+        .testTarget(name: "FengNiaoKitTests", dependencies: ["FengNiaoKit", "Spectre"], exclude: ["../Fixtures"]),
     ],
     swiftLanguageVersions: [4]
 )
