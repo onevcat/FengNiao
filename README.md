@@ -101,11 +101,18 @@ fengniao --exclude Carthage --force
 
 It is recommended to exclude vendor's folders like Pods or Carthage. Since you do not have a chance to confirm the result, you also need to add `--force` option.
 
+### App Version
+
+An GUI app version of FengNiao is also available. You can find it under the [App folder](https://github.com/onevcat/FengNiao/tree/master/App). We do not provide a pre-built binary for it. If needed, please build it by yourself. Thank you for @ldakhoa's contribution!
+
+![](https://github.com/onevcat/FengNiao/assets/1019875/fef5874b-b114-42c6-9ce5-0420460180ab)
+
 ## How it works
 
 1. Extract resource file names (default file type: `["imageset", "jpg", "png", "gif", "pdf"]`) in these folders `["imageset", "launchimage", "appiconset", "bundle”]`.
 2. Use regular expression to search all string names in files (default files type: `["m", "mm", "swift", "xib", "storyboard", "plist"]`).
 3. Exclude all used string names from resources files, we get all unused resources files.
+
 
 ## License and Information
 
