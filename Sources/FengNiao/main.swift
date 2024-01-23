@@ -29,7 +29,7 @@ import Rainbow
 import FengNiaoKit
 import PathKit
 
-let appVersion = "0.9.0"
+let appVersion = "0.9.1"
 
 #if os(Linux)
 let EX_OK: Int32 = 0
@@ -59,6 +59,11 @@ let isForceOption = BoolOption(
     longFlag: "force",
     helpMessage: "Delete the found unused files without asking.")
 cli.addOption(isForceOption)
+
+let isDisallowNumericalAffixesOption = BoolOption(
+    longFlag: "disallow-numerical-affixes",
+    helpMessage: "Names with numerical affixes without '%' will not count as used if enabled (myImage -> 123myImage456).")
+cli.addOption(isDisallowNumericalAffixesOption)
 
 let excludePathOption = MultiStringOption(
     shortFlag: "e", longFlag: "exclude",
@@ -120,11 +125,13 @@ let isForce = isForceOption.value
 let excludePaths = excludePathOption.value ?? []
 let resourceExtentions = resourceExtOption.value ?? ["imageset", "jpg", "png", "gif", "pdf"]
 let fileExtensions = fileExtOption.value ?? ["h", "m", "mm", "swift", "xib", "storyboard", "plist"]
+let isDisallowNumericalAffixes = isDisallowNumericalAffixesOption.value
 
 let fengNiao = FengNiao(projectPath: projectPath,
                         excludedPaths: excludePaths,
                         resourceExtensions: resourceExtentions,
-                        searchInFileExtensions: fileExtensions)
+                        searchInFileExtensions: fileExtensions,
+                        disallowNumericalAffixes: isDisallowNumericalAffixes)
 
 let unusedFiles: [FileInfo]
 do {
