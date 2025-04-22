@@ -128,10 +128,4 @@ I streamed the way I created this tool as a live-coding session in a live platfo
 
 It is a paid series lesson in Chinese. If you are interested in it, please check and watch the links below:
 
-#### 现场编程 - 用 Swift 创建命令行工具 fengniao-cli
-
-- [Part 1](http://m.quzhiboapp.com/?liveId=391&fromUserId=12049)
-- [Part 2](http://m.quzhiboapp.com/?liveId=401&fromUserId=12049)
-- [Part 3](http://m.quzhiboapp.com/?liveId=409&fromUserId=12049)
-
 
