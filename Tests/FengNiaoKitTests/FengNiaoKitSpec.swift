@@ -176,7 +176,8 @@ public let testFengNiaoKit: ((ContextType) -> Void) = {
             let fengniao = FengNiao(projectPath: project.string,
                                     excludedPaths: [],
                                     resourceExtensions: ["png", "jpg"],
-                                    searchInFileExtensions: ["txt"])
+                                    searchInFileExtensions: ["txt"],
+                                    disallowNumericalAffixes: false)
             let result = fengniao.allUsedStringNames()
             let expected: Set<String> = ["image", "another-image"]
             
@@ -188,7 +189,8 @@ public let testFengNiaoKit: ((ContextType) -> Void) = {
             let fengniao = FengNiao(projectPath: project.string,
                                     excludedPaths: [],
                                     resourceExtensions: ["png", "jpg"],
-                                    searchInFileExtensions: ["swift"])
+                                    searchInFileExtensions: ["swift"],
+                                    disallowNumericalAffixes: false)
             let result = fengniao.allUsedStringNames()
             let expected: Set<String> = ["common.login",
                                          "common.logout",
@@ -205,7 +207,8 @@ public let testFengNiaoKit: ((ContextType) -> Void) = {
             let fengniao = FengNiao(projectPath: project.string,
                                     excludedPaths: [],
                                     resourceExtensions: ["png", "jpg"],
-                                    searchInFileExtensions: ["m", "mm"])
+                                    searchInFileExtensions: ["m", "mm"],
+                                    disallowNumericalAffixes: false)
             let result = fengniao.allUsedStringNames()
             let expected: Set<String> = ["info.error.memory.full.confirm",
                                          "info.error.memory.full.ios",
@@ -222,7 +225,8 @@ public let testFengNiaoKit: ((ContextType) -> Void) = {
             let fengniao = FengNiao(projectPath: project.string,
                                     excludedPaths: [],
                                     resourceExtensions: ["png"],
-                                    searchInFileExtensions: ["xib", "storyboard"])
+                                    searchInFileExtensions: ["xib", "storyboard"],
+                                    disallowNumericalAffixes: false)
             let result = fengniao.allUsedStringNames()
             let expected: Set<String> = ["profile_image",
                                          "bottom",
@@ -239,7 +243,8 @@ public let testFengNiaoKit: ((ContextType) -> Void) = {
             let fengniao = FengNiao(projectPath: project.string,
                                     excludedPaths: [],
                                     resourceExtensions: [],
-                                    searchInFileExtensions: ["plist"])
+                                    searchInFileExtensions: ["plist"],
+                                    disallowNumericalAffixes: false)
             let result = fengniao.allUsedStringNames()
             let expected: Set<String> = ["some_image", "some_type", "Some Image"]
             
@@ -251,7 +256,8 @@ public let testFengNiaoKit: ((ContextType) -> Void) = {
             let fengniao = FengNiao(projectPath: project.string,
                                     excludedPaths: [],
                                     resourceExtensions: [],
-                                    searchInFileExtensions: ["pbxproj"])
+                                    searchInFileExtensions: ["pbxproj"],
+                                    disallowNumericalAffixes: false)
             let result = fengniao.allUsedStringNames()
             let expected: Set<String> = ["AppIcon", "MessagesIcon", "iMessage App Icon", "Complication"]
             
@@ -263,7 +269,8 @@ public let testFengNiaoKit: ((ContextType) -> Void) = {
             let fengniao = FengNiao(projectPath: project.string,
                                     excludedPaths: [],
                                     resourceExtensions: ["png", "jpg"],
-                                    searchInFileExtensions: ["m", "xib"])
+                                    searchInFileExtensions: ["m", "xib"],
+                                    disallowNumericalAffixes: false)
             let result = fengniao.allUsedStringNames()
             let expected: Set<String> = ["profile_image",
                                          "bottom",
@@ -280,7 +287,8 @@ public let testFengNiaoKit: ((ContextType) -> Void) = {
             let fengniao = FengNiao(projectPath: project.string,
                                     excludedPaths: ["SubFolder2"],
                                     resourceExtensions: ["png", "jpg"],
-                                    searchInFileExtensions: ["m", "xib"])
+                                    searchInFileExtensions: ["m", "xib"],
+                                    disallowNumericalAffixes: false)
             let result = fengniao.allUsedStringNames()
             let expected: Set<String> = ["info.error.memory.full.confirm",
                                          "info.error.memory.full.ios",
@@ -296,7 +304,8 @@ public let testFengNiaoKit: ((ContextType) -> Void) = {
             let fengniao = FengNiao(projectPath: project.string,
                                     excludedPaths: [],
                                     resourceExtensions: ["png", "jpg", "imageset"],
-                                    searchInFileExtensions: [])
+                                    searchInFileExtensions: [],
+                                    disallowNumericalAffixes: false)
             let result = fengniao.allResourceFiles()
             let expected: [String: Set<String>] = [
                 "file1": [(project + "file1.png").string],
@@ -311,7 +320,8 @@ public let testFengNiaoKit: ((ContextType) -> Void) = {
             let fengniao = FengNiao(projectPath: project.string,
                                     excludedPaths: ["Ignore"],
                                     resourceExtensions: ["png", "jpg", "imageset"],
-                                    searchInFileExtensions: [])
+                                    searchInFileExtensions: [],
+                                    disallowNumericalAffixes: false)
             let result = fengniao.allResourceFiles()
             let expected: [String: Set<String>] = [
                 "normal": [(project + "normal.png").string],
@@ -325,7 +335,8 @@ public let testFengNiaoKit: ((ContextType) -> Void) = {
             let fengniao = FengNiao(projectPath: project.string,
                                     excludedPaths: [],
                                     resourceExtensions: ["png"],
-                                    searchInFileExtensions: [])
+                                    searchInFileExtensions: [],
+                                    disallowNumericalAffixes: false)
             let result = fengniao.allResourceFiles()
             let expected: [String: Set<String>] = [
                 "image": [(project + "image@2x.png").string, (project + "image@3x.png").string],
@@ -344,7 +355,7 @@ public let testFengNiaoKit: ((ContextType) -> Void) = {
             ]
             let used: Set<String> = ["book"]
             
-            let result = FengNiao.filterUnused(from: all, used: used)
+            let result = FengNiao.filterUnused(from: all, used: used, disallowNumericalAffixes: false)
             let expected: Set<String> = ["face.png", "moon.png"]
             try expect(result) == expected
             
@@ -358,11 +369,11 @@ public let testFengNiaoKit: ((ContextType) -> Void) = {
             ]
             let used: Set<String> = ["book"]
             
-            let result = FengNiao.filterUnused(from: all, used: used)
+            let result = FengNiao.filterUnused(from: all, used: used, disallowNumericalAffixes: false)
             let expected: Set<String> = ["face1.png", "face2.png", "moon.png"]
             try expect(result) == expected
         }
-        
+
         $0.it("should not filter similar pattern") {
             let all: [String: Set<String>] = [
                 "face": ["face.png"],
@@ -383,14 +394,55 @@ public let testFengNiaoKit: ((ContextType) -> Void) = {
                 "unused_3": ["unused_3.png"],
             ]
             let used: Set<String> = ["image%02d", "%d_set", "middle_%d_bird","suffix_"]
-            let result = FengNiao.filterUnused(from: all, used: used)
+            let result = FengNiao.filterUnused(from: all, used: used, disallowNumericalAffixes: false)
             let expected: Set<String> = ["face.png", "unused_1.png", "unused_2.png", "unused_3.png"]
             try expect(result) == expected
         }
     }
-    
+
+    $0.describe("FengNiao File Filter with allowNumericalAffixes") {
+        $0.it("should filter files with affixes correctly when allowed") {
+            let all: [String: Set<String>] = [
+                "suffix20": ["suffix20.png", "suffix20@2x.png"],
+                "50prefix": ["50prefix.png", "50prefix@2x.png"],
+                "10both20": ["10both20.png", "10both20@2x.png"],
+            ]
+            let used: Set<String> = ["suffix", "prefix", "both"]
+
+            let result = FengNiao.filterUnused(from: all, used: used, disallowNumericalAffixes: false)
+            let expected: Set<String> = ["10both20@2x.png", "10both20.png"]
+            try expect(result) == expected
+        }
+
+        $0.it("should filter files with affixes correctly when not allowed") {
+            let all: [String: Set<String>] = [
+                "suffix20": ["suffix20.png", "suffix20@2x.png"],
+                "50prefix": ["50prefix.png", "50prefix@2x.png"],
+                "10both20": ["10both20.png", "10both20@2x.png"],
+            ]
+            let used: Set<String> = ["suffix", "prefix", "both"]
+
+            let result = FengNiao.filterUnused(from: all, used: used, disallowNumericalAffixes: true)
+            let expected: Set<String> = ["suffix20.png", "suffix20@2x.png", "50prefix.png", "50prefix@2x.png", "10both20@2x.png", "10both20.png"]
+            try expect(result) == expected
+        }
+
+        $0.it("should filter files with percent sign correctly when not allowed") {
+            let all: [String: Set<String>] = [
+                "suffix20": ["suffix20.png", "suffix20@2x.png"],
+                "50prefix": ["50prefix.png", "50prefix@2x.png"],
+                "10both20": ["10both20.png", "10both20@2x.png"],
+            ]
+            let used: Set<String> = ["suffix%d", "%dprefix", "%dboth%d"]
+
+            let result = FengNiao.filterUnused(from: all, used: used, disallowNumericalAffixes: true)
+            let expected: Set<String> = ["10both20@2x.png", "10both20.png"]
+            try expect(result) == expected
+        }
+    }
+
     $0.describe("FengNiao Deleting File") {
-        
+
         let file = fixtures + "DeleteFiles/file_in_root"
         let folder = fixtures + "DeleteFiles/Folder"
         
