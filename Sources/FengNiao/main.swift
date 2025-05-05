@@ -161,7 +161,6 @@ if xcodeWarningsOption.value {
 
 if listOnlyOption.value {
     let size = unusedFiles.reduce(0) { $0 + $1.size }.fn_readableSize
-    print("\(unusedFiles.count) unused files are found. Total Size: \(size)".yellow.bold)
     for file in unusedFiles.sorted(by: { $0.size > $1.size }) {
         print("\(file.readableSize) \(file.path.string)")
     }
