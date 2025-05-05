@@ -71,6 +71,10 @@ FengNiao supports some arguments. You can find it by:
       Skip the Project file (.pbxproj) reference cleaning.
       By skipping it, the project file will be left untouched. 
       You may want to skip ths step if you are trying to build multiple projects with dependency and keep .pbxproj unchanged while compiling.
+  --xcode-warnings:
+      Print results as xcode warnings and return non zero code if any.
+  --list-only:
+      List unused files and exit without prompting.
   --version:
       Print version.
   -h, --help:
