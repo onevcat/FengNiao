@@ -84,6 +84,9 @@ cli.addOption(skipProjRefereceCleanOption)
 let xcodeWarningsOption = BoolOption(longFlag: "xcode-warnings", helpMessage: "Print results as xcode warnings and return non zero code if any.")
 cli.addOption(xcodeWarningsOption)
 
+let listOnlyOption = BoolOption(longFlag: "list-only", helpMessage: "List unused files and exit without prompting.")
+cli.addOption(listOnlyOption)
+
 let versionOption = BoolOption(longFlag: "version", helpMessage: "Print version.")
 cli.addOption(versionOption)
 
@@ -153,8 +156,16 @@ if xcodeWarningsOption.value {
     for file in unusedFiles.sorted(by: { $0.size > $1.size }) {
         print("\(file.path.string): warning: Unused resource of size \(file.readableSize)")
     }
-
     exit(EXIT_UNUSED_RESOURCES);
+}
+
+if listOnlyOption.value {
+    let size = unusedFiles.reduce(0) { $0 + $1.size }.fn_readableSize
+    for file in unusedFiles.sorted(by: { $0.size > $1.size }) {
+        print("\(file.readableSize) \(file.path.string)")
+    }
+    print("\(unusedFiles.count) unused files are found. Total Size: \(size)".yellow.bold)
+    exit(EX_OK)
 }
 
 if !isForce {
