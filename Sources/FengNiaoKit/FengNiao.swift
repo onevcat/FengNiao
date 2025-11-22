@@ -95,7 +95,7 @@ public enum FengNiaoError: Error {
 }
 
 public struct FengNiao {
-
+    
     let projectPath: Path
     let excludedPaths: [Path]
     let resourceExtensions: [String]
@@ -121,7 +121,7 @@ public struct FengNiao {
         guard !searchInFileExtensions.isEmpty else {
             throw FengNiaoError.noFileExtension
         }
-
+        
         let allResources = allResourceFiles()
         let usedNames = allUsedStringNames()
         
@@ -206,17 +206,19 @@ public struct FengNiao {
         return files
     }
     
-    func allUsedStringNames() -> Set<String> {
+    func allUsedStringNames() -> (stringDeclaration: Set<String>, memberAccessProperty: Set<String>) {
         return usedStringNames(at: projectPath)
     }
     
-    func usedStringNames(at path: Path) -> Set<String> {
+    func usedStringNames(at path: Path) -> (stringDeclaration: Set<String>, memberAccessProperty: Set<String>) {
         guard let subPaths = try? path.children() else {
             print("Failed to get contents in path: \(path)".red)
-            return []
+            return ([], [])
         }
         
         var result = [String]()
+        var memberAccessPropertyResult: [String] = []
+        let memberAccessSearchRule = SwiftMemberAccessSearchRule()
         for subPath in subPaths {
             if subPath.lastComponent.hasPrefix(".") {
                 continue
@@ -227,7 +229,9 @@ public struct FengNiao {
             }
             
             if subPath.isDirectory {
-                result.append(contentsOf: usedStringNames(at: subPath))
+                let subResult = usedStringNames(at: subPath)
+                result.append(contentsOf: subResult.stringDeclaration)
+                memberAccessPropertyResult.append(contentsOf: subResult.memberAccessProperty)
             } else {
                 let fileExt = subPath.extension ?? ""
                 guard searchInFileExtensions.contains(fileExt) else {
@@ -237,9 +241,13 @@ public struct FengNiao {
                 let fileType = FileType(ext: fileExt)
                 
                 let searchRules = fileType?.searchRules(extensions: resourceExtensions) ??
-                                  [PlainImageSearchRule(extensions: resourceExtensions)]
+                [PlainImageSearchRule(extensions: resourceExtensions)]
                 
                 let content = (try? subPath.read()) ?? ""
+                if fileType == .swift {
+                    memberAccessPropertyResult.append(contentsOf: memberAccessSearchRule.search(in: content))
+                }
+                
                 result.append(contentsOf: searchRules.flatMap {
                     $0.search(in: content).map { name in
                         let p = Path(name)
@@ -250,13 +258,15 @@ public struct FengNiao {
             }
         }
         
-        return Set(result)
+        return (stringDeclaration: Set(result), memberAccessProperty: Set(memberAccessPropertyResult))
     }
     
-    static func filterUnused(from all: [String: Set<String>], used: Set<String>) -> Set<String> {
+    static func filterUnused(from all: [String: Set<String>], used: (stringDeclaration: Set<String>, memberAccessProperty: Set<String>)) -> Set<String> {
         let unusedPairs = all.filter { key, _ in
-            return !used.contains(key) &&
-                   !used.contains { $0.similarPatternWithNumberIndex(other: key) }
+            let generatedAssetSymbolKey = key.generatedAssetSymbolKey
+            return (!used.stringDeclaration.contains(key) &&
+                    !used.stringDeclaration.contains { $0.similarPatternWithNumberIndex(other: key) }) &&
+            !used.memberAccessProperty.contains(generatedAssetSymbolKey)
         }
         return Set( unusedPairs.flatMap { $0.value } )
     }
@@ -276,7 +286,7 @@ extension String {
         
         var prefix: String?
         var suffix: String?
-
+        
         let digitalLocation = digitalRange.location
         if digitalLocation != 0 {
             let index = other.index(other.startIndex, offsetBy: digitalLocation)
@@ -299,5 +309,23 @@ extension String {
         case (nil, let s?):
             return hasSuffix(s)
         }
+    }
+    
+    var generatedAssetSymbolKey: String {
+        var ret = "."
+        var nextUpper = false
+        for c in self {
+            if (c == "-" || c == "_") {
+                nextUpper = true
+            } else {
+                if nextUpper {
+                    ret += c.uppercased()
+                    nextUpper = false
+                } else {
+                    ret += String(c)
+                }
+            }
+        }
+        return ret
     }
 }

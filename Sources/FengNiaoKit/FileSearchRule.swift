@@ -75,6 +75,29 @@ struct SwiftImageSearchRule: RegPatternSearchRule {
     let patterns = ["\"(.*?)\""]
 }
 
+struct SwiftMemberAccessSearchRule: FileSearchRule {
+    func search(in content: String) -> Set<String> {
+        let nsstring = NSString(string: content)
+        var result = Set<String>()
+        let pattern = #"(UIImage|[^a-zA-Z])\.[a-zA-Z0-9]+((\))|($)|,|\n|$|\.| )"#
+        let extractedPattern = #"\.[a-zA-Z0-9]+"#
+        
+        let reg = try! NSRegularExpression(pattern: pattern, options: .caseInsensitive)
+        
+        let matches = reg.matches(in: content, options: [], range: content.fullRange)
+        for checkingResult in matches {
+            let matchedText = nsstring.substring(with: checkingResult.range)
+            
+            let extractedReg = try! NSRegularExpression(pattern: extractedPattern, options: .caseInsensitive)
+            if let extractMatch = extractedReg.firstMatch(in: matchedText, options: [], range: matchedText.fullRange) {
+                let extracted = (matchedText as NSString).substring(with: extractMatch.range)
+                result.insert(extracted)
+            }
+        }
+        return result
+    }
+}
+
 struct XibImageSearchRule: RegPatternSearchRule {
     let extensions = [String]()
     let patterns = ["image name=\"(.*?)\"", "image=\"(.*?)\"", "value=\"(.*?)\""]
