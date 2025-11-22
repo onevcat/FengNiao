@@ -311,6 +311,7 @@ extension String {
         }
     }
     
+    /// Example: ic_chat_white -> .icChatWhite
     var generatedAssetSymbolKey: String {
         var ret = "."
         var nextUpper = false

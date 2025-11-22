@@ -75,6 +75,24 @@ struct SwiftImageSearchRule: RegPatternSearchRule {
     let patterns = ["\"(.*?)\""]
 }
 
+/*
+Search for potential asset reference to generated asset symbols:
+ - let image = UIImage.icBall
+ - let image: UIImage = .icBall
+ - createThumbnail(image: .icBall)
+ - createThumbnail(
+    image: .icBall
+    )
+ - createThumbnail(
+    image: .icBall,
+    isDark: true
+    )
+ - createThumbnail(
+    image: .icBall.withTintColor(.black),
+    isDark: true
+    )
+ => extract to `.icBall`
+*/
 struct SwiftMemberAccessSearchRule: FileSearchRule {
     func search(in content: String) -> Set<String> {
         let nsstring = NSString(string: content)
