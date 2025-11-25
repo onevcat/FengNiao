@@ -124,8 +124,13 @@ public struct FengNiao {
 
         let allResources = allResourceFiles()
         let usedNames = allUsedStringNames()
+        let memberAccessUsedNames = allUsedMemberAccessNames()
+        let resourcesUsedByGeneratedSymbols = Set(
+            allResources.keys.filter { memberAccessUsedNames.contains($0.generatedAssetSymbolKey) }
+        )
+        let combinedUsedNames = usedNames.union(resourcesUsedByGeneratedSymbols)
         
-        return FengNiao.filterUnused(from: allResources, used: usedNames).map( FileInfo.init )
+        return FengNiao.filterUnused(from: allResources, used: combinedUsedNames).map( FileInfo.init )
     }
     
     // Return a failed list of deleting
@@ -210,6 +215,13 @@ public struct FengNiao {
         return usedStringNames(at: projectPath)
     }
     
+    func allUsedMemberAccessNames() -> Set<String> {
+        guard searchInFileExtensions.contains("swift") else {
+            return []
+        }
+        return usedMemberAccessNames(at: projectPath)
+    }
+    
     func usedStringNames(at path: Path) -> Set<String> {
         guard let subPaths = try? path.children() else {
             print("Failed to get contents in path: \(path)".red)
@@ -251,6 +263,38 @@ public struct FengNiao {
         }
         
         return Set(result)
+    }
+    
+    func usedMemberAccessNames(at path: Path) -> Set<String> {
+        guard let subPaths = try? path.children() else {
+            print("Failed to get contents in path: \(path)".red)
+            return []
+        }
+        
+        let searchRule = SwiftMemberAccessSearchRule()
+        var result = Set<String>()
+        for subPath in subPaths {
+            if subPath.lastComponent.hasPrefix(".") {
+                continue
+            }
+            
+            if excludedPaths.contains(subPath) {
+                continue
+            }
+            
+            if subPath.isDirectory {
+                result.formUnion(usedMemberAccessNames(at: subPath))
+            } else {
+                guard (subPath.extension ?? "") == "swift" else {
+                    continue
+                }
+                
+                let content = (try? subPath.read()) ?? ""
+                result.formUnion(searchRule.search(in: content))
+            }
+        }
+        
+        return result
     }
     
     static func filterUnused(from all: [String: Set<String>], used: Set<String>) -> Set<String> {

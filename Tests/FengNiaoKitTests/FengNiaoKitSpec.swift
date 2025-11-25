@@ -389,6 +389,20 @@ public let testFengNiaoKit: ((ContextType) -> Void) = {
         }
     }
     
+    $0.describe("FengNiao Generated Asset Symbols") {
+        $0.it("should treat generated Swift asset symbols as usage") {
+            let project = fixtures + "GeneratedAssetSymbol"
+            let fengniao = FengNiao(projectPath: project.string,
+                                    excludedPaths: [],
+                                    resourceExtensions: ["png"],
+                                    searchInFileExtensions: ["swift"])
+            let result = try fengniao.unusedFiles()
+            let fileNames = Set(result.map { $0.fileName })
+            let expected: Set<String> = ["ic_unused.png"]
+            try expect(fileNames) == expected
+        }
+    }
+    
     $0.describe("FengNiao Deleting File") {
         
         let file = fixtures + "DeleteFiles/file_in_root"
@@ -476,6 +490,5 @@ public func == (lhs: Expectation<[String: Set<String>]>, rhs: [String: Set<Strin
         throw lhs.failure("given value is nil")
     }
 }
-
 
 

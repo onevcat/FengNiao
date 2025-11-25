@@ -56,6 +56,27 @@ extension String {
         let nsstring = NSString(string: self)
         return nsstring.appendingPathComponent(str)
     }
+    
+    /// Convert resource name (snake/kebab case) to generated Swift asset symbol such as `.icChatWhite`.
+    var generatedAssetSymbolKey: String {
+        if isEmpty { return "." }
+        var ret = "."
+        var shouldUpperNext = false
+        for character in self {
+            switch character {
+            case "-", "_", " ":
+                shouldUpperNext = true
+            default:
+                if shouldUpperNext {
+                    ret.append(String(character).uppercased())
+                    shouldUpperNext = false
+                } else {
+                    ret.append(character)
+                }
+            }
+        }
+        return ret
+    }
 }
 
 let fileSizeSuffix = ["B", "KB", "MB", "GB"]
