@@ -143,6 +143,24 @@ public let testFengNiaoKit: ((ContextType) -> Void) = {
             let expected: Set<String> = [".icFlag", ".icFlagHighlighted", ".icFlagSecondary", ".customAccent"]
             try expect(result) == expected
         }
+        
+        $0.it("Swift member access rule applies to generated symbols for function parameters") {
+            let searcher = SwiftMemberAccessSearchRule()
+            let content = """
+            generateThumbnail(.icFlag)
+            generateThumbnail(
+                image: .icFlagHighlighted
+            )
+            generateThumbnail(
+                image: .icFlagSecondary,
+                isRight: true
+            )
+            generateThumbnail(image: .customAccent, isRight: false)
+            """
+            let result = searcher.search(in: content)
+            let expected: Set<String> = [".icFlag", ".icFlagHighlighted", ".icFlagSecondary", ".customAccent"]
+            try expect(result) == expected
+        }
 
         $0.it("Swift member access rule ignores regular property access") {
             let searcher = SwiftMemberAccessSearchRule()
@@ -150,6 +168,16 @@ public let testFengNiaoKit: ((ContextType) -> Void) = {
             let icon = image.icFlag
             let other = viewModel.output.imageName
             let chained = someFactory.imageProvider.icLater
+            """
+            let result = searcher.search(in: content)
+            let expected: Set<String> = []
+            try expect(result) == expected
+        }
+        
+        $0.it("Swift member access rule ignores method call") {
+            let searcher = SwiftMemberAccessSearchRule()
+            let content = """
+            view.addSubView()
             """
             let result = searcher.search(in: content)
             let expected: Set<String> = []
