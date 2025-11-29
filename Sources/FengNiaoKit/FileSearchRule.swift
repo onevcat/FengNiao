@@ -75,6 +75,24 @@ struct SwiftImageSearchRule: RegPatternSearchRule {
     let patterns = ["\"(.*?)\""]
 }
 
+/// Search for member access patterns like `.icFlag` or `UIImage.icFlag` that Xcode generates for assets.
+struct SwiftMemberAccessSearchRule: FileSearchRule {
+    func search(in content: String) -> Set<String> {
+        let nsstring = NSString(string: content)
+        var result = Set<String>()
+        let pattern = #"(?<![A-Za-z0-9_])(UIImage|UIColor|NSImage|NSColor|Image|Color)?\s*\.\s*([A-Za-z0-9_]+)"#
+        let reg = try! NSRegularExpression(pattern: pattern, options: [])
+        let matches = reg.matches(in: content, options: [], range: content.fullRange)
+        for match in matches {
+            let identifierRange = match.range(at: 2)
+            guard identifierRange.location != NSNotFound else { continue }
+            let identifier = nsstring.substring(with: identifierRange)
+            result.insert(".\(identifier)")
+        }
+        return result
+    }
+}
+
 struct XibImageSearchRule: RegPatternSearchRule {
     let extensions = [String]()
     let patterns = ["image name=\"(.*?)\"", "image=\"(.*?)\"", "value=\"(.*?)\""]

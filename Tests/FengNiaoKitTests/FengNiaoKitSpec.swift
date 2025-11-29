@@ -130,6 +130,59 @@ public let testFengNiaoKit: ((ContextType) -> Void) = {
             let expected: Set<String> = ["ChristmasIcon_20pt", "ChristmasIcon_29pt", "ChristmasIcon_40pt", "ChristmasIcon_60pt", "ChristmasIcon_76pt", "ChristmasIcon_83.5pt", "ChristmasIcon_1024pt", "NewYearIcon_20pt", "NewYearIcon_29pt", "NewYearIcon_40pt", "NewYearIcon_60pt", "NewYearIcon_76pt", "NewYearIcon_83.5pt", "NewYearIcon_1024pt"]
             try expect(result) == expected
         }
+
+        $0.it("Swift member access rule applies to generated symbols") {
+            let searcher = SwiftMemberAccessSearchRule()
+            let content = """
+            let flag = UIImage.icFlag
+            let highlighted: UIImage = .icFlagHighlighted
+            let legacy = NSImage .icFlagSecondary
+            let accent = Color .customAccent
+            """
+            let result = searcher.search(in: content)
+            let expected: Set<String> = [".icFlag", ".icFlagHighlighted", ".icFlagSecondary", ".customAccent"]
+            try expect(result) == expected
+        }
+        
+        $0.it("Swift member access rule applies to generated symbols for function parameters") {
+            let searcher = SwiftMemberAccessSearchRule()
+            let content = """
+            generateThumbnail(.icFlag)
+            generateThumbnail(
+                image: .icFlagHighlighted
+            )
+            generateThumbnail(
+                image: .icFlagSecondary,
+                isRight: true
+            )
+            generateThumbnail(image: .customAccent, isRight: false)
+            """
+            let result = searcher.search(in: content)
+            let expected: Set<String> = [".icFlag", ".icFlagHighlighted", ".icFlagSecondary", ".customAccent"]
+            try expect(result) == expected
+        }
+
+        $0.it("Swift member access rule ignores regular property access") {
+            let searcher = SwiftMemberAccessSearchRule()
+            let content = """
+            let icon = image.icFlag
+            let other = viewModel.output.imageName
+            let chained = someFactory.imageProvider.icLater
+            """
+            let result = searcher.search(in: content)
+            let expected: Set<String> = []
+            try expect(result) == expected
+        }
+        
+        $0.it("Swift member access rule ignores method call") {
+            let searcher = SwiftMemberAccessSearchRule()
+            let content = """
+            view.addSubView()
+            """
+            let result = searcher.search(in: content)
+            let expected: Set<String> = []
+            try expect(result) == expected
+        }
     }
     
     $0.describe("File Info Structure") {
@@ -389,6 +442,20 @@ public let testFengNiaoKit: ((ContextType) -> Void) = {
         }
     }
     
+    $0.describe("FengNiao Generated Asset Symbols") {
+        $0.it("should treat generated Swift asset symbols as usage") {
+            let project = fixtures + "GeneratedAssetSymbol"
+            let fengniao = FengNiao(projectPath: project.string,
+                                    excludedPaths: [],
+                                    resourceExtensions: ["png"],
+                                    searchInFileExtensions: ["swift"])
+            let result = try fengniao.unusedFiles()
+            let fileNames = Set(result.map { $0.fileName })
+            let expected: Set<String> = ["ic_unused.png"]
+            try expect(fileNames) == expected
+        }
+    }
+    
     $0.describe("FengNiao Deleting File") {
         
         let file = fixtures + "DeleteFiles/file_in_root"
@@ -476,6 +543,3 @@ public func == (lhs: Expectation<[String: Set<String>]>, rhs: [String: Set<Strin
         throw lhs.failure("given value is nil")
     }
 }
-
-
-
