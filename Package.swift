@@ -11,7 +11,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/onevcat/Rainbow.git", from: "3.1.1"),
-        .package(url: "https://github.com/benoit-pereira-da-silva/CommandLine.git", from: "4.0.0"),
+        .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.4.0"),
         .package(url: "https://github.com/kylef/PathKit.git", from: "1.0.1")
     ],
     targets: [
@@ -20,9 +20,10 @@ let package = Package(
             name: "FengNiao",
             dependencies: [
                 "FengNiaoKit",
-                .product(name: "CommandLineKit", package: "CommandLine")
+                .product(name: "ArgumentParser", package: "swift-argument-parser")
             ]
         ),
-        .testTarget(name: "FengNiaoKitTests", dependencies: ["FengNiaoKit"], exclude: ["../Fixtures"])
+        .testTarget(name: "FengNiaoKitTests", dependencies: ["FengNiaoKit"], exclude: ["../Fixtures"]),
+        .testTarget(name: "FengNiaoCLITests", dependencies: ["FengNiao"])
     ]
 )
