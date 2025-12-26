@@ -52,13 +52,15 @@ public let testFengNiaoKit: ((ContextType) -> Void) = {
             try expect(result) == expected
         }
         
-        $0.it("generatedAssetSymbolKey work properly") {
+        $0.it("generatedAssetSymbolKey works with digits") {
             let images = [
+                "ic_chat_white_24px",
                 "ic-chat_white_24 px",
                 "iC-ChAt_whIte_24 pX",
                 "ICCHATWHITE"
             ]
             let expected = [
+                ".icChatWhite24Px",
                 ".icChatWhite24Px",
                 ".iCChAtWhIte24PX",
                 ".ICCHATWHITE"
