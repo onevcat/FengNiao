@@ -51,6 +51,22 @@ public let testFengNiaoKit: ((ContextType) -> Void) = {
             let result = paths.map { $0.plainFileName(extensions: ["png", "jpg"]) }
             try expect(result) == expected
         }
+        
+        $0.it("generatedAssetSymbolKey works with digits") {
+            let images = [
+                "ic_chat_white_24px",
+                "ic-chat_white_24 px",
+                "iC-ChAt_whIte_24 pX",
+                "ICCHATWHITE"
+            ]
+            let expected = [
+                ".icChatWhite24Px",
+                ".icChatWhite24Px",
+                ".iCChAtWhIte24PX",
+                ".ICCHATWHITE"
+            ]
+            try expect(images.map { $0.generatedAssetSymbolKey }) == expected
+        }
     }
     
     $0.describe("Int Extesnions") {

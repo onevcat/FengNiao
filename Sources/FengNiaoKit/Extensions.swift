@@ -66,6 +66,9 @@ extension String {
             switch character {
             case "-", "_", " ":
                 shouldUpperNext = true
+            case let c where c.isNumber:
+                shouldUpperNext = true
+                ret.append(c)
             default:
                 if shouldUpperNext {
                     ret.append(String(character).uppercased())
