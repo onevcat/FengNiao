@@ -80,7 +80,7 @@ struct SwiftMemberAccessSearchRule: FileSearchRule {
     func search(in content: String) -> Set<String> {
         let nsstring = NSString(string: content)
         var result = Set<String>()
-        let pattern = #"(?<![A-Za-z0-9_])(UIImage|UIColor|NSImage|NSColor|Image|Color)?\s*\.\s*([A-Za-z0-9_]+)"#
+        let pattern = #"(?<![A-Za-z0-9_])(ImageResource|UIImage|UIColor|NSImage|NSColor|Image|Color)?\s*\.\s*([A-Za-z0-9_]+)"#
         let reg = try! NSRegularExpression(pattern: pattern, options: [])
         let matches = reg.matches(in: content, options: [], range: content.fullRange)
         for match in matches {

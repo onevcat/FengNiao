@@ -85,12 +85,13 @@ struct SearchRuleTests {
         let searcher = SwiftMemberAccessSearchRule()
         let content = """
         let flag = UIImage.icFlag
+        let flag1 = ImageResource.icFlag1
         let highlighted: UIImage = .icFlagHighlighted
         let legacy = NSImage .icFlagSecondary
         let accent = Color .customAccent
         """
         let result = searcher.search(in: content)
-        let expected: Set<String> = [".icFlag", ".icFlagHighlighted", ".icFlagSecondary", ".customAccent"]
+        let expected: Set<String> = [".icFlag", ".icFlag1", ".icFlagHighlighted", ".icFlagSecondary", ".customAccent"]
         #expect(result == expected)
     }
 
