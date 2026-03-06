@@ -59,9 +59,23 @@ extension String {
     
     /// Convert resource name (snake/kebab case) to generated Swift asset symbol such as `.icChatWhite`.
     var generatedAssetSymbolKey: String {
-        if isEmpty { return "." }
-        var ret = "."
-        var shouldUpperNext = false
+        return convertToCamelCase(prefix: ".", uppercaseFirst: false)
+    }
+    
+    /// Convert resource name (snake/kebab case) to generated Objective-C asset symbol such as `ACImageNameIcFlag`.
+    /// Example: "ic_flag" -> "ACImageNameIcFlag"
+    var objcGeneratedAssetSymbolKey: String {
+        return convertToCamelCase(prefix: "ACImageName", uppercaseFirst: true)
+    }
+    
+    /// Convert resource name (snake/kebab case) to camel case with optional prefix.
+    /// - Parameters:
+    ///   - prefix: The prefix to prepend to the result
+    ///   - uppercaseFirst: Whether the first character after prefix should be uppercase
+    private func convertToCamelCase(prefix: String, uppercaseFirst: Bool) -> String {
+        if isEmpty { return prefix }
+        var ret = prefix
+        var shouldUpperNext = uppercaseFirst
         for character in self {
             switch character {
             case "-", "_", " ":

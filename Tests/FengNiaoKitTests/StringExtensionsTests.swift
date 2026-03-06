@@ -41,4 +41,21 @@ struct StringExtensionsTests {
         ]
         #expect(images.map { $0.generatedAssetSymbolKey } == expected)
     }
+    
+    @Test("objcGeneratedAssetSymbolKey converts to Objective-C format")
+    func objcGeneratedAssetSymbolKeyConvertsToObjectiveCFormat() {
+        let images = [
+            "ic_chat_white_24px",
+            "ic-chat_white_24 px",
+            "iC-ChAt_whIte_24 pX",
+            "ICCHATWHITE",
+        ]
+        let expected = [
+            "ACImageNameIcChatWhite24Px",
+            "ACImageNameIcChatWhite24Px",
+            "ACImageNameICChAtWhIte24PX",
+            "ACImageNameICCHATWHITE",
+        ]
+        #expect(images.map { $0.objcGeneratedAssetSymbolKey } == expected)
+    }
 }

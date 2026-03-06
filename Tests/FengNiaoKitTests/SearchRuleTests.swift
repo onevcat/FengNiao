@@ -85,12 +85,13 @@ struct SearchRuleTests {
         let searcher = SwiftMemberAccessSearchRule()
         let content = """
         let flag = UIImage.icFlag
+        let flag1 = ImageResource.icFlag1
         let highlighted: UIImage = .icFlagHighlighted
         let legacy = NSImage .icFlagSecondary
         let accent = Color .customAccent
         """
         let result = searcher.search(in: content)
-        let expected: Set<String> = [".icFlag", ".icFlagHighlighted", ".icFlagSecondary", ".customAccent"]
+        let expected: Set<String> = [".icFlag", ".icFlag1", ".icFlagHighlighted", ".icFlagSecondary", ".customAccent"]
         #expect(result == expected)
     }
 
@@ -130,6 +131,35 @@ struct SearchRuleTests {
         let searcher = SwiftMemberAccessSearchRule()
         let content = """
         view.addSubView()
+        """
+        let result = searcher.search(in: content)
+        #expect(result.isEmpty)
+    }
+
+    @Test("Objective-C member access rule applies to generated symbols")
+    func objcMemberAccessRuleAppliesToGeneratedSymbols() {
+        let searcher = ObjCMemberAccessSearchRule()
+        let content = """
+        UIImage *flag = [UIImage imageNamed:ACImageNameIcFlag];
+        UIImage *highlighted = [UIImage imageNamed:ACImageNameIcFlagHighlighted];
+        NSImage *legacy = [NSImage imageNamed:ACImageNameIcFlagSecondary];
+        NSString *name = ACImageNameIcFlag;
+        """
+        let result = searcher.search(in: content)
+        let expected: Set<String> = [
+            "ACImageNameIcFlag",
+            "ACImageNameIcFlagHighlighted",
+            "ACImageNameIcFlagSecondary",
+        ]
+        #expect(result == expected)
+    }
+
+    @Test("Objective-C member access rule ignores regular constants")
+    func objcMemberAccessRuleIgnoresRegularConstants() {
+        let searcher = ObjCMemberAccessSearchRule()
+        let content = """
+        NSString *name = kImageName;
+        NSString *other = SomeOtherConstant;
         """
         let result = searcher.search(in: content)
         #expect(result.isEmpty)

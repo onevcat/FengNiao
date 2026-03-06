@@ -125,8 +125,23 @@ public struct FengNiao {
         let allResources = allResourceFiles()
         let usedNames = allUsedStringNames()
         let memberAccessUsedNames = allUsedMemberAccessNames()
+        
+        // Filter resources that are referenced via Generated Asset Symbols
+        // Swift uses .icFlag format, Objective-C uses ACImageNameIcFlag for images and ACColorNameCustomAccent for colors
         let resourcesUsedByGeneratedSymbols = Set(
-            allResources.keys.filter { memberAccessUsedNames.contains($0.generatedAssetSymbolKey) }
+            allResources.keys.filter { resourceKey in
+                // Check Swift format: .icFlag
+                let swiftSymbolKey = resourceKey.generatedAssetSymbolKey
+                if memberAccessUsedNames.contains(swiftSymbolKey) {
+                    return true
+                }
+                // Check Objective-C image format: ACImageNameIcFlag
+                let objcImageSymbolKey = resourceKey.objcGeneratedAssetSymbolKey
+                if memberAccessUsedNames.contains(objcImageSymbolKey) {
+                    return true
+                }
+                return false
+            }
         )
         let combinedUsedNames = usedNames.union(resourcesUsedByGeneratedSymbols)
         
@@ -216,7 +231,9 @@ public struct FengNiao {
     }
     
     func allUsedMemberAccessNames() -> Set<String> {
-        guard searchInFileExtensions.contains("swift") else {
+        // Search in both Swift and Objective-C files for Generated Asset Symbols
+        let supportedExtensions = ["swift", "m", "mm", "h"]
+        guard supportedExtensions.contains(where: { searchInFileExtensions.contains($0) }) else {
             return []
         }
         return usedMemberAccessNames(at: projectPath)
@@ -271,7 +288,8 @@ public struct FengNiao {
             return []
         }
         
-        let searchRule = SwiftMemberAccessSearchRule()
+        let swiftSearchRule = SwiftMemberAccessSearchRule()
+        let objcSearchRule = ObjCMemberAccessSearchRule()
         var result = Set<String>()
         for subPath in subPaths {
             if subPath.lastComponent.hasPrefix(".") {
@@ -285,12 +303,22 @@ public struct FengNiao {
             if subPath.isDirectory {
                 result.formUnion(usedMemberAccessNames(at: subPath))
             } else {
-                guard (subPath.extension ?? "") == "swift" else {
+                let fileExt = subPath.extension ?? ""
+                guard searchInFileExtensions.contains(fileExt) else {
                     continue
                 }
                 
                 let content = (try? subPath.read()) ?? ""
-                result.formUnion(searchRule.search(in: content))
+                
+                // Use appropriate search rule based on file type
+                switch fileExt {
+                case "swift":
+                    result.formUnion(swiftSearchRule.search(in: content))
+                case "m", "mm", "h":
+                    result.formUnion(objcSearchRule.search(in: content))
+                default:
+                    break
+                }
             }
         }
         
