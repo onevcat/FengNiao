@@ -6,7 +6,7 @@ import PathKit
 
 @main
 struct FengNiaoCommand: ParsableCommand {
-    private static let appVersion = "0.11.0"
+    private static let appVersion = "0.12.0"
     private static let exitUnusedResources: Int32 = 1
     private static let exitUsage: Int32 = 64
 
