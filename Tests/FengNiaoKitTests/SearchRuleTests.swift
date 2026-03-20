@@ -134,4 +134,131 @@ struct SearchRuleTests {
         let result = searcher.search(in: content)
         #expect(result.isEmpty)
     }
+
+    @Test("Swift member access rule applies to nested member access patterns")
+    func swiftMemberAccessRuleAppliesToNestedMemberAccessPatterns() {
+        let searcher = SwiftMemberAccessSearchRule()
+        let content = """
+        Image(.Icons.Navigation.menuIcon)
+        let icon = Image(.Images.Animals.dogFace)
+        UIImage(.Background.landscapeCard)
+        Color(.Theme.Primary.background)
+        """
+        let result = searcher.search(in: content)
+        let expected: Set<String> = [
+            ".Icons.Navigation.menuIcon",
+            ".Images.Animals.dogFace",
+            ".Background.landscapeCard",
+            ".Theme.Primary.background"
+        ]
+        #expect(result == expected)
+    }
+
+    @Test("Swift member access rule applies to nested patterns with whitespace")
+    func swiftMemberAccessRuleAppliesToNestedPatternsWithWhitespace() {
+        let searcher = SwiftMemberAccessSearchRule()
+        let content = """
+        Image( .Icons.Navigation.menuIcon )
+        let icon = Image(
+            .Images.Animals.dogFace
+        )
+        UIImage(  .Background.landscapeCard  )
+        """
+        let result = searcher.search(in: content)
+        let expected: Set<String> = [
+            ".Icons.Navigation.menuIcon",
+            ".Images.Animals.dogFace",
+            ".Background.landscapeCard"
+        ]
+        #expect(result == expected)
+    }
+
+    @Test("Swift member access rule handles both simple and nested patterns together")
+    func swiftMemberAccessRuleHandlesBothSimpleAndNestedPatternsTogether() {
+        let searcher = SwiftMemberAccessSearchRule()
+        let content = """
+        let flag = UIImage.icFlag
+        let device = Image(.Icons.Navigation.menuIcon)
+        let highlighted: UIImage = .icFlagHighlighted
+        let nested = Image(.Images.Animals.dogFace)
+        """
+        let result = searcher.search(in: content)
+        let expected: Set<String> = [
+            ".icFlag",
+            ".Icons.Navigation.menuIcon",
+            ".icFlagHighlighted",
+            ".Images.Animals.dogFace"
+        ]
+        #expect(result == expected)
+    }
+
+    @Test("Swift member access rule handles deeply nested patterns")
+    func swiftMemberAccessRuleHandlesDeeplyNestedPatterns() {
+        let searcher = SwiftMemberAccessSearchRule()
+        let content = """
+        Image(.Level1.Level2.Level3.Level4.deepAsset)
+        Image(.A.B.C.veryNestedIcon)
+        """
+        let result = searcher.search(in: content)
+        let expected: Set<String> = [
+            ".Level1.Level2.Level3.Level4.deepAsset",
+            ".A.B.C.veryNestedIcon"
+        ]
+        #expect(result == expected)
+    }
+
+    @Test("Swift member access rule handles Image and ImageResource types")
+    func swiftMemberAccessRuleHandlesImageAndImageResourceTypes() {
+        let searcher = SwiftMemberAccessSearchRule()
+        let content = """
+        Image(.myIcon)
+        UIImage(.anotherIcon)
+        NSImage(.macIcon)
+        """
+        let result = searcher.search(in: content)
+        let expected: Set<String> = [
+            ".myIcon",
+            ".anotherIcon",
+            ".macIcon"
+        ]
+        #expect(result == expected)
+    }
+
+    @Test("Swift member access rule handles ImageResource dot notation")
+    func swiftMemberAccessRuleHandlesImageResourceDotNotation() {
+        let searcher = SwiftMemberAccessSearchRule()
+        let content = """
+        Image(ImageResource.homeIcon)
+        let icon = ImageResource.Icons.Settings.logo
+        ImageResource .Symbols.plug
+        """
+        let result = searcher.search(in: content)
+        let expected: Set<String> = [
+            ".homeIcon",
+            ".Icons.Settings.logo",
+            ".Symbols.plug"
+        ]
+        #expect(result == expected)
+    }
+
+    @Test("Swift member access rule handles mixed ImageResource and direct patterns")
+    func swiftMemberAccessRuleHandlesMixedImageResourceAndDirectPatterns() {
+        let searcher = SwiftMemberAccessSearchRule()
+        let content = """
+        Image(.directIcon)
+        Image(ImageResource.resourceIcon)
+        UIImage(.simpleIcon)
+        let nested = Image(.Icons.Settings.logo)
+        let resource = ImageResource.Icons.Dashboard.quickAction
+        """
+        let result = searcher.search(in: content)
+        let expected: Set<String> = [
+            ".directIcon",
+            ".resourceIcon",
+            ".simpleIcon",
+            ".Icons.Settings.logo",
+            ".Icons.Dashboard.quickAction"
+        ]
+        #expect(result == expected)
+    }
 }

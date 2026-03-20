@@ -125,8 +125,38 @@ public struct FengNiao {
         let allResources = allResourceFiles()
         let usedNames = allUsedStringNames()
         let memberAccessUsedNames = allUsedMemberAccessNames()
+
+        // Match resources against member access symbols
+        // Handle both simple symbols like ".icFlag" and nested like ".Icons.Settings.logo"
         let resourcesUsedByGeneratedSymbols = Set(
-            allResources.keys.filter { memberAccessUsedNames.contains($0.generatedAssetSymbolKey) }
+            allResources.keys.filter { resourceName in
+                let resourceSymbol = resourceName.generatedAssetSymbolKey
+
+                // Check for exact match first
+                if memberAccessUsedNames.contains(resourceSymbol) {
+                    return true
+                }
+
+                // For nested symbols, check if the resource symbol appears as a component
+                // e.g., resource "logo" with symbol ".logo" should match member symbol ".Icons.Settings.logo"
+                // Both resourceSymbol and memberSymbol start with ".", so we can check suffix matching
+                for memberSymbol in memberAccessUsedNames {
+                    // If memberSymbol ends with resourceSymbol AND
+                    // either they're equal OR there's a dot before the match
+                    // Example: ".Icons.Settings.logo".hasSuffix(".logo") is true
+                    // and it's longer than just ".logo", so it's a valid namespace match
+                    if memberSymbol.hasSuffix(resourceSymbol) && memberSymbol != resourceSymbol {
+                        // Check that it's a proper component boundary (there must be a '.' before the resource symbol)
+                        // Since resourceSymbol starts with '.', we need member to be ".X.Y.resourceSymbol"
+                        // This is true if member has more than just resourceSymbol
+                        if memberSymbol.count > resourceSymbol.count {
+                            return true
+                        }
+                    }
+                }
+
+                return false
+            }
         )
         let combinedUsedNames = usedNames.union(resourcesUsedByGeneratedSymbols)
         

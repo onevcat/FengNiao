@@ -58,13 +58,14 @@ extension String {
     }
     
     /// Convert resource name (snake/kebab case) to generated Swift asset symbol such as `.icChatWhite`.
+    /// Xcode treats hyphens, underscores, spaces, and dots as word boundaries that trigger camelCase.
     var generatedAssetSymbolKey: String {
         if isEmpty { return "." }
         var ret = "."
         var shouldUpperNext = false
         for character in self {
             switch character {
-            case "-", "_", " ":
+            case "-", "_", " ", ".":
                 shouldUpperNext = true
             case let c where c.isNumber:
                 shouldUpperNext = true
