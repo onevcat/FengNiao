@@ -93,16 +93,13 @@ struct SwiftMemberAccessSearchRule: FileSearchRule {
     }
 }
 
-/// Search for Generated Asset Symbol patterns in Objective-C files.
-/// Objective-C uses constants like `ACImageNameIcFlag` for image assets and `ACColorNameCustomAccent` for color assets.
+/// Search for generated Objective-C image asset symbols such as `ACImageNameIcFlag`.
 /// Example: "ic_flag.png" -> "ACImageNameIcFlag"
-/// Example: "custom_accent" -> "ACColorNameCustomAccent"
 struct ObjCMemberAccessSearchRule: FileSearchRule {
     func search(in content: String) -> Set<String> {
         let nsstring = NSString(string: content)
         var result = Set<String>()
         
-        // Match patterns for images and colors
         result.formUnion(matchSymbols(in: content, prefix: "ACImageName", nsstring: nsstring))
         
         return result
