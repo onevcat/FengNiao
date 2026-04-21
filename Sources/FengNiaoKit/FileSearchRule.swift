@@ -80,7 +80,7 @@ struct SwiftMemberAccessSearchRule: FileSearchRule {
     func search(in content: String) -> Set<String> {
         let nsstring = NSString(string: content)
         var result = Set<String>()
-        let pattern = #"(?<![A-Za-z0-9_])(UIImage|UIColor|NSImage|NSColor|Image|Color)?\s*\.\s*([A-Za-z0-9_]+)"#
+        let pattern = #"(?<![A-Za-z0-9_])(ImageResource|UIImage|UIColor|NSImage|NSColor|Image|Color)?\s*\.\s*([A-Za-z0-9_]+)"#
         let reg = try! NSRegularExpression(pattern: pattern, options: [])
         let matches = reg.matches(in: content, options: [], range: content.fullRange)
         for match in matches {
@@ -88,6 +88,35 @@ struct SwiftMemberAccessSearchRule: FileSearchRule {
             guard identifierRange.location != NSNotFound else { continue }
             let identifier = nsstring.substring(with: identifierRange)
             result.insert(".\(identifier)")
+        }
+        return result
+    }
+}
+
+/// Search for generated Objective-C image asset symbols such as `ACImageNameIcFlag`.
+/// Example: "ic_flag.png" -> "ACImageNameIcFlag"
+struct ObjCMemberAccessSearchRule: FileSearchRule {
+    func search(in content: String) -> Set<String> {
+        let nsstring = NSString(string: content)
+        var result = Set<String>()
+        
+        result.formUnion(matchSymbols(in: content, prefix: "ACImageName", nsstring: nsstring))
+        
+        return result
+    }
+    
+    private func matchSymbols(in content: String, prefix: String, nsstring: NSString) -> Set<String> {
+        var result = Set<String>()
+        // Escape the prefix for use in regex pattern
+        let escapedPrefix = NSRegularExpression.escapedPattern(for: prefix)
+        let pattern = "\(escapedPrefix)([A-Z][a-zA-Z0-9]*)"
+        let reg = try! NSRegularExpression(pattern: pattern, options: [])
+        let matches = reg.matches(in: content, options: [], range: content.fullRange)
+        for match in matches {
+            let identifierRange = match.range(at: 1)
+            guard identifierRange.location != NSNotFound else { continue }
+            let identifier = nsstring.substring(with: identifierRange)
+            result.insert("\(prefix)\(identifier)")
         }
         return result
     }
