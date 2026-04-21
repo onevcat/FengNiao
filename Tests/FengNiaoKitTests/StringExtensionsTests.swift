@@ -58,4 +58,22 @@ struct StringExtensionsTests {
         ]
         #expect(images.map { $0.objcGeneratedAssetSymbolKey } == expected)
     }
+
+    @Test("generated asset symbol keys treat dots as word boundaries")
+    func generatedAssetSymbolKeysTreatDotsAsWordBoundaries() {
+        let images = [
+            "empty.icon",
+            "navigation-menu.row.icon",
+        ]
+        let swiftExpected = [
+            ".emptyIcon",
+            ".navigationMenuRowIcon",
+        ]
+        let objcExpected = [
+            "ACImageNameEmptyIcon",
+            "ACImageNameNavigationMenuRowIcon",
+        ]
+        #expect(images.map { $0.generatedAssetSymbolKey } == swiftExpected)
+        #expect(images.map { $0.objcGeneratedAssetSymbolKey } == objcExpected)
+    }
 }

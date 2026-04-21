@@ -59,13 +59,18 @@ extension String {
     
     /// Convert resource name (snake/kebab case) to generated Swift asset symbol such as `.icChatWhite`.
     var generatedAssetSymbolKey: String {
-        return convertToCamelCase(prefix: ".", uppercaseFirst: false)
+        return ".\(generatedAssetSymbolPathComponent)"
     }
     
     /// Convert resource name (snake/kebab case) to generated Objective-C asset symbol such as `ACImageNameIcFlag`.
     /// Example: "ic_flag" -> "ACImageNameIcFlag"
     var objcGeneratedAssetSymbolKey: String {
         return convertToCamelCase(prefix: "ACImageName", uppercaseFirst: true)
+    }
+
+    /// Convert a resource name to a single generated Swift member-access component.
+    var generatedAssetSymbolPathComponent: String {
+        return convertToCamelCase(prefix: "", uppercaseFirst: false)
     }
     
     /// Convert resource name (snake/kebab case) to camel case with optional prefix.
@@ -78,7 +83,7 @@ extension String {
         var shouldUpperNext = uppercaseFirst
         for character in self {
             switch character {
-            case "-", "_", " ":
+            case "-", "_", " ", ".":
                 shouldUpperNext = true
             case let c where c.isNumber:
                 shouldUpperNext = true

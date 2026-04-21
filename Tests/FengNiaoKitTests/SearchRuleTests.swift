@@ -136,6 +136,35 @@ struct SearchRuleTests {
         #expect(result.isEmpty)
     }
 
+    @Test("Swift member access rule applies to nested asset catalog symbols")
+    func swiftMemberAccessRuleAppliesToNestedAssetCatalogSymbols() {
+        let searcher = SwiftMemberAccessSearchRule()
+        let content = """
+        let image = Image(.Icons.Settings.logo)
+        let resource = ImageResource.Symbols.plug
+        let direct = Image(ImageResource.emptyIcon)
+        """
+        let result = searcher.search(in: content)
+        let expected: Set<String> = [
+            ".Icons.Settings.logo",
+            ".Symbols.plug",
+            ".emptyIcon",
+        ]
+        #expect(result == expected)
+    }
+
+    @Test("Swift member access rule ignores custom type prefixes that only end with asset type names")
+    func swiftMemberAccessRuleIgnoresCustomTypePrefixesThatOnlyEndWithAssetTypeNames() {
+        let searcher = SwiftMemberAccessSearchRule()
+        let content = """
+        let a = SomeImageResource.icon
+        let b = FooImage.value
+        let c = CustomNSImage.tintColor
+        """
+        let result = searcher.search(in: content)
+        #expect(result.isEmpty)
+    }
+
     @Test("Objective-C member access rule applies to generated symbols")
     func objcMemberAccessRuleAppliesToGeneratedSymbols() {
         let searcher = ObjCMemberAccessSearchRule()

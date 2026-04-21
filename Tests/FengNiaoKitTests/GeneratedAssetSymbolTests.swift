@@ -50,4 +50,19 @@ struct GeneratedAssetSymbolTests {
         let expected: Set<String> = ["ic_unused.png"]
         #expect(fileNames == expected)
     }
+
+    @Test("treats generated asset catalog symbols as usage in nested folders")
+    func treatsGeneratedAssetCatalogSymbolsAsUsageInNestedFolders() throws {
+        let project = fixtures + "GeneratedAssetCatalogSymbol"
+        let fengniao = FengNiao(
+            projectPath: project.string,
+            excludedPaths: [],
+            resourceExtensions: ["imageset"],
+            searchInFileExtensions: ["swift"]
+        )
+        let result = try fengniao.unusedFiles()
+        let fileNames = Set(result.map { $0.fileName })
+        let expected: Set<String> = ["unused.imageset"]
+        #expect(fileNames == expected)
+    }
 }
