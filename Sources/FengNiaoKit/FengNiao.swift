@@ -126,24 +126,16 @@ public struct FengNiao {
         let usedNames = allUsedStringNames()
         let memberAccessUsedNames = allUsedMemberAccessNames()
         
-        // Generated asset symbols are an additional conservative usage signal.
-        // Swift uses `.icFlag`, while Objective-C image symbols use `ACImageNameIcFlag`.
         let resourcesUsedByGeneratedSymbols = Set(
-            allResources.keys.filter { resourceKey in
-                let swiftSymbolKey = resourceKey.generatedAssetSymbolKey
-                if memberAccessUsedNames.contains(swiftSymbolKey) {
-                    return true
-                }
-                let objcImageSymbolKey = resourceKey.objcGeneratedAssetSymbolKey
-                if memberAccessUsedNames.contains(objcImageSymbolKey) {
-                    return true
-                }
-                return false
-            }
+            allResources.values
+                .flatMap { $0 }
+                .filter { isUsedByGeneratedSymbol($0, memberAccessUsedNames: memberAccessUsedNames) }
         )
-        let combinedUsedNames = usedNames.union(resourcesUsedByGeneratedSymbols)
+        let unusedPaths = FengNiao.filterUnused(from: allResources, used: usedNames)
         
-        return FengNiao.filterUnused(from: allResources, used: combinedUsedNames).map( FileInfo.init )
+        return unusedPaths
+            .subtracting(resourcesUsedByGeneratedSymbols)
+            .map(FileInfo.init)
     }
     
     // Return a failed list of deleting
@@ -234,6 +226,51 @@ public struct FengNiao {
             return []
         }
         return usedMemberAccessNames(at: projectPath)
+    }
+
+    func isUsedByGeneratedSymbol(_ resourcePath: String, memberAccessUsedNames: Set<String>) -> Bool {
+        let swiftSymbolKeys = generatedSwiftAssetSymbolKeys(for: resourcePath)
+        if !swiftSymbolKeys.isDisjoint(with: memberAccessUsedNames) {
+            return true
+        }
+
+        let objcSymbolKeys = generatedObjectiveCAssetSymbolKeys(for: resourcePath)
+        if !objcSymbolKeys.isDisjoint(with: memberAccessUsedNames) {
+            return true
+        }
+
+        return false
+    }
+
+    func generatedSwiftAssetSymbolKeys(for resourcePath: String) -> Set<String> {
+        let path = Path(resourcePath)
+        var result: Set<String> = [path.lastComponentWithoutExtension.generatedAssetSymbolKey]
+
+        let components = generatedAssetCatalogSymbolComponents(for: resourcePath)
+        if !components.isEmpty {
+            result.insert(".\(components.joined(separator: "."))")
+        }
+
+        return result
+    }
+
+    func generatedObjectiveCAssetSymbolKeys(for resourcePath: String) -> Set<String> {
+        let path = Path(resourcePath)
+        return [path.lastComponentWithoutExtension.objcGeneratedAssetSymbolKey]
+    }
+
+    func generatedAssetCatalogSymbolComponents(for resourcePath: String) -> [String] {
+        let pathComponents = resourcePath.split(separator: "/").map(String.init)
+        guard let assetCatalogIndex = pathComponents.lastIndex(where: { $0.hasSuffix(".xcassets") }) else {
+            return []
+        }
+        guard assetCatalogIndex < pathComponents.count - 1 else {
+            return []
+        }
+
+        return pathComponents[(assetCatalogIndex + 1)...].map {
+            Path($0).lastComponentWithoutExtension.generatedAssetSymbolPathComponent
+        }
     }
     
     func usedStringNames(at path: Path) -> Set<String> {
